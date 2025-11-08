@@ -15,7 +15,7 @@ config/name_localized={
 "pt_BR": "Simulador de Estrangeiro"
 }
 config/version="0.0.1"
-run/main_scene="res://scenes/menus/startup.tscn"
+run/main_scene="res://scenes/startup.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -32,7 +32,8 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/window_width_override=1920
 window/size/window_height_override=1080
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3l5m8oap2q1r"]
 
-[ext_resource type="Script" path="res://scenes/menus/language_selection.gd" id="1_language_script"]
-[ext_resource type="FontFile" uid="uid://dupdcbxquxfk7" path="res://assets/fonts/pixel.ttf" id="2_font"]
+[ext_resource type="Script" uid="uid://dl4j0677v8ocj" path="res://scenes/settings/language_selection.gd" id="1_language_script"]
+[ext_resource type="FontFile" uid="uid://2iila81hgrg7" path="res://assets/fonts/pixel.ttf" id="2_font"]
 
 [sub_resource type="Theme" id="Theme_1"]
 default_font = ExtResource("2_font")

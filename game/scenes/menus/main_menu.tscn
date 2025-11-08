@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://hopc4wmjmhk6"]
+[gd_scene load_steps=9 format=3 uid="uid://hopc4wmjmhk6"]
 
-[ext_resource type="VideoStream" uid="uid://duh35c4eqph7x" path="res://assets/videos/backgrounds/main_menu_light_background.ogv" id="1_4t2mg"]
 [ext_resource type="AudioStream" uid="uid://b2ccoqknc8bmb" path="res://assets/audios/main_menu.mp3" id="2_rn7m7"]
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="3_menu_script"]
 [ext_resource type="FontFile" uid="uid://dupdcbxquxfk7" path="res://assets/fonts/pixel.ttf" id="4_font"]
+[ext_resource type="Script" path="res://scenes/menus/animated_background_sprites.gd" id="5_bg_script"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1"]
 
@@ -21,6 +21,10 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="Gradient" id="Gradient_1"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(0.2, 0.15, 0.25, 1, 0.35, 0.25, 0.4, 1)
+
 [node name="MainMenuScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -31,16 +35,19 @@ grow_vertical = 2
 script = ExtResource("3_menu_script")
 metadata/_edit_use_anchors_ = true
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-clip_contents = true
-layout_mode = 0
-offset_right = 864.0
-offset_bottom = 480.0
-scale = Vector2(0.74148786, 0.75017685)
-stream = ExtResource("1_4t2mg")
-autoplay = true
-expand = true
-loop = true
+[node name="BackgroundGradient" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.15, 0.25, 1)
+
+[node name="AnimatedBackground" type="Node2D" parent="."]
+script = ExtResource("5_bg_script")
+animation_speed = 0.3
+scroll_speed = Vector2(15, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_rn7m7")
