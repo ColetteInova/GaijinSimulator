@@ -4,7 +4,7 @@ var difficulty_level := "Normal"
 var sound_volume := 0.8
 var graphics_quality := "High"
 var control_scheme := "Keyboard"
-var language := "English"
+var language := "br"
 var subtitles_enabled := true
 var auto_save_enabled := true
 var tutorial_enabled := true
@@ -19,11 +19,7 @@ var key_bindings := {
 	"move_forward": "W",
 	"move_backward": "S",
 	"move_left": "A",
-	"move_right": "D",
-	"jump": "Space",
-	"crouch": "Ctrl",
-	"shoot": "Left Mouse Button",
-	"aim": "Right Mouse Button"
+	"move_right": "D"
 }
 
 
@@ -34,33 +30,24 @@ func _ready():
 	print_settings()
 
 func load_settings():
-	difficulty_level = SimpleSettings.get_value("game", "gameplay/difficulty_level", "Normal")
-	sound_volume = SimpleSettings.get_value("game", "audio/sound_volume", 0.8)
-	graphics_quality = SimpleSettings.get_value("game", "graphics/quality", "High")
-	control_scheme = SimpleSettings.get_value("game", "controls/scheme", "Keyboard")
-	language = SimpleSettings.get_value("game", "general/language", "English")
-	subtitles_enabled = SimpleSettings.get_value("game", "accessibility/subtitles_enabled", true)
-	auto_save_enabled = SimpleSettings.get_value("game", "general/auto_save_enabled", true)
-	tutorial_enabled = SimpleSettings.get_value("game", "general/tutorial_enabled", true)
-	max_framerate = SimpleSettings.get_value("game", "graphics/max_framerate", 60)
-	fullscreen_enabled = SimpleSettings.get_value("game", "graphics/fullscreen_enabled", true)
-	mouse_sensitivity = SimpleSettings.get_value("game", "controls/mouse_sensitivity", 1.0)
-	vibration_enabled = SimpleSettings.get_value("game", "controls/vibration_enabled", false)
-	hud_opacity = SimpleSettings.get_value("game", "graphics/hud_opacity", 1.0)
-	chat_enabled = SimpleSettings.get_value("game", "general/chat_enabled", true)
-	crosshair_style = SimpleSettings.get_value("game", "graphics/crosshair_style", "Default")
-	key_bindings = SimpleSettings.get_value("game", "controls/key_bindings", {
-		"move_forward": "W",
-		"move_backward": "S",
-		"move_left": "A",
-		"move_right": "D",
-		"jump": "Space",
-		"crouch": "Ctrl",
-		"shoot": "Left Mouse Button",
-		"aim": "Right Mouse Button"
-	})
+	difficulty_level = get_difficulty_level()
+	sound_volume = get_sound_volume()
+	graphics_quality = get_graphics_quality()
+	control_scheme = get_control_scheme()
+	language = get_language()
+	subtitles_enabled = get_subtitles_enabled()
+	auto_save_enabled = get_auto_save_enabled()
+	tutorial_enabled = get_tutorial_enabled()
+	max_framerate = get_max_framerate()
+	fullscreen_enabled = get_fullscreen_enabled()
+	mouse_sensitivity = get_mouse_sensitivity()
+	vibration_enabled = get_vibration_enabled()
+	hud_opacity = get_hud_opacity()
+	chat_enabled = get_chat_enabled()
+	crosshair_style = get_crosshair_style()
+	key_bindings = get_key_bindings()
 
-func save_settings():
+func save_settings():   
 	SimpleSettings.set_value("game", "gameplay/difficulty_level", difficulty_level)
 	SimpleSettings.set_value("game", "audio/sound_volume", sound_volume)
 	SimpleSettings.set_value("game", "graphics/quality", graphics_quality)

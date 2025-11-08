@@ -36,6 +36,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/simple-settings/plugin.cfg")
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/values/text.br.translation", "res://assets/values/text.en.translation", "res://assets/values/text.es.translation", "res://assets/values/text.ja.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
