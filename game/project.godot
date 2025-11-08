@@ -13,6 +13,7 @@ config_version=5
 config/name="Gaijin Simulator"
 config/name_localized={
 "pt_BR": "Simulador de Estrangeiro"
+"en": "Gaijin Simulator"
 }
 config/version="0.0.1"
 run/main_scene="uid://hopc4wmjmhk6"
