@@ -15,7 +15,7 @@ config/name_localized={
 "pt_BR": "Simulador de Estrangeiro"
 }
 config/version="0.0.1"
-run/main_scene="uid://hopc4wmjmhk6"
+run/main_scene="res://scenes/menus/startup.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,8 @@ config/icon="res://icon.svg"
 
 GameSettings="*res://configs/game_settings.gd"
 SimpleSettings="*res://addons/simple-settings/simple-settings.gd"
+SceneTransition="*res://scenes/utils/scene_transition.tscn"
+SaveManager="*res://scripts/save_manager.gd"
 
 [display]
 

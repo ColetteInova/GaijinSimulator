@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://hopc4wmjmhk6"]
+[gd_scene load_steps=3 format=3 uid="uid://c7p6epti0dpy6"]
 
 [ext_resource type="VideoStream" uid="uid://duh35c4eqph7x" path="res://assets/videos/backgrounds/main_menu_light_background.ogv" id="1_4t2mg"]
 [ext_resource type="AudioStream" uid="uid://b2ccoqknc8bmb" path="res://assets/audios/main_menu.mp3" id="2_rn7m7"]

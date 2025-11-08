@@ -2,3 +2,12 @@ KEYS,en,br,es,ja
 KEY_HELLO,Hello!,Olá!,Hola!,こんにちは
 KEY_PUSH,Push Me!,Aperte-me!,Aprétame!,押す
 KEY_TEXT,This is translated!,Isto está traduzido!,¡Esto está traducido!,これが翻訳されていました！
+MENU_START_GAME,Start Game,Iniciar Jogo,Iniciar Juego,ゲームスタート
+MENU_LOAD,Load,Carregar,Cargar,ロード
+MENU_OPTIONS,Options,Opções,Opciones,オプション
+MENU_EXIT,Exit,Sair,Salir,終了
+MENU_BACK,Back,Voltar,Volver,戻る
+SAVE_TITLE,Save Game,Salvar Jogo,Guardar Juego,セーブ
+LOAD_TITLE,Load Game,Carregar Jogo,Cargar Juego,ロード
+SLOT_LABEL,Slot {0},Slot {0},Ranura {0},スロット {0}
+SLOT_EMPTY,Empty Slot {0},Slot Vazio {0},Ranura Vacía {0},空きスロット {0}

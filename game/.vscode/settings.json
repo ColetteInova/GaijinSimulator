@@ -1,3 +1,27 @@
 {
-    "godotTools.editorPath.godot4": "/Applications/Godot.app"
+    "godotTools.editorPath.godot4": "/Applications/Godot.app",
+    
+    // Auto-save e auto-reload
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    
+    // Exclui pastas do file watcher para melhor performance
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.godot/**": true,
+        "**/build/**": true
+    },
+    
+    // Configurações do editor
+    "editor.formatOnSave": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    
+    // GDScript específico
+    "[gdscript]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": false
+    }
 }

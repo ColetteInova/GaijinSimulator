@@ -4,7 +4,7 @@ var difficulty_level := "Normal"
 var sound_volume := 0.8
 var graphics_quality := "High"
 var control_scheme := "Keyboard"
-var language := "br"
+var language := ""
 var subtitles_enabled := true
 var auto_save_enabled := true
 var tutorial_enabled := true
@@ -126,7 +126,11 @@ func get_control_scheme() -> String:
 	return SimpleSettings.get_value("game", "controls/scheme", control_scheme)
 
 func get_language() -> String:
-	return SimpleSettings.get_value("game", "general/language", language)
+	return SimpleSettings.get_value("game", "general/language", "")
+
+func is_language_set() -> bool:
+	var lang = get_language()
+	return lang != null and lang != ""
 
 func get_subtitles_enabled() -> bool:
 	return SimpleSettings.get_value("game", "accessibility/subtitles_enabled", subtitles_enabled)
