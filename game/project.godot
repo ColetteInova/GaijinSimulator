@@ -21,7 +21,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SimpleSettings="*res://addons/simple_settings/simple-settings.gd"
+GameSettings="*res://configs/game_settings.gd"
+SimpleSettings="*res://addons/simple-settings/simple-settings.gd"
 
 [display]
 
@@ -33,7 +34,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/simple_settings/plugin.cfg")
+enabled=PackedStringArray("res://addons/simple-settings/plugin.cfg")
 
 [rendering]
 
