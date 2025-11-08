@@ -1,0 +1,65 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Godot Project",
+			"type": "shell",
+			"command": "/Applications/Godot.app/Contents/MacOS/Godot",
+			"args": [
+				"--path",
+				"${workspaceFolder}"
+			],
+			"problemMatcher": [],
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Run Godot Editor",
+			"type": "shell",
+			"command": "/Applications/Godot.app/Contents/MacOS/Godot",
+			"args": [
+				"--path",
+				"${workspaceFolder}",
+				"--editor"
+			],
+			"problemMatcher": [],
+			"group": "none",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Export Project (Debug)",
+			"type": "shell",
+			"command": "/Applications/Godot.app/Contents/MacOS/Godot",
+			"args": [
+				"--path",
+				"${workspaceFolder}",
+				"--export-debug",
+				"macOS"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Export Project (Release)",
+			"type": "shell",
+			"command": "/Applications/Godot.app/Contents/MacOS/Godot",
+			"args": [
+				"--path",
+				"${workspaceFolder}",
+				"--export-release",
+				"macOS"
+			],
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
