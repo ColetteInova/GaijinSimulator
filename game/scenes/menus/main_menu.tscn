@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpxwlp6fl43a5"]
+[gd_scene load_steps=7 format=3 uid="uid://hopc4wmjmhk6"]
 
 [ext_resource type="AudioStream" uid="uid://b2ccoqknc8bmb" path="res://assets/audios/main_menu.mp3" id="2_rn7m7"]
 [ext_resource type="Script" uid="uid://cldjjr2c6gnw2" path="res://scenes/menus/main_menu.gd" id="3_menu_script"]
 [ext_resource type="FontFile" uid="uid://2iila81hgrg7" path="res://assets/fonts/pixel.ttf" id="4_font"]
-[ext_resource type="Texture2D" uid="uid://brij2n3eaawks" path="res://assets/images/Battleground3.png" id="5_battleground"]
-[ext_resource type="Script" uid="uid://dnt7cbo1at5y5" path="res://scenes/menus/battleground_animated.gd" id="6_bg_anim"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1"]
 
@@ -24,20 +22,22 @@ corner_radius_bottom_left = 4
 
 [node name="MainMenuScreen" type="Control"]
 layout_mode = 3
-anchor_right = 1.025
-anchor_bottom = 1.0222223
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_menu_script")
 metadata/_edit_use_anchors_ = true
 
-[node name="BattlegroundBackground" type="Node2D" parent="."]
-z_index = -1
-script = ExtResource("6_bg_anim")
-background_texture = ExtResource("5_battleground")
-scroll_speed = Vector2(25, 0)
-brightness_variation = 0.08
-color_tint_variation = 0.03
+[node name="BackgroundGradient" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.15, 0.25, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_rn7m7")
@@ -49,20 +49,17 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -72.000015
-offset_right = 320.0
-offset_bottom = -1.5258789e-05
+offset_left = 30.0
+offset_top = -280.0
+offset_right = 210.0
+offset_bottom = -30.0
 grow_vertical = 0
 
 [node name="MenuContainer" type="VBoxContainer" parent="SideMenu"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.156
-anchor_right = 0.61800003
-anchor_bottom = 0.56200004
-offset_top = 0.063999176
-offset_right = -0.0960083
-offset_bottom = -0.6720123
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -70,12 +67,13 @@ alignment = 1
 
 [node name="StartGameButton" type="Button" parent="SideMenu/MenuContainer"]
 auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
 theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1")
@@ -84,13 +82,13 @@ flat = true
 
 [node name="LoadButton" type="Button" parent="SideMenu/MenuContainer"]
 auto_translate_mode = 1
-clip_contents = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
 theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1")
@@ -99,12 +97,13 @@ flat = true
 
 [node name="OptionsButton" type="Button" parent="SideMenu/MenuContainer"]
 auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
 theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1")
@@ -113,12 +112,13 @@ flat = true
 
 [node name="ExitButton" type="Button" parent="SideMenu/MenuContainer"]
 auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
 theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1")
