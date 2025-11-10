@@ -1,0 +1,67 @@
+Crie uma ilustração em pixel-art animada no estilo "Japan Collection Asset Pack Vol.2" com os seguintes elementos:
+
+**ESTILO E TÉCNICA:**
+- Estilo: Pixel-art detalhado com atmosfera animável
+- Resolução: 1920x1080 pixels para uso em jogos
+- Paleta de cores: Tons noturnos profundos (azul-marinho, roxo escuro, preto) com pontos de luz vibrante (laranja neon, amarelo quente, rosa suave)
+- Iluminação: Efeitos de luz volumétrica, brilho suave, atmosfera dreamlike
+- Level of detail: Médio-alto para pixel-art (personagens 32x32 pixels, cenários detalhados)
+
+**CENÁRIO PRINCIPAL:**
+Uma rua suburbana japonesa durante a transição crepuscular para noite profunda, com:
+
+**FOREGROUND (primeiro plano):**
+- Rua de paralelepípedos com poças d'água refletindo luzes
+- Bicicleta mamachari abandonada encostada em poste
+- Máquina de venda automática (vending machine) glow-in-the-dark iluminando o entorno
+- Placa de "conbini" (loja de conveniência) com caracteres japoneses glow
+- Lixeira pública com sacos plásticos
+
+**MIDGROUND (plano médio):**
+- Casa tradicional machiya com:
+  - Luzes amarelas quentes nas janelas de papel (shoji)
+  - Varanda (engawa) com plantas em vaso
+  - Cortinas noren balançando suavemente
+- Postes de eletricidade denchu com fios cruzados em padrão complexo
+- 2-3 personagens estilo "gaijin" (estrangeiros) caminhando:
+  - Um com mochila tirando foto
+  - Outro segurando mapa turístico
+- Placa de rua em japonês e inglês
+
+**BACKGROUND (fundo):**
+- Monte Fuji ao longe com:
+  - Aura suave e luminosa em tons de azul e roxo
+  - Neve no pico brilhando com luz lunar
+- Tokyo Skytree à distância com iluminação noturna piscante
+- Toriï flutuante (portal de santuário) com lanternas de pedra levitando
+- Cerejeiras (sakura) com pétalas brilhantes flutuando no ar
+- Arranha-céus de Tóquio no horizonte com luzes de escritórios
+
+**ELEMENTOS SURREALISTAS:**
+- Estrelas e constelações formando padrões japoneses (kanji) no céu
+- Nuvens luminosas em formato de peixes koi
+- Linhas de energia elétrica emitindo partículas de luz
+- Reflexos nas poças d'água mostrando cenas diferentes do dia
+- Fantasmas yokai sutis nas sombras (nezumi, tanuki)
+
+**ATMOSFERA E EFEITOS:**
+- Neblina noturna suave (mist effect)
+- Partículas de pólen luminoso flutuando
+- Raios de luz lunar filtrando através das nuvens
+- Efeito de profundidade com 3 camadas para parallax scrolling
+- Transição de cores: laranja crepuscular → azul noite → roxo profundo
+
+**DETALHES TÉCNICOS:**
+- Preparado para animação (separar layers: sky, far background, midground, foreground)
+- Transparências para uso em game engines
+- Estilo consistente com visual novels japonesas
+- Autenticidade cultural: elementos reais do Japão urbano/suburbano
+
+**PALAVRAS-CHAVE PARA IA:**
+pixel-art, night scene, Japanese suburban street, animated background, dreamlike atmosphere, vending machine, traditional machiya house, Mount Fuji background, Tokyo Skytree, floating torii gate, glowing cherry blossoms, surreal japan, gaijin simulator, twilight to night transition, volumetric lighting, neon signs in japanese, telephone poles with wires, nostalgic gaming background, 32bit pixel art, parallax scrolling ready
+
+**NEGATIVE PROMPT:**
+realistic, 3D, cartoon, western style, daytime, modern architecture only, crowded, realistic humans, photorealistic, blurry, low quality, generic fantasy
+
+**NOTAS PARA O ARTISTA/IA:**
+Esta cena será usada como background principal para o jogo "Gaijin Simulator", onde jogadores experimentam a vida de estrangeiro no Japão. Deve transmitir solidão poética, descoberta cultural e magia cotidiana.
