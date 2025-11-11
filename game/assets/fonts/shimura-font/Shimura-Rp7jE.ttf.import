@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cxxp7mwt3yxil"
-path="res://.godot/imported/MusekininKatakana-x34r.ttf-0dc745d64271e2140322f7957ea9c5b0.fontdata"
+uid="uid://ccll60xts0lr3"
+path="res://.godot/imported/Shimura-Rp7jE.ttf-c94d1b1db3b429f5909e284753675b4b.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/MusekininKatakana-x34r.ttf"
-dest_files=["res://.godot/imported/MusekininKatakana-x34r.ttf-0dc745d64271e2140322f7957ea9c5b0.fontdata"]
+source_file="res://assets/fonts/shimura-font/Shimura-Rp7jE.ttf"
+dest_files=["res://.godot/imported/Shimura-Rp7jE.ttf-c94d1b1db3b429f5909e284753675b4b.fontdata"]
 
 [params]
 

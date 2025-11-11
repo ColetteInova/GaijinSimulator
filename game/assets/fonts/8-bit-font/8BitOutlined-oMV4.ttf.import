@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://2iila81hgrg7"
-path="res://.godot/imported/pixel.ttf-12e479e6571f1a942f0f1f22125b476f.fontdata"
+uid="uid://dujssi7aqpwgb"
+path="res://.godot/imported/8BitOutlined-oMV4.ttf-863f53c95edd28d4d0f52fd135c5adf3.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/pixel.ttf"
-dest_files=["res://.godot/imported/pixel.ttf-12e479e6571f1a942f0f1f22125b476f.fontdata"]
+source_file="res://assets/fonts/8-bit-font/8BitOutlined-oMV4.ttf"
+dest_files=["res://.godot/imported/8BitOutlined-oMV4.ttf-863f53c95edd28d4d0f52fd135c5adf3.fontdata"]
 
 [params]
 
