@@ -23,7 +23,7 @@ config/icon="res://icon.svg"
 
 GameSettings="*res://configs/game_settings.gd"
 SimpleSettings="*res://addons/simple-settings/simple-settings.gd"
-SceneTransition="*res://scenes/utils/scene_transition.tscn"
+SceneTransition="*res://scripts/utils/scene_transition.tscn"
 SaveManager="*res://scripts/save_manager.gd"
 
 [display]

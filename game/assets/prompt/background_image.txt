@@ -1,67 +1,80 @@
-Crie uma ilustração em pixel-art animada no estilo "Japan Collection Asset Pack Vol.2" com os seguintes elementos:
+### **Título:** Rua Movimentada de Tóquio ao Meio-Dia - Pixel Art Animada
 
-**ESTILO E TÉCNICA:**
-- Estilo: Pixel-art detalhado com atmosfera animável
-- Resolução: 1920x1080 pixels para uso em jogos
-- Paleta de cores: Tons noturnos profundos (azul-marinho, roxo escuro, preto) com pontos de luz vibrante (laranja neon, amarelo quente, rosa suave)
-- Iluminação: Efeitos de luz volumétrica, brilho suave, atmosfera dreamlike
-- Level of detail: Médio-alto para pixel-art (personagens 32x32 pixels, cenários detalhados)
+**Estilo e Técnica:**
 
-**CENÁRIO PRINCIPAL:**
-Uma rua suburbana japonesa durante a transição crepuscular para noite profunda, com:
+* **Estilo:** Pixel-art detalhada e limpa, com elementos animáveis para jogos simuladores de vida urbana.
+* **Resolução:** 640x360 pixels.
+* **Paleta de Cores:** Tons vibrantes de azul-céu, branco de nuvens, cinzas urbanos e vermelhos/laranjas de placas e toldos. Cores claras e saturadas para transmitir luz e energia.
+* **Iluminação:** Luz solar intensa e direta, com sombras curtas e nítidas. Sensação de meio-dia em um dia ensolarado.
+* **Level of Detail:** Médio-alto, priorizando texturas urbanas, placas e pequenos objetos da rotina japonesa.
 
-**FOREGROUND (primeiro plano):**
-- Rua de paralelepípedos com poças d'água refletindo luzes
-- Bicicleta mamachari abandonada encostada em poste
-- Máquina de venda automática (vending machine) glow-in-the-dark iluminando o entorno
-- Placa de "conbini" (loja de conveniência) com caracteres japoneses glow
-- Lixeira pública com sacos plásticos
+---
 
-**MIDGROUND (plano médio):**
-- Casa tradicional machiya com:
-  - Luzes amarelas quentes nas janelas de papel (shoji)
-  - Varanda (engawa) com plantas em vaso
-  - Cortinas noren balançando suavemente
-- Postes de eletricidade denchu com fios cruzados em padrão complexo
-- 2-3 personagens estilo "gaijin" (estrangeiros) caminhando:
-  - Um com mochila tirando foto
-  - Outro segurando mapa turístico
-- Placa de rua em japonês e inglês
+### **Cenário Principal:**
 
-**BACKGROUND (fundo):**
-- Monte Fuji ao longe com:
-  - Aura suave e luminosa em tons de azul e roxo
-  - Neve no pico brilhando com luz lunar
-- Tokyo Skytree à distância com iluminação noturna piscante
-- Toriï flutuante (portal de santuário) com lanternas de pedra levitando
-- Cerejeiras (sakura) com pétalas brilhantes flutuando no ar
-- Arranha-céus de Tóquio no horizonte com luzes de escritórios
+Uma rua comercial de Tóquio, em um dia de sol, representando a rotina cotidiana da cidade.
 
-**ELEMENTOS SURREALISTAS:**
-- Estrelas e constelações formando padrões japoneses (kanji) no céu
-- Nuvens luminosas em formato de peixes koi
-- Linhas de energia elétrica emitindo partículas de luz
-- Reflexos nas poças d'água mostrando cenas diferentes do dia
-- Fantasmas yokai sutis nas sombras (nezumi, tanuki)
+---
 
-**ATMOSFERA E EFEITOS:**
-- Neblina noturna suave (mist effect)
-- Partículas de pólen luminoso flutuando
-- Raios de luz lunar filtrando através das nuvens
-- Efeito de profundidade com 3 camadas para parallax scrolling
-- Transição de cores: laranja crepuscular → azul noite → roxo profundo
+### **Foreground (Primeiro Plano):**
 
-**DETALHES TÉCNICOS:**
-- Preparado para animação (separar layers: sky, far background, midground, foreground)
-- Transparências para uso em game engines
-- Estilo consistente com visual novels japonesas
-- Autenticidade cultural: elementos reais do Japão urbano/suburbano
+* **Calçada:** Piso de concreto limpo, com marcações discretas.
+* **Máquina de Venda Automática:** Colorida, metálica e refletiva — destaque clássico do cotidiano japonês.
+* **Máquina de “Gacha Pon”:** Próxima à loja de conveniência, com cápsulas coloridas visíveis, oferecendo brinquedos e miniaturas.
+* **Bicicleta “Mamachari”:** Estacionada de forma casual perto de um poste.
+* **Lixeira Pública:** Com rótulos para reciclagem e lixo comum.
+* **Poste de Sinalização:** Com avisos e ícones em japonês.
 
-**PALAVRAS-CHAVE PARA IA:**
-pixel-art, night scene, Japanese suburban street, animated background, dreamlike atmosphere, vending machine, traditional machiya house, Mount Fuji background, Tokyo Skytree, floating torii gate, glowing cherry blossoms, surreal japan, gaijin simulator, twilight to night transition, volumetric lighting, neon signs in japanese, telephone poles with wires, nostalgic gaming background, 32bit pixel art, parallax scrolling ready
+---
 
-**NEGATIVE PROMPT:**
-realistic, 3D, cartoon, western style, daytime, modern architecture only, crowded, realistic humans, photorealistic, blurry, low quality, generic fantasy
+### **Midground (Plano Médio):**
 
-**NOTAS PARA O ARTISTA/IA:**
-Esta cena será usada como background principal para o jogo "Gaijin Simulator", onde jogadores experimentam a vida de estrangeiro no Japão. Deve transmitir solidão poética, descoberta cultural e magia cotidiana.
+* **Rua:** Faixa de pedestres (“zebra crossing”) com poucos moradores locais andando ou aguardando o sinal — sem foco em turistas.
+* **Lojas e Edifícios Baixos:**
+
+  * **Loja de Conveniência (“Conbini”)** com letreiro típico (ex: 7-Eleven, Lawson).
+  * **Loja de Ramen** com cortina “noren” balançando suavemente ao vento.
+  * **Loja com “Gacha Pon”** visível na entrada, com brilho nas cápsulas transparentes.
+  * **Placas de negócios** em japonês e letreiros verticais.
+* **Postes de Eletricidade (“Denchu”)** e fios cruzando o cenário, reforçando o visual urbano típico.
+
+---
+
+### **Background (Fundo):**
+
+* **Arranha-céus de Tóquio** em tons azulados e acinzentados no horizonte.
+* **Tokyo Skytree** visível à distância sob o céu azul.
+* **Céu:** Azul vibrante com algumas nuvens brancas e um rastro de avião (contrail).
+
+---
+
+### **Atmosfera e Efeitos:**
+
+* **Animações Suaves:**
+
+  * Cortinas “noren” se movendo com a brisa.
+  * Cápsulas da máquina “Gacha Pon” girando levemente.
+  * Pessoas andando ao fundo ou mexendo no celular.
+  * Nuvens deslizando lentamente no céu.
+  * Folhas de árvore (se presentes) tremulando.
+* **Efeito de Profundidade:** Três camadas (foreground, midground, background) com parallax scrolling para dar sensação de movimento urbano.
+* **Ambiente Cotidiano:** Tudo transmite rotina, trabalho e normalidade, sem elementos turísticos ou fantasiosos.
+
+---
+
+### **Palavras-chave para IA:**
+
+pixel art, daytime, Tokyo street, Japanese urban life, gacha pon machine, conbini, vending machine, ramen shop, detailed pixel art, parallax scrolling, japanese signs, sunny day, everyday life, slice of life, Shibuya, clear sky, Tokyo Skytree
+
+---
+
+### **Negative Prompt:**
+
+night, dark, neon, surreal, fantasy, ghost, yokai, tourist, floating, magic, cherry blossoms, rain, crowded, realistic 3D, cartoon, western style, blurry, low quality
+
+---
+
+**Nota Final:**
+A cena deve representar o cotidiano autêntico de Tóquio — uma rua viva, organizada e ensolarada, com elementos clássicos do dia a dia japonês como máquinas “Gacha Pon”, bicicletas e lojas locais. O foco é a **rotina urbana**, não o turismo.
+
+---
