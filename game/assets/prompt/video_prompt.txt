@@ -4,7 +4,7 @@ Dia a Dia em Frente ao Konbini — Pixel Art Loop
 Descrição e Ação:
 Cena de pixel art em loop ambientada em uma rua japonesa ao meio-dia, com o Monte Fuji ao fundo. O cenário é idêntico ao da imagem fornecida: duas máquinas de venda automática (azul e vermelha) à esquerda, uma loja “Konbini” no centro e uma pequena loja “Ramy” à direita.
 As animações devem ocorrer de forma contínua e harmoniosa, sem cortes abruptos, simulando o cotidiano.
-
+Mova acamera com efeito paralax
 Elementos animados e ações (em loop suave):
 
 Personagens:

@@ -23,7 +23,7 @@ config/icon="res://icon.svg"
 
 GameSettings="*res://configs/game_settings.gd"
 SimpleSettings="*res://addons/simple-settings/simple-settings.gd"
-SceneTransition="*res://scripts/utils/scene_transition.tscn"
+SceneTransition="*res://scenes/scene_transition.tscn"
 SaveManager="*res://scripts/save_manager.gd"
 
 [display]
@@ -84,3 +84,4 @@ renderer/rendering_method.mobile="gl_compatibility"
 viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0.1, 0.1, 0.1, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

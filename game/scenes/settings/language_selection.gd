@@ -33,9 +33,6 @@ func setup_language_buttons():
 	for child in language_container.get_children():
 		child.queue_free()
 	
-	# Carrega a fonte PressStart2P
-	var font = preload("res://assets/fonts/pixel.ttf")
-	
 	# Cria um botão para cada idioma
 	for lang_code in languages.keys():
 		var button = Button.new()
@@ -43,9 +40,7 @@ func setup_language_buttons():
 		button.custom_minimum_size = Vector2(300, 50)
 		button.pressed.connect(_on_language_button_pressed.bind(lang_code))
 		
-		# Estiliza o botão com a fonte PressStart2P
-		button.add_theme_font_override("font", font)
-		button.add_theme_font_size_override("font_size", 14)
+
 		
 		language_container.add_child(button)
 

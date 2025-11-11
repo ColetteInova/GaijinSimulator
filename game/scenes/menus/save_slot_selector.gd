@@ -46,10 +46,6 @@ func create_slot_button(slot: int) -> Button:
 	button.custom_minimum_size = Vector2(400, 60)
 	button.pressed.connect(_on_slot_pressed.bind(slot))
 	
-	# Carrega a fonte
-	var font = preload("res://assets/fonts/pixel.ttf")
-	button.add_theme_font_override("font", font)
-	button.add_theme_font_size_override("font_size", 10)
 	
 	update_slot_button(button, slot)
 	

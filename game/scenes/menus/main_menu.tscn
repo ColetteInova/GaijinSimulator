@@ -1,115 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://hopc4wmjmhk6"]
+[gd_scene load_steps=8 format=3 uid="uid://hopc4wmjmhk6"]
 
-[ext_resource type="VideoStream" uid="uid://bqi8oohq7v0xo" path="res://assets/videos/backgrounds/mani_menu_video.ogv" id="2_2o76q"]
+[ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_8r73w"]
+[ext_resource type="VideoStream" uid="uid://d3emum3xg3snc" path="res://assets/videos/backgrounds/house_car_urban_clean.ogv" id="2_2o76q"]
 [ext_resource type="AudioStream" uid="uid://b2ccoqknc8bmb" path="res://assets/audios/main_menu.mp3" id="2_rn7m7"]
+[ext_resource type="Script" uid="uid://v4lcos1kbe44" path="res://scripts/utils/video_switcher.gd" id="3_imvie"]
 [ext_resource type="Script" uid="uid://cldjjr2c6gnw2" path="res://scenes/menus/main_menu.gd" id="3_menu_script"]
+[ext_resource type="VideoStream" uid="uid://cmrn3w6qqjpk" path="res://assets/videos/backgrounds/house_brigde_uban_clean.ogv" id="4_ng0o5"]
+[ext_resource type="Texture2D" uid="uid://cp75hen6perpm" path="res://assets/images/logo.png" id="7_50h1w"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2"]
-bg_color = Color(1, 0.8, 0.2, 0.2)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
-bg_color = Color(1, 1, 1, 0.1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[node name="MainMenuScreen" type="Control"]
+[node name="TitleScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_8r73w")
 script = ExtResource("3_menu_script")
 metadata/_edit_use_anchors_ = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_rn7m7")
-autoplay = true
-parameters/looping = true
-
-[node name="SideMenu" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = -280.0
-offset_right = 210.0
-offset_bottom = -30.0
-grow_vertical = 0
-
-[node name="MenuContainer" type="VBoxContainer" parent="SideMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.16000001
-anchor_right = 0.989
-anchor_bottom = 1.0
-offset_right = -0.020004272
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="StartGameButton" type="Button" parent="SideMenu/MenuContainer"]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1")
-text = "MENU_START_GAME"
-flat = true
-
-[node name="LoadButton" type="Button" parent="SideMenu/MenuContainer"]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1")
-text = "MENU_LOAD"
-flat = true
-
-[node name="OptionsButton" type="Button" parent="SideMenu/MenuContainer"]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1")
-text = "MENU_OPTIONS"
-flat = true
-
-[node name="ExitButton" type="Button" parent="SideMenu/MenuContainer"]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.6, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1")
-text = "MENU_EXIT"
-flat = true
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
@@ -118,8 +26,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("2_2o76q")
 autoplay = true
 expand = true
 loop = true
-metadata/_edit_use_anchors_ = true
+script = ExtResource("3_imvie")
+video_list = Array[VideoStream]([ExtResource("2_2o76q"), ExtResource("4_ng0o5")])
+enable_movement = false
+movement_speed = 10.0
+random_order = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rn7m7")
+autoplay = true
+parameters/looping = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="GameLogo" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(260, 160)
+layout_mode = 2
+texture = ExtResource("7_50h1w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MenuContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 20
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme = ExtResource("1_8r73w")
+theme_override_constants/line_spacing = 10
+text = "MENU_START_GAME"
+
+[node name="LoadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+disabled = true
+text = "MENU_LOAD"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "MENU_OPTIONS"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "MENU_EXIT"

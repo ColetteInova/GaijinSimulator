@@ -1,9 +1,9 @@
 extends Control
 
-@onready var start_game_btn = $SideMenu/MenuContainer/StartGameButton
-@onready var load_btn = $SideMenu/MenuContainer/LoadButton
-@onready var options_btn = $SideMenu/MenuContainer/OptionsButton
-@onready var exit_btn = $SideMenu/MenuContainer/ExitButton
+@onready var start_game_btn = $MarginContainer/HBoxContainer/VBoxContainer/MenuContainer/StartGameButton
+@onready var load_btn = $MarginContainer/HBoxContainer/VBoxContainer/MenuContainer/LoadButton
+@onready var options_btn = $MarginContainer/HBoxContainer/VBoxContainer/MenuContainer/OptionsButton
+@onready var exit_btn = $MarginContainer/HBoxContainer/VBoxContainer/MenuContainer/ExitButton
 
 
 func _ready():
