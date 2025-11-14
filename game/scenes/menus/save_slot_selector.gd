@@ -72,6 +72,7 @@ func set_mode(mode: Mode):
 
 
 func _on_slot_pressed(slot: int):
+	UISoundManager.play_click()
 	if current_mode == Mode.SAVE:
 		_save_to_slot(slot)
 	else:
@@ -118,4 +119,5 @@ func _load_from_slot(slot: int):
 
 
 func _on_back_pressed():
+	UISoundManager.play_click()
 	await SceneTransition.change_scene_to_file("res://scenes/menus/main_menu_screen.tscn", 0.3, 0.5)

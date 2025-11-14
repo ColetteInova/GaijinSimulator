@@ -2,11 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_8r73w"]
 [ext_resource type="VideoStream" uid="uid://d3emum3xg3snc" path="res://assets/videos/backgrounds/house_car_urban_clean.ogv" id="2_2o76q"]
-[ext_resource type="AudioStream" uid="uid://b2ccoqknc8bmb" path="res://assets/audios/main_menu.mp3" id="2_rn7m7"]
 [ext_resource type="Script" uid="uid://v4lcos1kbe44" path="res://scripts/utils/video_switcher.gd" id="3_imvie"]
 [ext_resource type="Script" uid="uid://cldjjr2c6gnw2" path="res://scenes/menus/main_menu.gd" id="3_menu_script"]
 [ext_resource type="VideoStream" uid="uid://cmrn3w6qqjpk" path="res://assets/videos/backgrounds/house_brigde_uban_clean.ogv" id="4_ng0o5"]
-[ext_resource type="Texture2D" uid="uid://cp75hen6perpm" path="res://assets/images/logo.png" id="7_50h1w"]
+[ext_resource type="AudioStream" uid="uid://o8p3l8tmuchx" path="res://assets/audios/main_menu_music.mp3" id="6_8r73w"]
+[ext_resource type="Texture2D" uid="uid://bumtcn743bshj" path="res://assets/sprites/UIs/logo.png" id="7_8r73w"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -36,7 +36,7 @@ movement_speed = 10.0
 random_order = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_rn7m7")
+stream = ExtResource("6_8r73w")
 autoplay = true
 parameters/looping = true
 
@@ -58,31 +58,35 @@ layout_mode = 2
 [node name="GameLogo" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(260, 160)
 layout_mode = 2
-texture = ExtResource("7_50h1w")
+texture = ExtResource("7_8r73w")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="MenuContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_horizontal = 4
+size_flags_vertical = 10
 theme_override_constants/separation = 20
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
 auto_translate_mode = 1
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("1_8r73w")
-theme_override_constants/line_spacing = 10
 text = "MENU_START_GAME"
 
 [node name="LoadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
 auto_translate_mode = 1
 layout_mode = 2
+size_flags_vertical = 4
 disabled = true
 text = "MENU_LOAD"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
 auto_translate_mode = 1
 layout_mode = 2
+size_flags_vertical = 4
 text = "MENU_OPTIONS"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]

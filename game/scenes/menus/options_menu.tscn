@@ -1,0 +1,170 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5jqm8vn2xh3p"]
+
+[ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_options"]
+[ext_resource type="Script" uid="uid://cwnglwy0cwqpe" path="res://scenes/menus/options_menu.gd" id="2_options"]
+[ext_resource type="VideoStream" uid="uid://d3emum3xg3snc" path="res://assets/videos/backgrounds/house_car_urban_clean.ogv" id="4_dwjoh"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_options")
+script = ExtResource("2_options")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4_dwjoh")
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.12, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "MENU_OPTIONS"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="AudioSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="AudioLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "OPTIONS_AUDIO"
+
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection/MasterVolumeContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "OPTIONS_MASTER_VOLUME"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+layout_mode = 2
+value = 100.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection/MusicVolumeContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "OPTIONS_MUSIC_VOLUME"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+layout_mode = 2
+value = 100.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection/SFXVolumeContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "OPTIONS_SFX_VOLUME"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/AudioSection"]
+layout_mode = 2
+value = 100.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="VideoSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VideoLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/VideoSection"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "OPTIONS_VIDEO"
+
+[node name="FullscreenCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/VideoSection"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "OPTIONS_FULLSCREEN"
+
+[node name="VsyncCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/VideoSection"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "OPTIONS_VSYNC"
+
+[node name="GameSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="GameLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/GameSection"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "OPTIONS_GAME"
+
+[node name="LanguageContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/GameSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/GameSection/LanguageContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "OPTIONS_LANGUAGE"
+
+[node name="LanguageOption" type="OptionButton" parent="MarginContainer/VBoxContainer/ScrollContainer/OptionsContainer/GameSection"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MENU_BACK"

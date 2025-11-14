@@ -11,3 +11,21 @@ SAVE_TITLE,Save Game,Salvar Jogo,Guardar Juego,セーブ
 LOAD_TITLE,Load Game,Carregar Jogo,Cargar Juego,ロード
 SLOT_LABEL,Slot {0},Slot {0},Ranura {0},スロット {0}
 SLOT_EMPTY,Empty Slot {0},Slot Vazio {0},Ranura Vacía {0},空きスロット {0}
+OPTIONS_AUDIO,Audio,Áudio,Audio,オーディオ
+OPTIONS_VIDEO,Video,Vídeo,Video,ビデオ
+OPTIONS_GAME,Game,Jogo,Juego,ゲーム
+OPTIONS_MASTER_VOLUME,Master Volume,Volume Geral,Volumen General,マスター音量
+OPTIONS_MUSIC_VOLUME,Music Volume,Volume da Música,Volumen de Música,音楽の音量
+OPTIONS_SFX_VOLUME,SFX Volume,Volume de Efeitos,Volumen de Efectos,効果音の音量
+OPTIONS_FULLSCREEN,Fullscreen,Tela Cheia,Pantalla Completa,フルスクリーン
+OPTIONS_VSYNC,VSync,VSync,VSync,垂直同期
+OPTIONS_LANGUAGE,Language,Idioma,Idioma,言語
+CHARACTER_CREATION_TITLE,Create Your Character,Crie Seu Personagem,Crea Tu Personaje,キャラクター作成
+CHARACTER_PREVIEW,Character Preview,Visualização do Personagem,Vista Previa del Personaje,キャラクタープレビュー
+CHARACTER_NAME_LABEL,Character Name,Nome do Personagem,Nombre del Personaje,キャラクター名
+CHARACTER_CONFIRM,Start Adventure,Iniciar Aventura,Iniciar Aventura,冒険を始める
+CHARACTER_MALE_STUDENT,Male Student,Estudante Masculino,Estudiante Masculino,男子学生
+CHARACTER_FEMALE_STUDENT,Female Student,Estudante Feminina,Estudiante Femenina,女子学生
+CHARACTER_MALE_OFFICE,Male Office Worker,Trabalhador de Escritório,Oficinista Masculino,男性会社員
+CHARACTER_FEMALE_OFFICE,Female Office Worker,Trabalhadora de Escritório,Oficinista Femenina,女性会社員
+

@@ -2,6 +2,9 @@ extends Node
 
 var difficulty_level := "Normal"
 var sound_volume := 0.8
+var master_volume := 100.0
+var music_volume := 80.0
+var sfx_volume := 80.0
 var graphics_quality := "High"
 var control_scheme := "Keyboard"
 var language := ""
@@ -10,6 +13,7 @@ var auto_save_enabled := true
 var tutorial_enabled := true
 var max_framerate := 60
 var fullscreen_enabled := true
+var vsync_enabled := true
 var mouse_sensitivity := 1.0
 var vibration_enabled := false
 var hud_opacity := 1.0
@@ -32,6 +36,9 @@ func _ready():
 func load_settings():
 	difficulty_level = get_difficulty_level()
 	sound_volume = get_sound_volume()
+	master_volume = get_master_volume()
+	music_volume = get_music_volume()
+	sfx_volume = get_sfx_volume()
 	graphics_quality = get_graphics_quality()
 	control_scheme = get_control_scheme()
 	language = get_language()
@@ -39,7 +46,8 @@ func load_settings():
 	auto_save_enabled = get_auto_save_enabled()
 	tutorial_enabled = get_tutorial_enabled()
 	max_framerate = get_max_framerate()
-	fullscreen_enabled = get_fullscreen_enabled()
+	fullscreen_enabled = get_fullscreen()
+	vsync_enabled = get_vsync()
 	mouse_sensitivity = get_mouse_sensitivity()
 	vibration_enabled = get_vibration_enabled()
 	hud_opacity = get_hud_opacity()
@@ -237,3 +245,42 @@ func set_key_bindings(value: Dictionary):
 func set_key_binding(action: String, key: String):
 	key_bindings[action] = key
 	SimpleSettings.set_value("game", "controls/key_bindings", key_bindings)
+
+
+# Volume and Audio methods
+func get_master_volume() -> float:
+	return SimpleSettings.get_value("game", "audio/master_volume", master_volume)
+
+func set_master_volume(value: float):
+	master_volume = value
+	SimpleSettings.set_value("game", "audio/master_volume", value)
+
+func get_music_volume() -> float:
+	return SimpleSettings.get_value("game", "audio/music_volume", music_volume)
+
+func set_music_volume(value: float):
+	music_volume = value
+	SimpleSettings.set_value("game", "audio/music_volume", value)
+
+func get_sfx_volume() -> float:
+	return SimpleSettings.get_value("game", "audio/sfx_volume", sfx_volume)
+
+func set_sfx_volume(value: float):
+	sfx_volume = value
+	SimpleSettings.set_value("game", "audio/sfx_volume", value)
+
+
+# Video methods
+func get_fullscreen() -> bool:
+	return SimpleSettings.get_value("game", "graphics/fullscreen", fullscreen_enabled)
+
+func set_fullscreen(value: bool):
+	fullscreen_enabled = value
+	SimpleSettings.set_value("game", "graphics/fullscreen", value)
+
+func get_vsync() -> bool:
+	return SimpleSettings.get_value("game", "graphics/vsync", vsync_enabled)
+
+func set_vsync(value: bool):
+	vsync_enabled = value
+	SimpleSettings.set_value("game", "graphics/vsync", value)
