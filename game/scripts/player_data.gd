@@ -136,3 +136,30 @@ func add_experience(amount: int):
 	character_data["experience"] += amount
 	# TODO: Sistema de level up
 	save_data()
+
+
+func get_time_of_day() -> String:
+	"""Retorna o período do dia atual (morning, afternoon, night)"""
+	return character_data.get("time", "morning")
+
+
+func set_time_of_day(time: String):
+	"""Define o período do dia (morning, afternoon, night)"""
+	if time in ["morning", "afternoon", "night"]:
+		character_data["time"] = time
+		save_data()
+
+
+func advance_time():
+	"""Avança o período do dia (morning -> afternoon -> night -> morning)"""
+	var current_time = get_time_of_day()
+	match current_time:
+		"morning":
+			set_time_of_day("afternoon")
+		"afternoon":
+			set_time_of_day("night")
+		"night":
+			set_time_of_day("morning")
+			# Avança o dia quando volta para manhã
+			character_data["day"] += 1
+			save_data()

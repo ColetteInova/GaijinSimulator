@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://j5ql28qy78mu"]
+[gd_scene load_steps=13 format=3 uid="uid://j5ql28qy78mu"]
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_char"]
-[ext_resource type="Script" path="res://scenes/menus/character_creation.gd" id="2_char"]
+[ext_resource type="PackedScene" uid="uid://dhql0w47jfkgb" path="res://scenes/components/parallax_background.tscn" id="2_parallax"]
+[ext_resource type="Texture2D" uid="uid://6erdvyhh2y6k" path="res://assets/sprites/backgrounds/clouds/afternoon/sky.png" id="3_gxf3h"]
+[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/cloud_layer.gd" id="4_ud8jk"]
+[ext_resource type="Resource" uid="uid://ef4x5tqxjx5y" path="res://assets/sprites/backgrounds/clouds/afternoon/layers/cloud_afeternoon_1.tres" id="5_frqx0"]
+[ext_resource type="Resource" uid="uid://b65vkg36cw7gn" path="res://assets/sprites/backgrounds/clouds/afternoon/layers/cloud_afeternoon_2.tres" id="6_qu3m1"]
+[ext_resource type="Resource" uid="uid://dy8hbetd0f0kb" path="res://assets/sprites/backgrounds/clouds/afternoon/layers/cloud_afeternoon_3.tres" id="7_bt4fl"]
+[ext_resource type="Resource" uid="uid://ci2sftj1nhs3m" path="res://assets/sprites/backgrounds/clouds/afternoon/layers/cloud_afeternoon_4.tres" id="8_cqvlb"]
+[ext_resource type="Texture2D" uid="uid://dyo2waynnbj8c" path="res://assets/sprites/backgrounds/clouds/night/sky.png" id="9_bt4fl"]
+[ext_resource type="Resource" uid="uid://xduo2okcvrrq" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_1.tres" id="10_cqvlb"]
+[ext_resource type="Resource" uid="uid://urlmbkjnodnp" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_2.tres" id="11_vtx7c"]
+[ext_resource type="Resource" uid="uid://bydas0n5qj3ra" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_3.tres" id="12_dtpt7"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -11,7 +21,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_char")
-script = ExtResource("2_char")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_parallax")]
+layout_mode = 1
+afternoon_background = ExtResource("3_gxf3h")
+afternoon_cloud_layers = Array[ExtResource("4_ud8jk")]([ExtResource("5_frqx0"), ExtResource("6_qu3m1"), ExtResource("7_bt4fl"), ExtResource("8_cqvlb")])
+night_background = ExtResource("9_bt4fl")
+night_cloud_layers = Array[ExtResource("4_ud8jk")]([ExtResource("10_cqvlb"), ExtResource("11_vtx7c"), ExtResource("12_dtpt7")])
+auto_update_time = true
+manual_time = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CloudLayer" load_steps=3 format=3 uid="uid://ef4x5tqxjx5y"]
+
+[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/cloud_layer.gd" id="1_1lru3"]
+[ext_resource type="Texture2D" uid="uid://4bad88yhdqxl" path="res://assets/sprites/backgrounds/clouds/afternoon/cloud_afternoon_1.png" id="1_poxl6"]
+
+[resource]
+script = ExtResource("1_1lru3")
+cloud_texture = ExtResource("1_poxl6")
+speed = 0.1
+scale = 0.5
+metadata/_custom_type_script = "uid://cd54cs08bamu3"

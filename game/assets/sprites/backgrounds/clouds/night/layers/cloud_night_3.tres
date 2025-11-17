@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CloudLayer" load_steps=3 format=3 uid="uid://bydas0n5qj3ra"]
+
+[ext_resource type="Texture2D" uid="uid://cjcxcqxgivgma" path="res://assets/sprites/backgrounds/clouds/night/cloud_night_3.png" id="1_jasab"]
+[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/cloud_layer.gd" id="2_n2bi0"]
+
+[resource]
+script = ExtResource("2_n2bi0")
+cloud_texture = ExtResource("1_jasab")
+metadata/_custom_type_script = "uid://cd54cs08bamu3"
