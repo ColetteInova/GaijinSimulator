@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://p0fm8a51dphy"]
+
+[ext_resource type="StyleBox" uid="uid://dxk5w1m8qy7ro" path="res://assets/themes/ui_window_theme.tres" id="2_p3tda"]
+[ext_resource type="Script" uid="uid://cvh8w5n3qy2md" path="res://scripts/utils/ui_window.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://hbp7h1kb23jk" path="res://assets/sprites/UIs/ui_windows/windows_decorations.png" id="2_vqbbp"]
+
+[node name="UIWindowBase" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 0.36200002
+anchor_bottom = 0.6
+offset_right = 0.31999207
+offset_bottom = -1.5258789e-05
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_p3tda")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="FrameTop" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_vqbbp")
+region_rect = Rect2(160, 58, 48, 11)
+patch_margin_left = 18
+patch_margin_right = 18
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FrameTop2" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+texture = ExtResource("2_vqbbp")
+region_rect = Rect2(160, 74, 48, 6)
+patch_margin_left = 4
+patch_margin_right = 4
