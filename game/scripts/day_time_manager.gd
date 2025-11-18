@@ -10,17 +10,32 @@ signal hour_changed(new_hour: int)
 
 var current_hour: int = 8  # Hora atual (0-23)
 var current_time_of_day: TimeOfDay = TimeOfDay.MORNING
+var use_system_time: bool = false  # Se true, usa hora do sistema ao invés do PlayerData
 
 
 func _ready():
-	# Carrega a hora salva do jogador
-	if PlayerData:
+	# Carrega a hora salva do jogador ou usa hora do sistema
+	if use_system_time:
+		_sync_with_system_time()
+	elif PlayerData:
 		_sync_with_player_data()
+	else:
+		# Fallback para hora do sistema se não tiver PlayerData
+		_sync_with_system_time()
+
+
+func _sync_with_system_time():
+	"""Sincroniza com a hora atual do sistema"""
+	var time_dict = Time.get_datetime_dict_from_system()
+	current_hour = time_dict.hour
+	print("DayTimeManager - Hora do sistema: ", current_hour)
+	_update_time_of_day_from_hour()
 
 
 func _sync_with_player_data():
 	"""Sincroniza com os dados do PlayerData"""
 	var saved_time = PlayerData.get_time_of_day()
+	print("DayTimeManager - Tempo salvo no PlayerData: ", saved_time)
 	match saved_time:
 		"morning":
 			current_time_of_day = TimeOfDay.MORNING
@@ -34,6 +49,7 @@ func _sync_with_player_data():
 		_:
 			current_time_of_day = TimeOfDay.MORNING
 			current_hour = 8
+	print("DayTimeManager - Período configurado: ", get_time_of_day_string(), " Hora: ", current_hour)
 
 
 func get_time_of_day() -> TimeOfDay:
@@ -77,7 +93,7 @@ func _update_time_of_day_from_hour():
 	if current_hour >= 6 and current_hour < 12:
 		current_time_of_day = TimeOfDay.MORNING
 	# 12:01 - 18:00 = Tarde (hora 12-17)
-	elif current_hour >= 12 and current_hour < 18:
+	elif current_hour >= 12 and current_hour <= 17:
 		current_time_of_day = TimeOfDay.AFTERNOON
 	# 18:01 - 06:00 = Noite (hora 18-23, 0-5)
 	else:

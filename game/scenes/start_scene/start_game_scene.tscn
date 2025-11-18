@@ -36,6 +36,7 @@ afternoon_cloud_layers = Array[ExtResource("4_f2sok")]([ExtResource("5_odcua"), 
 night_background = ExtResource("9_vvqbo")
 night_cloud_layers = Array[ExtResource("4_f2sok")]([ExtResource("10_onvh6"), ExtResource("11_4yc28"), ExtResource("12_rhnsv")])
 auto_update_time = true
+manual_time = 2
 move_left = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

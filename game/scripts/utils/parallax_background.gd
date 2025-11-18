@@ -37,6 +37,10 @@ func _ready():
 		if auto_update_time and DayTimeManager:
 			# Conecta ao sinal de mudança de período
 			DayTimeManager.time_of_day_changed.connect(_on_time_changed)
+			# Força atualização inicial
+			var current_time = DayTimeManager.get_time_of_day()
+			var current_hour = DayTimeManager.get_hour()
+			print("ParallaxBackground - Hora atual: ", current_hour, " Período: ", current_time)
 		_update_current_period()
 		_setup_background()
 		_setup_clouds()
@@ -98,7 +102,9 @@ func _get_current_cloud_layers() -> Array[SpriteParallaxLayer]:
 func _get_time_period() -> int:
 	"""Retorna o período atual (0=Morning, 1=Afternoon, 2=Night)"""
 	if auto_update_time and DayTimeManager:
-		return int(DayTimeManager.get_time_of_day())
+		var period = int(DayTimeManager.get_time_of_day())
+		print("ParallaxBackground - Período detectado: ", period, " (0=Morning, 1=Afternoon, 2=Night)")
+		return period
 	else:
 		return manual_time
 
@@ -121,6 +127,7 @@ func _setup_clouds():
 	
 	# Obtém as camadas do período atual
 	var current_layers = _get_current_cloud_layers()
+	print("ParallaxBackground - Número de layers para este período: ", current_layers.size())
 	
 	# Cria novos containers para cada camada
 	for layer in current_layers:

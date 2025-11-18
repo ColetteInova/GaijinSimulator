@@ -16,7 +16,7 @@ region_rect = Rect2(78, 208, 50, 50)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fent0"]
 texture = ExtResource("3_ve476")
 texture_margin_left = 3.8961487
-texture_margin_top = 4.288426
+texture_margin_top = 4.080395
 texture_margin_right = 3.9471567
 texture_margin_bottom = 4.003477
 region_rect = Rect2(144, 208, 48, 48)
@@ -39,10 +39,10 @@ unique_name_in_owner = true
 [node name="NameLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 19.0
-offset_top = 199.0
-offset_right = 87.72253
-offset_bottom = 219.0
+offset_left = 18.0
+offset_top = 184.0
+offset_right = 86.72253
+offset_bottom = 209.01595
 theme = ExtResource("3_xyeu4")
 theme_type_variation = &"HeaderSmall"
 text = "dsdadas"
@@ -54,28 +54,27 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
-anchor_top = 0.64444447
+anchor_top = 0.62222224
 anchor_right = 0.975
-anchor_bottom = 0.95555556
-offset_top = 1.0
-offset_bottom = 1.0
+anchor_bottom = 0.9583333
+offset_top = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_xyeu4")
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.18400002
-anchor_top = 0.21400002
+anchor_left = 0.02631579
+anchor_top = -0.024951603
 anchor_right = 0.9736842
-anchor_bottom = 0.89285713
-offset_left = -95.87201
-offset_top = -7.9680023
-offset_bottom = -4.0
+anchor_bottom = 1.0328996
+offset_top = 20.945145
+offset_bottom = -20.945137
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -104,11 +103,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_fent0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextLabel" type="RichTextLabel" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="TextLabel" type="RichTextLabel" parent="Panel/HBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -120,5 +115,6 @@ text = "TextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabel
 scroll_active = false
 scroll_following = true
 scroll_following_visible_characters = true
+tab_size = 3
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false

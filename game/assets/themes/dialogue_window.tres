@@ -1,12 +1,13 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://ca0k68oog044u"]
 
-[ext_resource type="FontFile" uid="uid://bmylvteiiktv" path="res://assets/fonts/mplus-jp/PixelMplus12-Bold.ttf" id="1_wimqv"]
+[ext_resource type="FontFile" uid="uid://c444dg71eouhn" path="res://assets/fonts/depixel/DePixelHalbfett.ttf" id="1_237yd"]
 
 [resource]
-RichTextLabel/colors/default_color = Color(1, 1, 1, 0.845)
+RichTextLabel/colors/default_color = Color(0.92667675, 0.9432019, 0.98255354, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/line_separation = 2
-RichTextLabel/constants/outline_size = 1
-RichTextLabel/fonts/bold_font = ExtResource("1_wimqv")
-RichTextLabel/fonts/normal_font = ExtResource("1_wimqv")
+RichTextLabel/constants/outline_size = 2
+RichTextLabel/font_sizes/normal_font_size = 11
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/normal_font = ExtResource("1_237yd")
 RichTextLabel/icons/horizontal_rule = null
