@@ -1,18 +1,21 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bga34dw0emcf7"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bga34dw0emcf7"]
 
 [ext_resource type="Texture2D" uid="uid://bnny5awah48rv" path="res://assets/sprites/UIs/ui_banners/banners_horizontal.png" id="1_hlwd4"]
+[ext_resource type="FontFile" uid="uid://bim58mnativyr" path="res://assets/fonts/pixeled/Pixeled.ttf" id="1_uqh17"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uqh17"]
 texture = ExtResource("1_hlwd4")
-texture_margin_left = 6.3077593
-texture_margin_top = 1.7765654
-texture_margin_right = 7.261431
-texture_margin_bottom = 1.833874
+texture_margin_left = 6.0651135
+texture_margin_top = 1.5761174
+texture_margin_right = 7.287485
+texture_margin_bottom = 1.7107426
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
 region_rect = Rect2(147, 212, 44, 10)
 
 [resource]
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0.9607843, 0.9607843, 0.9607843, 0.20784314)
-Label/constants/outline_size = 1
-Label/font_sizes/font_size = 14
+Label/font_sizes/font_size = 11
+Label/fonts/font = ExtResource("1_uqh17")
 Label/styles/normal = SubResource("StyleBoxTexture_uqh17")

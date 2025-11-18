@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d0ndshtwl3vj4"
-path="res://.godot/imported/8Bit-44Pl.ttf-dc666ee21c5d2009558c00a24a93ca33.fontdata"
+uid="uid://nixa4q7edlu5"
+path="res://.godot/imported/PixelMplus10-Regular.ttf-0d1492c74b0d7237d2d8053dca69cf3a.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/8-bit-font/8Bit-44Pl.ttf"
-dest_files=["res://.godot/imported/8Bit-44Pl.ttf-dc666ee21c5d2009558c00a24a93ca33.fontdata"]
+source_file="res://assets/fonts/mplus-jp/PixelMplus10-Regular.ttf"
+dest_files=["res://.godot/imported/PixelMplus10-Regular.ttf-0d1492c74b0d7237d2d8053dca69cf3a.fontdata"]
 
 [params]
 

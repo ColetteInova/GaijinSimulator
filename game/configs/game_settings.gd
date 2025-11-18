@@ -1,5 +1,9 @@
 extends Node
 
+# Temas para diferentes idiomas
+var japanese_theme: Theme
+var default_theme: Theme
+
 var difficulty_level := "Normal"
 var sound_volume := 0.8
 var master_volume := 100.0
@@ -28,6 +32,9 @@ var key_bindings := {
 
 
 func _ready():
+	# Carrega os temas
+	japanese_theme = load("res://assets/themes/japanese_theme.tres")
+	default_theme = load("res://assets/themes/default.tres")
 	SimpleSettings.config_files.set("game", {"path": "user://game.ini"})
 	SimpleSettings.load()
 	load_settings()
@@ -284,3 +291,24 @@ func get_vsync() -> bool:
 func set_vsync(value: bool):
 	vsync_enabled = value
 	SimpleSettings.set_value("game", "graphics/vsync", value)
+
+
+# Métodos para gerenciamento de temas baseados em idioma
+func get_current_theme() -> Theme:
+	"""Retorna o tema apropriado baseado no idioma atual"""
+	if language == "ja" or TranslationServer.get_locale().begins_with("ja"):
+		return japanese_theme if japanese_theme else default_theme
+	return default_theme
+
+
+func is_japanese_language() -> bool:
+	"""Verifica se o idioma atual é japonês"""
+	return language == "ja" or TranslationServer.get_locale().begins_with("ja")
+
+
+func apply_theme_to_node(node: Control):
+	"""Aplica o tema apropriado a um nó Control"""
+	if node and is_japanese_language() and japanese_theme:
+		node.theme = japanese_theme
+	elif node and default_theme:
+		node.theme = default_theme

@@ -5,6 +5,10 @@
 
 [resource]
 script = ExtResource("1_vq4x1")
+use_translation_key = true
+japanese_text = "皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在を。皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在を。"
+translated_text = "Senhoras e senhores, bem-vindos ao Japão.Estamos chegando ao Aeroporto de Haneda, em Tóquio.Por favor permaneçam sentados até o sinal de cinto apagar.Obrigado por voar com a Japan Airlines.Desejamos uma boa estadia."
+display_mode = 1
 character_name = "Mikoto Yoshida"
 character_avatar = ExtResource("1_3fg1k")
 metadata/_custom_type_script = "uid://cklkhy8dos46y"

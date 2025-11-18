@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dnu50r6g7u8bs"
-path="res://.godot/imported/HalfBoldPixel7-2rw3.ttf-3831b580f433f573dc6f2774704f360e.fontdata"
+uid="uid://btbps4bvshfi8"
+path="res://.godot/imported/PixelMplus10-Bold.ttf-b99f963fafbe16fcec0c17500b6123cf.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/half-bold-pixel-7-font/HalfBoldPixel7-2rw3.ttf"
-dest_files=["res://.godot/imported/HalfBoldPixel7-2rw3.ttf-3831b580f433f573dc6f2774704f360e.fontdata"]
+source_file="res://assets/fonts/mplus-jp/PixelMplus10-Bold.ttf"
+dest_files=["res://.godot/imported/PixelMplus10-Bold.ttf-b99f963fafbe16fcec0c17500b6123cf.fontdata"]
 
 [params]
 

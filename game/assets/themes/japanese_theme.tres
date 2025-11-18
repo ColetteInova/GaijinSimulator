@@ -1,0 +1,42 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bvh2k8x7j9pqr"]
+
+[ext_resource type="FontFile" uid="uid://nixa4q7edlu5" path="res://assets/fonts/mplus-jp/PixelMplus10-Regular.ttf" id="1_noto"]
+[ext_resource type="StyleBox" uid="uid://co7ytwycnmtun" path="res://assets/themes/buttons/menus/menu_button_disable_theme.tres" id="2_4bmj0"]
+[ext_resource type="StyleBox" uid="uid://d0pwva58kwywi" path="res://assets/themes/buttons/menus/menu_button_hover_theme.tres" id="2_hvkdh"]
+[ext_resource type="StyleBox" uid="uid://deqtx6asxatk2" path="res://assets/themes/buttons/menus/menu_focus_default_theme.tres" id="3_exttd"]
+[ext_resource type="StyleBox" uid="uid://dr1rx8sn3vtcn" path="res://assets/themes/buttons/menus/menu_button_normal_theme.tres" id="3_qyfqg"]
+[ext_resource type="StyleBox" uid="uid://o2f4gf48e41v" path="res://assets/themes/buttons/menus/menu_button_pressed_theme.tres" id="4_qyfqg"]
+
+[resource]
+default_font = ExtResource("1_noto")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.8047426, 0.80474263, 0.8047426, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.9999997, 0.9258203, 0.8968991, 1)
+Button/colors/font_hover_pressed_color = Color(0.2627451, 0.007843138, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.9882353, 0.7058824, 0.07058824, 1)
+Button/constants/outline_size = 1
+Button/font_sizes/font_size = 14
+Button/fonts/font = ExtResource("1_noto")
+Button/styles/disabled = ExtResource("2_4bmj0")
+Button/styles/focus = ExtResource("3_exttd")
+Button/styles/hover = ExtResource("2_hvkdh")
+Button/styles/normal = ExtResource("3_qyfqg")
+Button/styles/pressed = ExtResource("4_qyfqg")
+MarginContainer/constants/margin_bottom = 12
+MarginContainer/constants/margin_left = 12
+MarginContainer/constants/margin_right = 12
+MarginContainer/constants/margin_top = 12
+RichTextLabel/colors/font_outline_color = Color(0.7294118, 0.38039216, 0.3372549, 1)
+RichTextLabel/constants/line_separation = 2
+RichTextLabel/constants/outline_size = 1
+RichTextLabel/font_sizes/normal_font_size = 14
+RichTextLabel/fonts/normal_font = ExtResource("1_noto")
+RichTextLabel/icons/horizontal_rule = null
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0.9607843, 0.9607843, 0.9607843, 0.20784314)
+Label/constants/outline_size = 1
+Label/font_sizes/font_size = 14
+Label/fonts/font = ExtResource("1_noto")
+

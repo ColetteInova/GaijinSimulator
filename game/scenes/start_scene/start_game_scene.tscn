@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://j5ql28qy78mu"]
+[gd_scene load_steps=20 format=3 uid="uid://j5ql28qy78mu"]
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_gtona"]
 [ext_resource type="PackedScene" uid="uid://dhql0w47jfkgb" path="res://scenes/components/parallax_background.tscn" id="2_g13i7"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://3ymc1f4xsjsu" path="res://assets/sprites/backgrounds/dialogs/plane_inner_1_background.png" id="14_dyesy"]
 [ext_resource type="SpriteFrames" uid="uid://32chf30ypq7g" path="res://assets/sprites/characters/avatars/commissaries/mikoto_yoshida_commissary.tres" id="15_wmb5t"]
 [ext_resource type="SpriteFrames" uid="uid://pdlqhua0jw8y" path="res://assets/sprites/transports/planes/japan_airlines_plane/japan_airlines_sprite_frames.tres" id="16_ci80x"]
+[ext_resource type="Script" uid="uid://cklkhy8dos46y" path="res://scripts/utils/dialogue_line.gd" id="16_knp0f"]
+[ext_resource type="Resource" uid="uid://cpexqfyh5gb04" path="res://scenes/start_scene/dialogs/commissioner_dialog_1.tres" id="17_in13e"]
 [ext_resource type="Script" uid="uid://ch6wwik7c1tbv" path="res://scenes/start_scene/japan_airlines_animated_sprite.gd" id="17_irmer"]
 
 [node name="CharacterCreation" type="Control"]
@@ -49,7 +51,9 @@ layout_mode = 2
 avatar_background = ExtResource("14_dyesy")
 avatar_spritesheet = ExtResource("15_wmb5t")
 avatar_size = Vector2(80, 80)
-dialogue_lines = Array[String](["Senhoras e senhores, bem-vindos ao Japão. Acabamos de aterrissar no Aeroporto de Haneda, em Tóquio.", "Por favor, permaneçam sentados até que o aviso de cintos apagado acenda.A Japan Airlines agradece por voar conosco. Desejamos uma excelente estadia."])
+dialogue_lines = Array[ExtResource("16_knp0f")]([ExtResource("17_in13e")])
+text_speed = 0.06
+line_advance_delay = 1.0
 
 [node name="japan_airlines_animated_sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(736.00006, 208)

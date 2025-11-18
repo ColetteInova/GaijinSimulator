@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dxengo5m38oha"
-path="res://.godot/imported/TokyoTaiyakiDemoRegular-5yl5B.otf-acaae3a88f5dc48b961352e80e6eaa3b.fontdata"
+uid="uid://cd2swt0ehlv7k"
+path="res://.godot/imported/PixelMplus12-Regular.ttf-6a84bcfa0a526ac1774e84fab3b8bef1.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/tokyo-taiyaki-font/TokyoTaiyakiDemoRegular-5yl5B.otf"
-dest_files=["res://.godot/imported/TokyoTaiyakiDemoRegular-5yl5B.otf-acaae3a88f5dc48b961352e80e6eaa3b.fontdata"]
+source_file="res://assets/fonts/mplus-jp/PixelMplus12-Regular.ttf"
+dest_files=["res://.godot/imported/PixelMplus12-Regular.ttf-6a84bcfa0a526ac1774e84fab3b8bef1.fontdata"]
 
 [params]
 

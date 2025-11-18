@@ -181,7 +181,7 @@ func _update_clouds(delta):
 		var cloud_width = container.get_meta("cloud_width", 0.0)
 		var overlap = container.get_meta("overlap", 0.0)
 		var num_clouds = container.get_meta("num_clouds", 0)
-		var move_left = container.get_meta("move_left", true)
+		var layer_move_left = container.get_meta("move_left", true)
 		
 		if cloud_width == 0 or num_clouds == 0:
 			continue
@@ -193,7 +193,7 @@ func _update_clouds(delta):
 		for cloud in container.get_children():
 			if cloud is TextureRect:
 				# Move a nuvem na direção configurada
-				if move_left:
+				if layer_move_left:
 					cloud.position.x -= movement
 					# Reposiciona quando passa completamente da tela (loop sem emendas)
 					if cloud.position.x <= -cloud_width:

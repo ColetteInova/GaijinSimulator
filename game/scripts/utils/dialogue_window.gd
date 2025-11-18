@@ -36,7 +36,7 @@ signal dialogue_advanced
 			call_deferred("_update_avatar_size")
 
 @export_group("Dialogue Settings")
-@export var dialogue_lines: Array[DialogueLine] = []:  ## Lista de linhas de diálogo
+@export var dialogue_lines: Array[DialogueLine] = []: ## Lista de linhas de diálogo
 	set(value):
 		dialogue_lines = value
 		if is_inside_tree():
@@ -58,19 +58,36 @@ signal dialogue_advanced
 @onready var avatar_background_texture_rect: TextureRect = %AvatarBackground
 @onready var audio_player: AudioStreamPlayer = %AudioPlayer
 
+# Temas para diferentes idiomas
+var japanese_theme: Theme
+var default_theme: Theme
+
 var is_typing: bool = false
 var current_char_index: int = 0
 var typing_timer: float = 0.0
 var full_text: String = ""
-var current_dialogue_index: int = 0  ## Índice da linha atual
-var current_sequence_index: int = 0  ## Índice da sequência atual (japonês/tradução)
-var current_line: DialogueLine  ## Linha de diálogo atual
-var current_sequence: Array[Dictionary] = []  ## Sequência de exibição atual
+var current_dialogue_index: int = 0 ## Índice da linha atual
+var current_sequence_index: int = 0 ## Índice da sequência atual (japonês/tradução)
+var current_line: DialogueLine ## Linha de diálogo atual
+var current_sequence: Array[Dictionary] = [] ## Sequência de exibição atual
+var initial_visible_position: float = 0.0 ## Posição Y inicial da janela
 
 
 func _ready():
+	japanese_theme = load("res://assets/themes/dialogue_window_japanese.tres")
+	default_theme = window_theme if window_theme else load("res://assets/themes/dialogue_window.tres")
+	
 	if panel and window_theme:
 		panel.theme = window_theme
+	
+	# Armazena a posição inicial da janela
+	initial_visible_position = global_position.y
+	
+	# Configura o text_label
+	if text_label:
+		text_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		text_label.get_v_scroll_bar().visible = false
+		text_label.scroll_active = false
 	
 	_update_avatar_size()
 	_update_avatar_background()
@@ -87,6 +104,9 @@ func _process(delta):
 		# Efeito de digitação
 		if is_typing:
 			_type_text(delta)
+		
+		# Verifica se houve scroll na tela e esconde a janela
+		_check_scroll_visibility()
 
 
 func _setup_avatar():
@@ -201,7 +221,18 @@ func _start_dialogue_line(line: DialogueLine):
 
 func _display_sequence(sequence_data: Dictionary):
 	"""Exibe uma sequência (japonês ou tradução)"""
-	_display_text(sequence_data.get("text", ""))
+	var text: String = sequence_data.get("text", "")
+	
+	# Verifica se o texto contém caracteres japoneses e ajusta o tema
+	if _is_japanese_text(text):
+		if text_label and japanese_theme:
+			text_label.theme = japanese_theme
+	else:
+		if text_label and default_theme:
+			text_label.theme = default_theme
+		
+	
+	_display_text(text)
 	
 	# Toca o áudio se disponível
 	var audio: AudioStream = sequence_data.get("audio", null)
@@ -228,6 +259,10 @@ func _type_text(delta):
 		if current_char_index < full_text.length():
 			current_char_index += 1
 			text_label.text = full_text.substr(0, current_char_index)
+			
+			# Auto-scroll quando criar uma linha nova
+			if text_label.get_v_scroll_bar():
+				text_label.get_v_scroll_bar().value = text_label.get_v_scroll_bar().max_value
 		else:
 			is_typing = false
 			dialogue_finished.emit()
@@ -274,12 +309,6 @@ func previous_dialogue() -> bool:
 		_start_dialogue_line(dialogue_lines[current_dialogue_index])
 		return true
 	return false
-	if current_dialogue_index > 0:
-		current_dialogue_index -= 1
-		current_sequence_index = 0
-		_start_dialogue_line(dialogue_lines[current_dialogue_index])
-		return true
-	return false
 
 
 func has_next_dialogue() -> bool:
@@ -306,11 +335,11 @@ func set_dialogue_single(line: DialogueLine):
 	current_sequence_index = 0
 
 
-func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", size: Vector2 = Vector2(128, 128)):
+func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", avatar_custom_size: Vector2 = Vector2(128, 128)):
 	"""Define o avatar do personagem usando SpriteFrames"""
 	avatar_spritesheet = spriteframes
 	animation_name = anim_name
-	avatar_size = size
+	avatar_size = avatar_custom_size
 
 
 func set_avatar_background(background_texture: Texture2D):
@@ -334,3 +363,30 @@ func stop_avatar_animation():
 	"""Para a animação do avatar"""
 	if avatar_sprite:
 		avatar_sprite.stop()
+
+
+func _is_japanese_text(text: String) -> bool:
+	"""Verifica se o texto contém caracteres japoneses (Hiragana, Katakana ou Kanji)"""
+	for i in range(text.length()):
+		var char_code = text.unicode_at(i)
+		# Hiragana: 0x3040-0x309F
+		# Katakana: 0x30A0-0x30FF
+		# Kanji: 0x4E00-0x9FFF
+		# Full-width characters: 0xFF00-0xFFEF
+		if (char_code >= 0x3040 and char_code <= 0x309F) or \
+		   (char_code >= 0x30A0 and char_code <= 0x30FF) or \
+		   (char_code >= 0x4E00 and char_code <= 0x9FFF) or \
+		   (char_code >= 0xFF00 and char_code <= 0xFFEF):
+			return true
+	return false
+
+
+func _check_scroll_visibility():
+	"""Verifica se houve scroll e esconde a janela se necessário"""
+	var current_y = global_position.y
+	var scroll_threshold = 50.0  # Threshold em pixels para considerar scroll
+	
+	if abs(current_y - initial_visible_position) > scroll_threshold:
+		visible = false
+	else:
+		visible = true

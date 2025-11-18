@@ -39,11 +39,15 @@ unique_name_in_owner = true
 [node name="NameLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 24.0
-offset_top = 201.0
-offset_right = 64.0
-offset_bottom = 220.61044
+offset_left = 19.0
+offset_top = 199.0
+offset_right = 87.72253
+offset_bottom = 219.0
 theme = ExtResource("3_xyeu4")
+theme_type_variation = &"HeaderSmall"
+text = "dsdadas"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -53,6 +57,8 @@ anchor_left = 0.025
 anchor_top = 0.64444447
 anchor_right = 0.975
 anchor_bottom = 0.95555556
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_xyeu4")
@@ -75,6 +81,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AvatarContainer" type="PanelContainer" parent="Panel/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -105,9 +112,13 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-bbcode_enabled = true
-fit_content = true
+focus_mode = 0
+mouse_filter = 2
+text = "TextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabel"
+scroll_active = false
 scroll_following = true
 scroll_following_visible_characters = true
-justification_flags = 131
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false

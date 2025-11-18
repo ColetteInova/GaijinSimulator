@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c5lhc2u48qgcj"
-path="res://.godot/imported/The Japan Collection Official Font v2.ttf-aeea15d0cd3af4c92a91b4c09ddedb25.fontdata"
+uid="uid://bmylvteiiktv"
+path="res://.godot/imported/PixelMplus12-Bold.ttf-340c4a42667d487e5e39c39cb1703dfe.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/japan-collections/The Japan Collection Official Font v2.ttf"
-dest_files=["res://.godot/imported/The Japan Collection Official Font v2.ttf-aeea15d0cd3af4c92a91b4c09ddedb25.fontdata"]
+source_file="res://assets/fonts/mplus-jp/PixelMplus12-Bold.ttf"
+dest_files=["res://.godot/imported/PixelMplus12-Bold.ttf-340c4a42667d487e5e39c39cb1703dfe.fontdata"]
 
 [params]
 
