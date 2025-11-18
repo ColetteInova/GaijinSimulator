@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://phgauu3paffi"]
+
+[ext_resource type="Script" uid="uid://bstnj38vucutt" path="res://scripts/utils/dialogue_window.gd" id="1"]
+[ext_resource type="Theme" uid="uid://ca0k68oog044u" path="res://assets/themes/dialogue_window.tres" id="2_aixfb"]
+[ext_resource type="Texture2D" uid="uid://bssbjqi5rw1le" path="res://assets/sprites/UIs/ui_windows/windows.png" id="3_ve476"]
+[ext_resource type="FontFile" uid="uid://d0ndshtwl3vj4" path="res://assets/fonts/8-bit-font/8Bit-44Pl.ttf" id="7_po4f0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xyeu4"]
+texture = ExtResource("3_ve476")
+texture_margin_left = 8.071981
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.085644
+region_rect = Rect2(78, 208, 50, 50)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fent0"]
+texture = ExtResource("3_ve476")
+texture_margin_left = 3.8961487
+texture_margin_top = 4.288426
+texture_margin_right = 3.9471567
+texture_margin_bottom = 4.003477
+region_rect = Rect2(144, 208, 48, 48)
+draw_center = false
+
+[node name="DialogueWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_aixfb")
+script = ExtResource("1")
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 216.0
+offset_right = 166.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("7_po4f0")
+theme_override_font_sizes/font_size = 20
+text = "Character Name"
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.64444447
+anchor_right = 0.975
+anchor_bottom = 0.95555556
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xyeu4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18400002
+anchor_top = 0.21400002
+anchor_right = 0.9736842
+anchor_bottom = 0.89285713
+offset_left = -95.87201
+offset_top = -7.9680023
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AvatarContainer" type="PanelContainer" parent="Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="AvatarBackground" type="TextureRect" parent="Panel/HBoxContainer/AvatarContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AvatarSprite" type="AnimatedSprite2D" parent="Panel/HBoxContainer/AvatarContainer"]
+unique_name_in_owner = true
+texture_filter = 2
+position = Vector2(39.999996, 43.999996)
+scale = Vector2(0.12500003, 0.12500003)
+
+[node name="AvatarFrame" type="PanelContainer" parent="Panel/HBoxContainer/AvatarContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_fent0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextLabel" type="RichTextLabel" parent="Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Dialgoes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here..."
+fit_content = true
+justification_flags = 131

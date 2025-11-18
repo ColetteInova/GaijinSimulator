@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ca0k68oog044u"]
+
+[ext_resource type="FontFile" uid="uid://d0ndshtwl3vj4" path="res://assets/fonts/8-bit-font/8Bit-44Pl.ttf" id="1_237yd"]
+
+[resource]
+default_font = ExtResource("1_237yd")
+RichTextLabel/colors/font_outline_color = Color(0.7294118, 0.38039216, 0.3372549, 1)
+RichTextLabel/constants/line_separation = 2
+RichTextLabel/constants/outline_size = 1
+RichTextLabel/font_sizes/normal_font_size = 14
+RichTextLabel/icons/horizontal_rule = null

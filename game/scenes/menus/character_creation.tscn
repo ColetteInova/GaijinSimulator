@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://j5ql28qy78mu"]
+[gd_scene load_steps=18 format=3 uid="uid://j5ql28qy78mu"]
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_char"]
 [ext_resource type="PackedScene" uid="uid://dhql0w47jfkgb" path="res://scenes/components/parallax_background.tscn" id="2_parallax"]
@@ -13,8 +13,10 @@
 [ext_resource type="Resource" uid="uid://urlmbkjnodnp" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_2.tres" id="11_rg42j"]
 [ext_resource type="Resource" uid="uid://bydas0n5qj3ra" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_3.tres" id="12_p4okr"]
 [ext_resource type="SpriteFrames" uid="uid://pdlqhua0jw8y" path="res://assets/sprites/transports/planes/japan_airlines_plane/japan_airlines_sprite_frames.tres" id="13_cqvlb"]
+[ext_resource type="PackedScene" uid="uid://phgauu3paffi" path="res://scenes/components/dialogue_window.tscn" id="13_rg42j"]
+[ext_resource type="Texture2D" uid="uid://3ymc1f4xsjsu" path="res://assets/sprites/backgrounds/dialogs/plane_inner_1_background.png" id="14_p4okr"]
 [ext_resource type="Script" uid="uid://ch6wwik7c1tbv" path="res://scenes/menus/japan_airlines_animated_sprite.gd" id="14_vtx7c"]
-[ext_resource type="PackedScene" uid="uid://p0fm8a51dphy" path="res://scenes/components/ui_window.tscn" id="15_dtpt7"]
+[ext_resource type="SpriteFrames" uid="uid://32chf30ypq7g" path="res://assets/sprites/characters/avatars/commissaries/mikoto_yoshida_commissary.tres" id="15_dtpt7"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -41,17 +43,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="DialogueWindow" parent="MarginContainer" instance=ExtResource("13_rg42j")]
 layout_mode = 2
-theme_override_constants/separation = 4
+avatar_background = ExtResource("14_p4okr")
+avatar_spritesheet = ExtResource("15_dtpt7")
+avatar_size = Vector2(80, 80)
+character_name = "Mioto Yashida"
+dialogue_lines = Array[String](["testes", "testes"])
 
 [node name="japan_airlines_animated_sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(719.99994, 272)
+position = Vector2(736.00006, 208)
 scale = Vector2(0.26250002, 0.26250002)
 sprite_frames = ExtResource("13_cqvlb")
 autoplay = "default"
@@ -60,13 +62,3 @@ script = ExtResource("14_vtx7c")
 float_duration = 10.0
 move_to_center_delay = 1.0
 move_to_center_duration = 5.0
-
-[node name="UIWindowBase" parent="." instance=ExtResource("15_dtpt7")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 32.0
-offset_top = 56.0
-offset_right = 32.319992
-offset_bottom = 71.999985
