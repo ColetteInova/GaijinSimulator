@@ -39,19 +39,13 @@ region_rect = Rect2(160, 58, 48, 11)
 patch_margin_left = 18
 patch_margin_right = 18
 
-[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FrameTop2" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="FrameBottom" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2

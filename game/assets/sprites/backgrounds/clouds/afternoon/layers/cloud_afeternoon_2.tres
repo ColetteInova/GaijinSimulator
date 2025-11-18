@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="CloudLayer" load_steps=3 format=3 uid="uid://b65vkg36cw7gn"]
+[gd_resource type="Resource" script_class="SpriteParallaxLayer" load_steps=3 format=3 uid="uid://b65vkg36cw7gn"]
 
 [ext_resource type="Texture2D" uid="uid://btxgbltf1yxrq" path="res://assets/sprites/backgrounds/clouds/afternoon/cloud_afternoon_2.png" id="1_xrbei"]
-[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/cloud_layer.gd" id="2_1p6i7"]
+[ext_resource type="Script" uid="uid://bh57norbdrtjm" path="res://scripts/utils/sprite_parallax_layer.gd" id="2_1p6i7"]
 
 [resource]
 script = ExtResource("2_1p6i7")
 cloud_texture = ExtResource("1_xrbei")
-speed = 18.0
-metadata/_custom_type_script = "uid://cd54cs08bamu3"

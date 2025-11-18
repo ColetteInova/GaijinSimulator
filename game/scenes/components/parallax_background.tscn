@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dytoq26240ra8" path="res://scripts/utils/parallax_background.gd" id="1_parallax"]
 [ext_resource type="Texture2D" uid="uid://cwmo5spwnr8ym" path="res://assets/sprites/backgrounds/clouds/morning/sky.png" id="2_rel6w"]
-[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/cloud_layer.gd" id="3_433jg"]
+[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/sprite_parallax_layer.gd" id="3_433jg"]
 [ext_resource type="Resource" uid="uid://bnmxdn7p32rox" path="res://assets/sprites/backgrounds/clouds/morning/layers/cloud_morning_1.tres" id="4_qpa6b"]
 [ext_resource type="Resource" uid="uid://bwiwdsjhwem5n" path="res://assets/sprites/backgrounds/clouds/morning/layers/cloud_morning_2.tres" id="5_u76mp"]
 [ext_resource type="Resource" uid="uid://b7hnn0c3gxojm" path="res://assets/sprites/backgrounds/clouds/morning/layers/cloud_morning_3.tres" id="6_j84sl"]

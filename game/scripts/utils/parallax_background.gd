@@ -8,15 +8,14 @@ extends Control
 
 @export_group("Morning (06:01 - 12:00)")
 @export var morning_background: Texture2D
-@export var morning_cloud_layers: Array[CloudLayer] = []
+@export var morning_cloud_layers: Array[SpriteParallaxLayer] = []
 
 @export_group("Afternoon (12:01 - 18:00)")
 @export var afternoon_background: Texture2D
-@export var afternoon_cloud_layers: Array[CloudLayer] = []
-
+@export var afternoon_cloud_layers: Array[SpriteParallaxLayer] = []
 @export_group("Night (18:01 - 06:00)")
 @export var night_background: Texture2D
-@export var night_cloud_layers: Array[CloudLayer] = []
+@export var night_cloud_layers: Array[SpriteParallaxLayer] = []
 
 @export_group("Time Settings")
 @export var auto_update_time: bool = true  ## Se true, usa DayTimeManager para definir o período
@@ -78,7 +77,7 @@ func _get_current_background() -> Texture2D:
 			return morning_background
 
 
-func _get_current_cloud_layers() -> Array[CloudLayer]:
+func _get_current_cloud_layers() -> Array[SpriteParallaxLayer]:
 	"""Retorna as camadas de nuvens do período atual"""
 	var time_period = _get_time_period()
 	
@@ -128,7 +127,7 @@ func _setup_clouds():
 			cloud_containers.append(container)
 
 
-func _create_cloud_layer(layer: CloudLayer) -> Control:
+func _create_cloud_layer(layer: Resource) -> Control:
 	"""Cria um container com nuvens para uma camada específica"""
 	var container = Control.new()
 	container.name = "CloudLayer_" + str(cloud_containers.size())
@@ -140,7 +139,7 @@ func _create_cloud_layer(layer: CloudLayer) -> Control:
 	var screen_width = get_viewport_rect().size.x
 	var cloud_width = layer.cloud_texture.get_width() * layer.scale
 	var cloud_height = layer.cloud_texture.get_height() * layer.scale
-	var num_clouds = ceil(screen_width / cloud_width) + 2  # +2 para garantir cobertura durante scroll
+	var num_clouds = ceil(screen_width / cloud_width) + 4  # +4 para garantir cobertura sem emendas visíveis
 	
 	# Cria as nuvens de forma mais eficiente
 	for i in range(num_clouds):
@@ -149,16 +148,17 @@ func _create_cloud_layer(layer: CloudLayer) -> Control:
 		cloud.stretch_mode = TextureRect.STRETCH_SCALE
 		cloud.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		cloud.size = Vector2(cloud_width, cloud_height)
-		cloud.position = Vector2(i  * cloud_width, layer.y_position)
+		cloud.position = Vector2(i * cloud_width, layer.y_position)
 		cloud.modulate = layer.tint
 		cloud.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		# Filtro linear para movimento mais suave
-		cloud.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC
+		# Filtro linear para movimento mais suave e sem emendas
+		cloud.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		container.add_child(cloud)
 	
 	container.set_meta("speed", layer.speed)
 	container.set_meta("cloud_width", cloud_width)
 	container.set_meta("num_clouds", num_clouds)
+	container.set_meta("move_left", layer.move_left)
 	
 	return container
 
@@ -172,6 +172,7 @@ func _update_clouds(delta):
 		var speed = container.get_meta("speed", 0.0)
 		var cloud_width = container.get_meta("cloud_width", 0.0)
 		var num_clouds = container.get_meta("num_clouds", 0)
+		var move_left = container.get_meta("move_left", true)
 		
 		if cloud_width == 0 or num_clouds == 0:
 			continue
@@ -182,12 +183,17 @@ func _update_clouds(delta):
 		
 		for cloud in container.get_children():
 			if cloud is TextureRect:
-				# Move a nuvem (mantém posição em float para suavidade)
-				cloud.position.x -= movement
-				
-				# Reposiciona quando passa da tela (loop infinito)
-				if cloud.position.x <= -cloud_width:
-					cloud.position.x += total_width
+				# Move a nuvem na direção configurada
+				if move_left:
+					cloud.position.x -= movement
+					# Reposiciona quando passa da tela (loop infinito)
+					if cloud.position.x <= -cloud_width:
+						cloud.position.x += total_width
+				else:
+					cloud.position.x += movement
+					# Reposiciona quando passa da tela (loop infinito)
+					if cloud.position.x >= total_width - cloud_width:
+						cloud.position.x -= total_width
 
 
 func refresh():

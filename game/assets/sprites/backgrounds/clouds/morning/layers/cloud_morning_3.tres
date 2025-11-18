@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="CloudLayer" load_steps=3 format=3 uid="uid://b7hnn0c3gxojm"]
+[gd_resource type="Resource" script_class="SpriteParallaxLayer" load_steps=3 format=3 uid="uid://b7hnn0c3gxojm"]
 
 [ext_resource type="Texture2D" uid="uid://bxi1cnp8bwi65" path="res://assets/sprites/backgrounds/clouds/morning/cloud_morning_3.png" id="1_sx0fj"]
-[ext_resource type="Script" uid="uid://cd54cs08bamu3" path="res://scripts/utils/cloud_layer.gd" id="2_kjrh6"]
+[ext_resource type="Script" uid="uid://bh57norbdrtjm" path="res://scripts/utils/sprite_parallax_layer.gd" id="2_kjrh6"]
 
 [resource]
 script = ExtResource("2_kjrh6")
