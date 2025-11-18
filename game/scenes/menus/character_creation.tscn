@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://j5ql28qy78mu"]
+[gd_scene load_steps=16 format=3 uid="uid://j5ql28qy78mu"]
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_char"]
 [ext_resource type="PackedScene" uid="uid://dhql0w47jfkgb" path="res://scenes/components/parallax_background.tscn" id="2_parallax"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://bydas0n5qj3ra" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_3.tres" id="12_p4okr"]
 [ext_resource type="SpriteFrames" uid="uid://pdlqhua0jw8y" path="res://assets/sprites/transports/planes/japan_airlines_plane/japan_airlines_sprite_frames.tres" id="13_cqvlb"]
 [ext_resource type="Script" uid="uid://ch6wwik7c1tbv" path="res://scenes/menus/japan_airlines_animated_sprite.gd" id="14_vtx7c"]
+[ext_resource type="PackedScene" uid="uid://p0fm8a51dphy" path="res://scenes/components/ui_window.tscn" id="15_dtpt7"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -54,8 +55,18 @@ position = Vector2(719.99994, 272)
 scale = Vector2(0.26250002, 0.26250002)
 sprite_frames = ExtResource("13_cqvlb")
 autoplay = "default"
-frame_progress = 0.97992605
+frame_progress = 0.29112843
 script = ExtResource("14_vtx7c")
 float_duration = 10.0
 move_to_center_delay = 1.0
 move_to_center_duration = 5.0
+
+[node name="UIWindowBase" parent="." instance=ExtResource("15_dtpt7")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 32.319992
+offset_bottom = 71.999985

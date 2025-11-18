@@ -142,16 +142,20 @@ func _create_cloud_layer(layer: Resource) -> Control:
 	var screen_width = get_viewport_rect().size.x
 	var cloud_width = layer.cloud_texture.get_width() * layer.scale
 	var cloud_height = layer.cloud_texture.get_height() * layer.scale
+	var overlap = 2.0  # Pixels de sobreposição para evitar emendas
 	var num_clouds = ceil(screen_width / cloud_width) + 4  # +4 para garantir cobertura sem emendas visíveis
 	
 	# Cria as nuvens de forma mais eficiente
 	for i in range(num_clouds):
 		var cloud = TextureRect.new()
 		cloud.texture = layer.cloud_texture
-		cloud.stretch_mode = TextureRect.STRETCH_SCALE
-		cloud.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		cloud.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		cloud.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		# Usa custom_minimum_size para garantir tamanho exato
+		cloud.custom_minimum_size = Vector2(cloud_width, cloud_height)
 		cloud.size = Vector2(cloud_width, cloud_height)
-		cloud.position = Vector2(i * cloud_width, layer.y_position)
+		# Posiciona com overlap para evitar vãos entre sprites
+		cloud.position = Vector2(i * cloud_width - (i * overlap), layer.y_position)
 		cloud.modulate = layer.tint
 		cloud.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		# Filtro linear para movimento mais suave e sem emendas
@@ -160,6 +164,7 @@ func _create_cloud_layer(layer: Resource) -> Control:
 	
 	container.set_meta("speed", layer.speed)
 	container.set_meta("cloud_width", cloud_width)
+	container.set_meta("overlap", overlap)
 	container.set_meta("num_clouds", num_clouds)
 	container.set_meta("move_left", move_left)
 	
@@ -174,6 +179,7 @@ func _update_clouds(delta):
 			
 		var speed = container.get_meta("speed", 0.0)
 		var cloud_width = container.get_meta("cloud_width", 0.0)
+		var overlap = container.get_meta("overlap", 0.0)
 		var num_clouds = container.get_meta("num_clouds", 0)
 		var move_left = container.get_meta("move_left", true)
 		
@@ -182,6 +188,7 @@ func _update_clouds(delta):
 		
 		# Move todas as nuvens no container de forma otimizada
 		var movement = speed * delta
+		var effective_width = cloud_width - overlap  # Largura efetiva considerando overlap
 		
 		for cloud in container.get_children():
 			if cloud is TextureRect:
@@ -189,24 +196,26 @@ func _update_clouds(delta):
 				if move_left:
 					cloud.position.x -= movement
 					# Reposiciona quando passa completamente da tela (loop sem emendas)
-					if cloud.position.x < -cloud_width:
+					if cloud.position.x <= -cloud_width:
 						# Encontra a nuvem mais à direita
 						var rightmost_x = -999999.0
 						for other_cloud in container.get_children():
 							if other_cloud is TextureRect and other_cloud != cloud:
 								rightmost_x = max(rightmost_x, other_cloud.position.x)
-						cloud.position.x = rightmost_x + cloud_width
+						# Posiciona com overlap para evitar vãos
+						cloud.position.x = rightmost_x + effective_width
 				else:
 					cloud.position.x += movement
 					# Reposiciona quando passa completamente da tela (loop sem emendas)
 					var screen_width = get_viewport_rect().size.x
-					if cloud.position.x > screen_width:
+					if cloud.position.x >= screen_width:
 						# Encontra a nuvem mais à esquerda
 						var leftmost_x = 999999.0
 						for other_cloud in container.get_children():
 							if other_cloud is TextureRect and other_cloud != cloud:
 								leftmost_x = min(leftmost_x, other_cloud.position.x)
-						cloud.position.x = leftmost_x - cloud_width
+						# Posiciona com overlap para evitar vãos
+						cloud.position.x = leftmost_x - effective_width
 
 
 func refresh():
