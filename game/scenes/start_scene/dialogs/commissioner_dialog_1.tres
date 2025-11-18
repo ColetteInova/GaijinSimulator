@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3 uid="uid://cpexqfyh5gb04"]
+
+[ext_resource type="SpriteFrames" uid="uid://32chf30ypq7g" path="res://assets/sprites/characters/avatars/commissaries/mikoto_yoshida_commissary.tres" id="1_3fg1k"]
+[ext_resource type="Script" uid="uid://cklkhy8dos46y" path="res://scripts/utils/dialogue_line.gd" id="1_vq4x1"]
+
+[resource]
+script = ExtResource("1_vq4x1")
+character_name = "Mikoto Yoshida"
+character_avatar = ExtResource("1_3fg1k")
+metadata/_custom_type_script = "uid://cklkhy8dos46y"

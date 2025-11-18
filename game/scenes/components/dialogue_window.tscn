@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bstnj38vucutt" path="res://scripts/utils/dialogue_window.gd" id="1"]
 [ext_resource type="Theme" uid="uid://ca0k68oog044u" path="res://assets/themes/dialogue_window.tres" id="2_aixfb"]
 [ext_resource type="Texture2D" uid="uid://bssbjqi5rw1le" path="res://assets/sprites/UIs/ui_windows/windows.png" id="3_ve476"]
-[ext_resource type="FontFile" uid="uid://d0ndshtwl3vj4" path="res://assets/fonts/8-bit-font/8Bit-44Pl.ttf" id="7_po4f0"]
+[ext_resource type="Theme" uid="uid://bga34dw0emcf7" path="res://assets/themes/labels/dialog_name_character_label_.tres" id="3_xyeu4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xyeu4"]
 texture = ExtResource("3_ve476")
@@ -33,16 +33,17 @@ theme = ExtResource("2_aixfb")
 script = ExtResource("1")
 metadata/_edit_use_anchors_ = true
 
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
 [node name="NameLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 32.0
-offset_top = 216.0
-offset_right = 166.0
-offset_bottom = 240.0
-theme_override_fonts/font = ExtResource("7_po4f0")
-theme_override_font_sizes/font_size = 20
-text = "Character Name"
+offset_left = 24.0
+offset_top = 201.0
+offset_right = 64.0
+offset_bottom = 220.61044
+theme = ExtResource("3_xyeu4")
 
 [node name="Panel" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -80,6 +81,7 @@ size_flags_vertical = 4
 
 [node name="AvatarBackground" type="TextureRect" parent="Panel/HBoxContainer/AvatarContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
@@ -87,7 +89,7 @@ stretch_mode = 5
 [node name="AvatarSprite" type="AnimatedSprite2D" parent="Panel/HBoxContainer/AvatarContainer"]
 unique_name_in_owner = true
 texture_filter = 2
-position = Vector2(39.999996, 43.999996)
+position = Vector2(64, 64)
 scale = Vector2(0.12500003, 0.12500003)
 
 [node name="AvatarFrame" type="PanelContainer" parent="Panel/HBoxContainer/AvatarContainer"]
@@ -105,6 +107,7 @@ clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "Dialgoes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here...Dialogue text goes here..."
 fit_content = true
+scroll_following = true
+scroll_following_visible_characters = true
 justification_flags = 131

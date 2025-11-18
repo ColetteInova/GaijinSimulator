@@ -36,13 +36,7 @@ signal dialogue_advanced
 			call_deferred("_update_avatar_size")
 
 @export_group("Dialogue Settings")
-@export var character_name: String = "":
-	set(value):
-		character_name = value
-		if is_inside_tree():
-			call_deferred("_update_character_name")
-
-@export var dialogue_lines: Array[String] = []: ## Lista de frases do diálogo
+@export var dialogue_lines: Array[DialogueLine] = []:  ## Lista de linhas de diálogo
 	set(value):
 		dialogue_lines = value
 		if is_inside_tree():
@@ -62,12 +56,16 @@ signal dialogue_advanced
 @onready var text_label: RichTextLabel = %TextLabel
 @onready var panel: Panel = %Panel
 @onready var avatar_background_texture_rect: TextureRect = %AvatarBackground
+@onready var audio_player: AudioStreamPlayer = %AudioPlayer
 
 var is_typing: bool = false
 var current_char_index: int = 0
 var typing_timer: float = 0.0
 var full_text: String = ""
-var current_dialogue_index: int = 0  ## Índice da frase atual
+var current_dialogue_index: int = 0  ## Índice da linha atual
+var current_sequence_index: int = 0  ## Índice da sequência atual (japonês/tradução)
+var current_line: DialogueLine  ## Linha de diálogo atual
+var current_sequence: Array[Dictionary] = []  ## Sequência de exibição atual
 
 
 func _ready():
@@ -79,11 +77,9 @@ func _ready():
 	_setup_avatar()
 	
 	if not Engine.is_editor_hint():
-		if character_name:
-			name_label.text = character_name
 		if dialogue_lines.size() > 0:
 			current_dialogue_index = 0
-			_display_text(dialogue_lines[current_dialogue_index])
+			_start_dialogue_line(dialogue_lines[current_dialogue_index])
 
 
 func _process(delta):
@@ -168,15 +164,50 @@ func _update_avatar_background():
 
 func _update_character_name():
 	"""Atualiza o nome do personagem"""
-	if name_label:
-		name_label.text = character_name
+	if name_label and current_line:
+		name_label.text = current_line.character_name
 
 
 func _update_dialogue_text():
 	"""Atualiza o texto do diálogo"""
-	if text_label and dialogue_lines.size() > 0:
+	if dialogue_lines.size() > 0:
 		current_dialogue_index = 0
-		_display_text(dialogue_lines[current_dialogue_index])
+		_start_dialogue_line(dialogue_lines[current_dialogue_index])
+
+
+func _start_dialogue_line(line: DialogueLine):
+	"""Inicia uma nova linha de diálogo"""
+	if not line:
+		return
+	
+	current_line = line
+	current_sequence = line.get_display_sequence()
+	current_sequence_index = 0
+	
+	# Atualiza avatar se a linha tem um definido
+	if line.character_avatar:
+		avatar_spritesheet = line.character_avatar
+		animation_name = line.character_avatar_animation
+		_setup_avatar()
+	
+	# Atualiza nome do personagem
+	if name_label:
+		name_label.text = line.character_name
+	
+	# Inicia a primeira sequência
+	if current_sequence.size() > 0:
+		_display_sequence(current_sequence[current_sequence_index])
+
+
+func _display_sequence(sequence_data: Dictionary):
+	"""Exibe uma sequência (japonês ou tradução)"""
+	_display_text(sequence_data.get("text", ""))
+	
+	# Toca o áudio se disponível
+	var audio: AudioStream = sequence_data.get("audio", null)
+	if audio and audio_player:
+		audio_player.stream = audio
+		audio_player.play()
 
 func _display_text(text: String):
 	"""Inicia a exibição do texto com efeito de digitação"""
@@ -201,8 +232,14 @@ func _type_text(delta):
 			is_typing = false
 			dialogue_finished.emit()
 			
+			# Verifica se há mais sequências na mesma linha (japonês -> tradução)
+			if current_sequence_index < current_sequence.size() - 1:
+				current_sequence_index += 1
+				var delay = current_line.delay_between_languages if current_line else 1.5
+				await get_tree().create_timer(delay).timeout
+				_display_sequence(current_sequence[current_sequence_index])
 			# Avança automaticamente para a próxima linha após delay configurável
-			if has_next_dialogue():
+			elif has_next_dialogue():
 				await get_tree().create_timer(line_advance_delay).timeout
 				next_dialogue()
 			elif auto_advance:
@@ -223,7 +260,8 @@ func next_dialogue() -> bool:
 	"""Avança para a próxima frase do diálogo. Retorna true se avançou, false se era a última"""
 	if current_dialogue_index < dialogue_lines.size() - 1:
 		current_dialogue_index += 1
-		_display_text(dialogue_lines[current_dialogue_index])
+		current_sequence_index = 0
+		_start_dialogue_line(dialogue_lines[current_dialogue_index])
 		return true
 	return false
 
@@ -232,7 +270,14 @@ func previous_dialogue() -> bool:
 	"""Volta para a frase anterior do diálogo. Retorna true se voltou, false se era a primeira"""
 	if current_dialogue_index > 0:
 		current_dialogue_index -= 1
-		_display_text(dialogue_lines[current_dialogue_index])
+		current_sequence_index = 0
+		_start_dialogue_line(dialogue_lines[current_dialogue_index])
+		return true
+	return false
+	if current_dialogue_index > 0:
+		current_dialogue_index -= 1
+		current_sequence_index = 0
+		_start_dialogue_line(dialogue_lines[current_dialogue_index])
 		return true
 	return false
 
@@ -247,18 +292,18 @@ func has_previous_dialogue() -> bool:
 	return current_dialogue_index > 0
 
 
-func set_dialogue(character: String, lines: Array[String]):
-	"""Define o personagem e lista de frases do diálogo"""
-	character_name = character
+func set_dialogue(lines: Array[DialogueLine]):
+	"""Define a lista de linhas de diálogo"""
 	dialogue_lines = lines
 	current_dialogue_index = 0
+	current_sequence_index = 0
 
 
-func set_dialogue_single(character: String, text: String):
-	"""Define o personagem e uma única frase de diálogo"""
-	character_name = character
-	dialogue_lines = [text]
+func set_dialogue_single(line: DialogueLine):
+	"""Define uma única linha de diálogo"""
+	dialogue_lines = [line]
 	current_dialogue_index = 0
+	current_sequence_index = 0
 
 
 func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", size: Vector2 = Vector2(128, 128)):

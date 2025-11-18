@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_8r73w"]
 [ext_resource type="VideoStream" uid="uid://d3emum3xg3snc" path="res://assets/videos/backgrounds/house_car_urban_clean.ogv" id="2_2o76q"]
 [ext_resource type="Script" uid="uid://v4lcos1kbe44" path="res://scripts/utils/video_switcher.gd" id="3_imvie"]
-[ext_resource type="Script" uid="uid://cldjjr2c6gnw2" path="res://scenes/menus/main_menu.gd" id="3_menu_script"]
+[ext_resource type="Script" uid="uid://cldjjr2c6gnw2" path="res://scenes/start_scene/main_menu.gd" id="3_menu_script"]
 [ext_resource type="VideoStream" uid="uid://cmrn3w6qqjpk" path="res://assets/videos/backgrounds/house_brigde_uban_clean.ogv" id="4_ng0o5"]
 [ext_resource type="VideoStream" uid="uid://4qndyd36ukn2" path="res://assets/videos/backgrounds/house_city_kanagawa_clean.ogv" id="6_1hnlc"]
 [ext_resource type="AudioStream" uid="uid://o8p3l8tmuchx" path="res://assets/audios/main_menu_music.mp3" id="6_8r73w"]
