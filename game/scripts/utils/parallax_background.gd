@@ -25,6 +25,9 @@ extends Control
 		if not auto_update_time and is_inside_tree():
 			_update_for_manual_time()
 
+@export_group("Movement Settings")
+@export var move_left: bool = true  ## Se true, todas as camadas movem para esquerda; se false, para direita
+
 @onready var background_sprite: TextureRect = $Background
 var cloud_containers: Array[Control] = []
 
@@ -158,7 +161,7 @@ func _create_cloud_layer(layer: Resource) -> Control:
 	container.set_meta("speed", layer.speed)
 	container.set_meta("cloud_width", cloud_width)
 	container.set_meta("num_clouds", num_clouds)
-	container.set_meta("move_left", layer.move_left)
+	container.set_meta("move_left", move_left)
 	
 	return container
 
@@ -178,7 +181,6 @@ func _update_clouds(delta):
 			continue
 		
 		# Move todas as nuvens no container de forma otimizada
-		var total_width = cloud_width * num_clouds
 		var movement = speed * delta
 		
 		for cloud in container.get_children():
@@ -186,14 +188,25 @@ func _update_clouds(delta):
 				# Move a nuvem na direção configurada
 				if move_left:
 					cloud.position.x -= movement
-					# Reposiciona quando passa da tela (loop infinito)
-					if cloud.position.x <= -cloud_width:
-						cloud.position.x += total_width
+					# Reposiciona quando passa completamente da tela (loop sem emendas)
+					if cloud.position.x < -cloud_width:
+						# Encontra a nuvem mais à direita
+						var rightmost_x = -999999.0
+						for other_cloud in container.get_children():
+							if other_cloud is TextureRect and other_cloud != cloud:
+								rightmost_x = max(rightmost_x, other_cloud.position.x)
+						cloud.position.x = rightmost_x + cloud_width
 				else:
 					cloud.position.x += movement
-					# Reposiciona quando passa da tela (loop infinito)
-					if cloud.position.x >= total_width - cloud_width:
-						cloud.position.x -= total_width
+					# Reposiciona quando passa completamente da tela (loop sem emendas)
+					var screen_width = get_viewport_rect().size.x
+					if cloud.position.x > screen_width:
+						# Encontra a nuvem mais à esquerda
+						var leftmost_x = 999999.0
+						for other_cloud in container.get_children():
+							if other_cloud is TextureRect and other_cloud != cloud:
+								leftmost_x = min(leftmost_x, other_cloud.position.x)
+						cloud.position.x = leftmost_x - cloud_width
 
 
 func refresh():

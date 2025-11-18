@@ -31,6 +31,7 @@ afternoon_cloud_layers = Array[ExtResource("3_ysejm")]([ExtResource("5_frqx0"), 
 night_background = ExtResource("9_bt4fl")
 night_cloud_layers = Array[ExtResource("3_ysejm")]([ExtResource("10_dtpt7"), ExtResource("11_rg42j"), ExtResource("12_p4okr")])
 auto_update_time = true
+move_left = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -49,11 +50,11 @@ layout_mode = 2
 theme_override_constants/separation = 4
 
 [node name="japan_airlines_animated_sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-88, 224)
+position = Vector2(719.99994, 272)
 scale = Vector2(0.26250002, 0.26250002)
 sprite_frames = ExtResource("13_cqvlb")
 autoplay = "default"
-frame_progress = 0.76197875
+frame_progress = 0.97992605
 script = ExtResource("14_vtx7c")
 float_duration = 10.0
 move_to_center_delay = 1.0

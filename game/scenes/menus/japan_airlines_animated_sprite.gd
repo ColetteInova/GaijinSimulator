@@ -3,6 +3,7 @@ extends AnimatedSprite2D
 # Configurações da animação de flutuação
 @export var float_amplitude: float = 15.0  # Amplitude do movimento vertical em pixels
 @export var float_duration: float = 2.5    # Duração de um ciclo completo em segundos
+@export var horizontal_float_amplitude: float = 8.0  # Amplitude do movimento horizontal em pixels
 @export var auto_start: bool = true        # Inicia automaticamente
 
 # Configurações de movimento para o centro
@@ -17,7 +18,6 @@ var has_moved_to_center: bool = false
 
 func _ready():
 	initial_position = position
-	flip_h = true  # Vira o sprite horizontalmente
 	if auto_start:
 		start_floating_animation()
 	
@@ -69,35 +69,53 @@ func start_floating_animation():
 	float_tween.set_loops()  # Loop infinito
 	float_tween.set_trans(Tween.TRANS_SINE)  # Transição suave senoidal
 	float_tween.set_ease(Tween.EASE_IN_OUT)  # Suavização nas extremidades
+	float_tween.set_parallel(true)  # Permite animações paralelas
 	
-	# Movimento para cima
+	# Movimento vertical (para cima e para baixo)
 	float_tween.tween_property(
 		self, 
 		"position:y", 
 		initial_position.y - float_amplitude, 
 		float_duration / 2
 	)
-	
-	# Movimento para baixo
 	float_tween.tween_property(
 		self, 
 		"position:y", 
 		initial_position.y + float_amplitude, 
 		float_duration / 2
-	)
-	
-	# Retorno à posição inicial
+	).set_delay(float_duration / 2)
 	float_tween.tween_property(
 		self, 
 		"position:y", 
 		initial_position.y, 
 		float_duration / 2
+	).set_delay(float_duration)
+	
+	# Movimento horizontal suave (vai e volta)
+	float_tween.tween_property(
+		self,
+		"position:x",
+		initial_position.x + horizontal_float_amplitude,
+		float_duration * 0.7  # Ritmo diferente para criar movimento mais natural
 	)
+	float_tween.tween_property(
+		self,
+		"position:x",
+		initial_position.x - horizontal_float_amplitude,
+		float_duration * 0.7
+	).set_delay(float_duration * 0.7)
+	float_tween.tween_property(
+		self,
+		"position:x",
+		initial_position.x,
+		float_duration * 0.6
+	).set_delay(float_duration * 1.4)
 
 func stop_floating_animation():
 	if float_tween:
 		float_tween.kill()
 		position.y = initial_position.y
+		position.x = initial_position.x
 
 func set_float_amplitude(new_amplitude: float):
 	float_amplitude = new_amplitude
