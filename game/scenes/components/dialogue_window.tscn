@@ -15,11 +15,11 @@ region_rect = Rect2(78, 208, 50, 50)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fent0"]
 texture = ExtResource("3_ve476")
-texture_margin_left = 3.8961487
-texture_margin_top = 4.080395
-texture_margin_right = 3.9471567
-texture_margin_bottom = 4.003477
-region_rect = Rect2(144, 208, 48, 48)
+texture_margin_left = 4.9081707
+texture_margin_top = 5.0004153
+texture_margin_right = 4.959179
+texture_margin_bottom = 4.923497
+region_rect = Rect2(208, 208, 48, 48)
 draw_center = false
 
 [node name="DialogueWindow" type="Control"]
@@ -74,12 +74,11 @@ anchor_top = -0.024951603
 anchor_right = 0.9736842
 anchor_bottom = 1.0328996
 offset_top = 20.945145
-offset_bottom = -20.945137
+offset_bottom = -27.054848
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
 alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="AvatarContainer" type="PanelContainer" parent="Panel/HBoxContainer"]
 unique_name_in_owner = true
@@ -90,7 +89,6 @@ size_flags_vertical = 4
 
 [node name="AvatarBackground" type="TextureRect" parent="Panel/HBoxContainer/AvatarContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
