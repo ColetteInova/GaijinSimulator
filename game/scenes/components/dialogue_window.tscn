@@ -37,18 +37,23 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 
-[node name="NameLabel" type="Label" parent="."]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0421875
-anchor_top = 0.5416667
-anchor_right = 0.14956644
-anchor_bottom = 0.6111554
+anchor_top = 0.5277778
+anchor_right = 0.959375
+anchor_bottom = 0.6388889
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
 theme = ExtResource("3_xyeu4")
 theme_type_variation = &"HeaderSmall"
 text = "dsdadas"
-horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -89,6 +94,7 @@ size_flags_vertical = 4
 
 [node name="AvatarBackground" type="TextureRect" parent="Panel/HBoxContainer/AvatarContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5

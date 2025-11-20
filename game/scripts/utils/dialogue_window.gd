@@ -21,6 +21,12 @@ signal dialogue_advanced
 		if is_inside_tree():
 			call_deferred("_setup_avatar")
 
+@export_enum("Left", "Right") var avatar_position: int = 0: ## Posição do avatar (0 = Esquerda, 1 = Direita)
+	set(value):
+		avatar_position = value
+		if is_inside_tree():
+			call_deferred("_update_avatar_position")
+
 @export var animation_name: String = "default": ## Nome da animação do SpriteFrames
 	set(value):
 		animation_name = value
@@ -92,6 +98,7 @@ func _ready():
 	_update_avatar_size()
 	_update_avatar_background()
 	_setup_avatar()
+	_update_avatar_position()
 	
 	if not Engine.is_editor_hint():
 		if dialogue_lines.size() > 0:
@@ -180,6 +187,35 @@ func _update_avatar_background():
 		# Garante que o fundo preencha todo o container
 		avatar_background_texture_rect.custom_minimum_size = avatar_size
 		avatar_background_texture_rect.size = avatar_size
+
+
+func _update_avatar_position():
+	"""Atualiza a posição do avatar (esquerda ou direita)"""
+	if not avatar_container or not text_label:
+		return
+	
+	var hbox_panel = avatar_container.get_parent()
+	if not hbox_panel or not hbox_panel is HBoxContainer:
+		return
+	
+	# Move o avatar para a posição correta no HBox do painel
+	if avatar_position == 0:  # Esquerda
+		hbox_panel.move_child(avatar_container, 0)
+	else:  # Direita
+		hbox_panel.move_child(avatar_container, hbox_panel.get_child_count() - 1)
+	
+	# Move e alinha o NameLabel no HBox do nome
+	if name_label:
+		var hbox_name = name_label.get_parent()
+		if hbox_name and hbox_name is HBoxContainer:
+			if avatar_position == 0:  # Esquerda
+				hbox_name.alignment = BoxContainer.ALIGNMENT_BEGIN
+				name_label.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+				name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+			else:  
+				hbox_name.alignment = BoxContainer.ALIGNMENT_END
+				name_label.size_flags_horizontal = Control.SIZE_SHRINK_END
+				name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 
 func _update_character_name():
