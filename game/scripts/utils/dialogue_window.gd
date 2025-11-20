@@ -7,6 +7,7 @@ class_name DialogueWindow
 
 signal dialogue_finished
 signal dialogue_advanced
+signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
 
 @export_group("Avatar Settings")
 @export var avatar_background: Texture2D ## Background padrão do avatar
@@ -35,6 +36,7 @@ signal dialogue_advanced
 @onready var panel: Panel = %Panel
 @onready var avatar_background_texture_rect: TextureRect = %AvatarBackground
 @onready var audio_player: AudioStreamPlayer = %AudioPlayer
+@onready var choices_container: VBoxContainer = %ChoicesContainer
 
 # Temas para diferentes idiomas
 var japanese_theme: Theme
@@ -57,6 +59,8 @@ var current_sequence: Array[Dictionary] = [] ## Sequência de exibição atual
 var initial_visible_position: float = 0.0 ## Posição Y inicial da janela
 var can_advance: bool = true ## Flag para controlar se pode avançar o diálogo
 var waiting_for_advance: bool = false ## Flag para indicar que está aguardando o usuário avançar
+var waiting_for_choice: bool = false ## Flag para indicar que está aguardando escolha
+var selected_choice: DialogueChoice = null ## Escolha selecionada pelo usuário
 
 
 func _ready():
@@ -346,6 +350,18 @@ func _handle_dialogue_advance():
 	if current_sequence_index < current_sequence.size() - 1:
 		current_sequence_index += 1
 		_display_sequence(current_sequence[current_sequence_index])
+	# Verifica se a linha atual tem escolhas
+	elif current_line and current_line.choice_type != 0 and current_line.choices.size() > 0:
+		_show_choices()
+		
+		# Aguarda até que uma escolha seja feita
+		waiting_for_choice = true
+		while waiting_for_choice:
+			await get_tree().process_frame
+		
+		# Processa a escolha selecionada
+		if selected_choice:
+			_process_choice(selected_choice)
 	# Avança para a próxima linha se houver
 	elif has_next_dialogue():
 		next_dialogue()
@@ -464,3 +480,53 @@ func _check_scroll_visibility():
 		visible = false
 	else:
 		visible = true
+
+
+func _show_choices():
+	"""Mostra as opções de escolha ao usuário"""
+	if not choices_container or not current_line:
+		return
+	
+	# Limpa escolhas anteriores
+	for child in choices_container.get_children():
+		child.queue_free()
+	
+	# Esconde o painel de diálogo e mostra o container de escolhas
+	if panel:
+		panel.visible = false
+	choices_container.visible = true
+	
+	# Cria botões para cada escolha
+	for choice in current_line.choices:
+		var button = Button.new()
+		button.text = choice.choice_text
+		button.pressed.connect(_on_choice_button_pressed.bind(choice))
+		choices_container.add_child(button)
+
+
+func _on_choice_button_pressed(choice):
+	"""Callback quando um botão de escolha é pressionado"""
+	selected_choice = choice
+	waiting_for_choice = false
+	
+	# Esconde as escolhas e mostra o painel novamente
+	choices_container.visible = false
+	if panel:
+		panel.visible = true
+
+
+func _process_choice(choice):
+	"""Processa a escolha selecionada"""
+	# Emite sinal para quem quiser escutar
+	choice_selected.emit(choice)
+	
+	# Se tem índice de próximo diálogo, redireciona
+	if choice.next_dialogue_index >= 0 and choice.next_dialogue_index < dialogue_lines.size():
+		current_dialogue_index = choice.next_dialogue_index
+		current_sequence_index = 0
+		_start_dialogue_line(dialogue_lines[current_dialogue_index])
+	# Senão, continua sequencialmente
+	elif has_next_dialogue():
+		next_dialogue()
+	else:
+		dialogue_advanced.emit()

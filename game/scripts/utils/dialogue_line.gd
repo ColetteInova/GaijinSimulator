@@ -27,6 +27,12 @@ enum DisplayMode {
 @export var character: Character  ## Referência ao personagem que fala
 @export var character_avatar_animation: String = "default"  ## Animação específica desta linha
 
+@export_group("Choices")
+@export_enum("None", "Single", "Multiple") var choice_type: int = 0  ## Tipo de escolha (0=Nenhuma, 1=Única, 2=Múltipla)
+@export var choices: Array[DialogueChoice] = []  ## Opções de escolha disponíveis
+@export var min_choices: int = 1  ## Mínimo de escolhas (para tipo múltipla)
+@export var max_choices: int = 1  ## Máximo de escolhas (para tipo múltipla)
+
 
 func get_japanese_text() -> String:
 	"""Retorna o texto em japonês (traduzido se for chave)"""
