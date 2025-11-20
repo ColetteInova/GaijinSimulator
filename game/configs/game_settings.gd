@@ -27,7 +27,8 @@ var key_bindings := {
 	"move_forward": "W",
 	"move_backward": "S",
 	"move_left": "A",
-	"move_right": "D"
+	"move_right": "D",
+	"dialogue_advance": "X"
 }
 
 
@@ -105,7 +106,8 @@ func reset_to_defaults():
 		"jump": "Space",
 		"crouch": "Ctrl",
 		"shoot": "Left Mouse Button",
-		"aim": "Right Mouse Button"
+		"aim": "Right Mouse Button",
+		"dialogue_advance": "X"
 	}
 	save_settings()    
 

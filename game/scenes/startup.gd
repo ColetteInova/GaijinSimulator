@@ -16,4 +16,4 @@ func _ready():
 		await SceneTransition.change_scene_to_file("res://scenes/main_menu.tscn", 0.5, 0.8)
 	else:
 		# Se não tiver idioma, mostra a tela de seleção de idioma com transição
-		await SceneTransition.change_scene_to_file("res://scenes/menus/language_selection.tscn", 0.5, 0.8)
+		await SceneTransition.change_scene_to_file("res://scenes/settings/language_selection.tscn", 0.5, 0.8)

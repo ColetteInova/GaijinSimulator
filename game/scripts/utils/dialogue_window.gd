@@ -52,6 +52,7 @@ signal dialogue_advanced
 @export var line_advance_delay: float = 3.0 ## Delay em segundos antes de avançar para próxima linha
 @export var auto_advance: bool = false ## Avança automaticamente após terminar todas as linhas
 @export var auto_advance_delay: float = 2.0 ## Delay antes de avançar automaticamente após última linha
+@export var enable_manual_advance: bool = true ## Permite avançar manualmente pressionando botão
 
 @export_group("Window Style")
 @export var window_theme: Theme
@@ -114,6 +115,31 @@ func _process(delta):
 		
 		# Verifica se houve scroll na tela e esconde a janela
 		_check_scroll_visibility()
+
+
+func _input(event):
+	if Engine.is_editor_hint() or not enable_manual_advance:
+		return
+	
+	# Obtém a tecla configurada para avançar o diálogo
+	var advance_key_string = GameSettings.get_key_binding("dialogue_advance")
+	if advance_key_string == "":
+		advance_key_string = "X"  # Fallback para X se não estiver configurado
+	
+	# Verifica se a tecla de avançar foi pressionada
+	if event is InputEventKey and event.pressed and not event.echo:
+		var key_string = OS.get_keycode_string(event.keycode)
+		if key_string == advance_key_string:
+			if is_typing:
+				# Se está digitando, pula a digitação
+				skip_typing()
+			elif not is_typing and dialogue_lines.size() > 0:
+				# Se terminou de digitar, avança para próxima linha
+				if has_next_dialogue():
+					next_dialogue()
+				else:
+					# Se era a última linha, emite sinal
+					dialogue_advanced.emit()
 
 
 func _setup_avatar():

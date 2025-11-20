@@ -32,6 +32,7 @@ grow_vertical = 2
 theme = ExtResource("2_aixfb")
 script = ExtResource("1")
 avatar_size = Vector2(80, 80)
+enable_manual_advance = null
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
@@ -54,7 +55,6 @@ size_flags_horizontal = 2
 theme = ExtResource("3_xyeu4")
 theme_type_variation = &"HeaderSmall"
 text = "dsdadas"
-vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
