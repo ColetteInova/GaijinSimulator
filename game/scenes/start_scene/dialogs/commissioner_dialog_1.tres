@@ -8,7 +8,6 @@
 script = ExtResource("2_tsmpo")
 character_name = "Mikoto Yoshida"
 avatar_spritesheet = ExtResource("1_3fg1k")
-avatar_position = 1
 metadata/_custom_type_script = "uid://5stvai7oytny"
 
 [resource]

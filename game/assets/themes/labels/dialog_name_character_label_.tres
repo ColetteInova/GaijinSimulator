@@ -4,11 +4,13 @@
 [ext_resource type="FontFile" uid="uid://bim58mnativyr" path="res://assets/fonts/pixeled/Pixeled.ttf" id="1_uqh17"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uqh17"]
+content_margin_left = 12.0
+content_margin_right = 12.0
 texture = ExtResource("1_hlwd4")
-texture_margin_left = 3.2351725
+texture_margin_left = 6.0006046
 texture_margin_top = 2.3052032
-texture_margin_right = 3.4387658
-texture_margin_bottom = 1.7107426
+texture_margin_right = 6.79679
+texture_margin_bottom = 1.5132117
 expand_margin_bottom = 4.0
 region_rect = Rect2(147, 212, 44, 10)
 
