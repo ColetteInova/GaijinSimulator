@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3 uid="uid://cpexqfyh5gb04"]
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=5 format=3 uid="uid://cpexqfyh5gb04"]
 
 [ext_resource type="SpriteFrames" uid="uid://32chf30ypq7g" path="res://assets/sprites/characters/avatars/commissaries/mikoto_yoshida_commissary.tres" id="1_3fg1k"]
 [ext_resource type="Script" uid="uid://cklkhy8dos46y" path="res://scripts/utils/dialogue_line.gd" id="1_vq4x1"]
+[ext_resource type="Script" uid="uid://5stvai7oytny" path="res://scripts/utils/character.gd" id="2_tsmpo"]
+
+[sub_resource type="Resource" id="Resource_0mh30"]
+script = ExtResource("2_tsmpo")
+character_name = "Mikoto Yoshida"
+avatar_spritesheet = ExtResource("1_3fg1k")
+avatar_position = 1
+metadata/_custom_type_script = "uid://5stvai7oytny"
 
 [resource]
 script = ExtResource("1_vq4x1")
 use_translation_key = true
 japanese_text = "皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在を。皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在を。"
 translated_text = "Senhoras e senhores, bem-vindos ao Japão.Estamos chegando ao Aeroporto de Haneda, em Tóquio.Por favor permaneçam sentados até o sinal de cinto apagar.Obrigado por voar com a Japan Airlines.Desejamos uma boa estadia."
-character_name = "Mikoto Yoshida"
-character_avatar = ExtResource("1_3fg1k")
+character = SubResource("Resource_0mh30")
 metadata/_custom_type_script = "uid://cklkhy8dos46y"

@@ -9,37 +9,8 @@ signal dialogue_finished
 signal dialogue_advanced
 
 @export_group("Avatar Settings")
-@export var avatar_background: Texture2D: ## Imagem de fundo do avatar
-	set(value):
-		avatar_background = value
-		if is_inside_tree():
-			call_deferred("_update_avatar_background")
-
-@export var avatar_spritesheet: SpriteFrames:
-	set(value):
-		avatar_spritesheet = value
-		if is_inside_tree():
-			call_deferred("_setup_avatar")
-
-@export_enum("Left", "Right") var avatar_position: int = 0: ## Posição do avatar (0 = Esquerda, 1 = Direita)
-	set(value):
-		avatar_position = value
-		if is_inside_tree():
-			call_deferred("_update_avatar_position")
-
-@export var animation_name: String = "default": ## Nome da animação do SpriteFrames
-	set(value):
-		animation_name = value
-		if is_inside_tree():
-			call_deferred("_setup_avatar")
-
-@export var play_animation: bool = true ## Se true, toca a animação do avatar
-
-@export var avatar_size: Vector2 = Vector2(128, 128): ## Tamanho do avatar em pixels
-	set(value):
-		avatar_size = value
-		if is_inside_tree():
-			call_deferred("_update_avatar_size")
+@export var avatar_background: Texture2D ## Background padrão do avatar
+@export var avatar_size: Vector2 = Vector2(128, 128) ## Tamanho global dos avatares
 
 @export_group("Dialogue Settings")
 @export var dialogue_lines: Array[DialogueLine] = []: ## Lista de linhas de diálogo
@@ -68,6 +39,12 @@ signal dialogue_advanced
 # Temas para diferentes idiomas
 var japanese_theme: Theme
 var default_theme: Theme
+
+# Variáveis internas de controle do avatar (configuradas dinamicamente por Character/DialogueLine)
+var avatar_spritesheet: SpriteFrames
+var animation_name: String = "default"
+var avatar_position: int = 0
+var play_animation: bool = true
 
 var is_typing: bool = false
 var current_char_index: int = 0
@@ -100,8 +77,6 @@ func _ready():
 	
 	_update_avatar_size()
 	_update_avatar_background()
-	_setup_avatar()
-	_update_avatar_position()
 	
 	if not Engine.is_editor_hint():
 		if dialogue_lines.size() > 0:
@@ -278,15 +253,27 @@ func _start_dialogue_line(line: DialogueLine):
 	current_sequence = line.get_display_sequence()
 	current_sequence_index = 0
 	
-	# Atualiza avatar se a linha tem um definido
-	if line.character_avatar:
-		avatar_spritesheet = line.character_avatar
+	# Atualiza todas as configurações do personagem usando Character resource
+	if line.character:
+		avatar_spritesheet = line.character.avatar_spritesheet
 		animation_name = line.character_avatar_animation
+		play_animation = line.character.play_animation
+		
+		# Atualiza background do personagem se definido (sobrescreve o padrão)
+		if line.character.avatar_background:
+			avatar_background = line.character.avatar_background
+		
+		# Atualiza posição do avatar
+		avatar_position = line.character.avatar_position
+		
+		# Aplica as mudanças
 		_setup_avatar()
+		_update_avatar_background()
+		_update_avatar_position()
 	
 	# Atualiza nome do personagem
-	if name_label:
-		name_label.text = line.character_name
+	if name_label and line.character:
+		name_label.text = line.character.character_name
 	
 	# Inicia a primeira sequência
 	if current_sequence.size() > 0:
@@ -422,7 +409,7 @@ func set_dialogue_single(line: DialogueLine):
 	current_sequence_index = 0
 
 
-func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", avatar_custom_size: Vector2 = Vector2(128, 128)):
+func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", avatar_custom_size: Vector2 = Vector2(80, 80)):
 	"""Define o avatar do personagem usando SpriteFrames"""
 	avatar_spritesheet = spriteframes
 	animation_name = anim_name

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://j5ql28qy78mu"]
+[gd_scene load_steps=19 format=3 uid="uid://j5ql28qy78mu"]
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_gtona"]
 [ext_resource type="PackedScene" uid="uid://dhql0w47jfkgb" path="res://scenes/components/parallax_background.tscn" id="2_g13i7"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://bydas0n5qj3ra" path="res://assets/sprites/backgrounds/clouds/night/layers/cloud_night_3.tres" id="12_rhnsv"]
 [ext_resource type="PackedScene" uid="uid://phgauu3paffi" path="res://scenes/components/dialogue_window.tscn" id="13_6erbo"]
 [ext_resource type="Texture2D" uid="uid://3ymc1f4xsjsu" path="res://assets/sprites/backgrounds/dialogs/plane_inner_1_background.png" id="14_dyesy"]
-[ext_resource type="SpriteFrames" uid="uid://32chf30ypq7g" path="res://assets/sprites/characters/avatars/commissaries/mikoto_yoshida_commissary.tres" id="15_wmb5t"]
 [ext_resource type="SpriteFrames" uid="uid://pdlqhua0jw8y" path="res://assets/sprites/transports/planes/japan_airlines_plane/japan_airlines_sprite_frames.tres" id="16_ci80x"]
 [ext_resource type="Script" uid="uid://cklkhy8dos46y" path="res://scripts/utils/dialogue_line.gd" id="16_knp0f"]
 [ext_resource type="Resource" uid="uid://cpexqfyh5gb04" path="res://scenes/start_scene/dialogs/commissioner_dialog_1.tres" id="17_in13e"]
@@ -50,7 +49,6 @@ grow_vertical = 2
 [node name="DialogueWindow" parent="MarginContainer" instance=ExtResource("13_6erbo")]
 layout_mode = 2
 avatar_background = ExtResource("14_dyesy")
-avatar_spritesheet = ExtResource("15_wmb5t")
 dialogue_lines = Array[ExtResource("16_knp0f")]([ExtResource("17_in13e")])
 text_speed = 0.06
 line_advance_delay = 1.0

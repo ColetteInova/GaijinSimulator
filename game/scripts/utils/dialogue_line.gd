@@ -24,9 +24,8 @@ enum DisplayMode {
 @export var delay_between_languages: float = 1.5  ## Delay entre japonês e tradução (se aplicável)
 
 @export_group("Character")
-@export var character_name: String = ""  ## Nome do personagem falando
-@export var character_avatar: SpriteFrames  ## Avatar do personagem
-@export var character_avatar_animation: String = "default"  ## Animação do avatar
+@export var character: Character  ## Referência ao personagem que fala
+@export var character_avatar_animation: String = "default"  ## Animação específica desta linha
 
 
 func get_japanese_text() -> String:
