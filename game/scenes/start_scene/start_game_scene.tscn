@@ -54,7 +54,8 @@ avatar_spritesheet = ExtResource("15_wmb5t")
 dialogue_lines = Array[ExtResource("16_knp0f")]([ExtResource("17_in13e")])
 text_speed = 0.06
 line_advance_delay = 1.0
-enable_manual_advance = null
+auto_advance = true
+enable_manual_advance = true
 
 [node name="japan_airlines_animated_sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(736.00006, 208)

@@ -78,6 +78,8 @@ var current_sequence_index: int = 0 ## Índice da sequência atual (japonês/tra
 var current_line: DialogueLine ## Linha de diálogo atual
 var current_sequence: Array[Dictionary] = [] ## Sequência de exibição atual
 var initial_visible_position: float = 0.0 ## Posição Y inicial da janela
+var can_advance: bool = true ## Flag para controlar se pode avançar o diálogo
+var waiting_for_advance: bool = false ## Flag para indicar que está aguardando o usuário avançar
 
 
 func _ready():
@@ -118,7 +120,7 @@ func _process(delta):
 
 
 func _input(event):
-	if Engine.is_editor_hint() or not enable_manual_advance:
+	if Engine.is_editor_hint() or not enable_manual_advance or not can_advance:
 		return
 	
 	# Obtém a tecla configurada para avançar o diálogo
@@ -133,6 +135,16 @@ func _input(event):
 			if is_typing:
 				# Se está digitando, pula a digitação
 				skip_typing()
+				# Bloqueia avanço temporariamente
+				can_advance = false
+				await get_tree().create_timer(0.2).timeout
+				can_advance = true
+			elif waiting_for_advance:
+				# Se está aguardando, desbloqueia para continuar
+				waiting_for_advance = false
+				can_advance = false
+				await get_tree().create_timer(0.2).timeout
+				can_advance = true
 			elif not is_typing and dialogue_lines.size() > 0:
 				# Se terminou de digitar, avança para próxima linha
 				if has_next_dialogue():
@@ -328,20 +340,30 @@ func _type_text(delta):
 		else:
 			is_typing = false
 			dialogue_finished.emit()
-			
-			# Verifica se há mais sequências na mesma linha (japonês -> tradução)
-			if current_sequence_index < current_sequence.size() - 1:
-				current_sequence_index += 1
-				var delay = current_line.delay_between_languages if current_line else 1.5
-				await get_tree().create_timer(delay).timeout
-				_display_sequence(current_sequence[current_sequence_index])
-			# Avança automaticamente para a próxima linha após delay configurável
-			elif has_next_dialogue():
-				await get_tree().create_timer(line_advance_delay).timeout
-				next_dialogue()
-			elif auto_advance:
-				await get_tree().create_timer(auto_advance_delay).timeout
-				dialogue_advanced.emit()
+			_handle_dialogue_advance()
+
+
+func _handle_dialogue_advance():
+	"""Gerencia o avanço do diálogo após completar a digitação"""
+	# Aguarda o usuário pressionar para avançar
+	waiting_for_advance = true
+	can_advance = false
+	await get_tree().create_timer(0.2).timeout
+	can_advance = true
+	
+	# Aguarda até que waiting_for_advance seja false (usuário pressionou a tecla)
+	while waiting_for_advance:
+		await get_tree().process_frame
+	
+	# Verifica se há mais sequências na mesma linha (japonês -> tradução)
+	if current_sequence_index < current_sequence.size() - 1:
+		current_sequence_index += 1
+		_display_sequence(current_sequence[current_sequence_index])
+	# Avança para a próxima linha se houver
+	elif has_next_dialogue():
+		next_dialogue()
+	elif auto_advance:
+		dialogue_advanced.emit()
 
 
 func skip_typing():
@@ -351,6 +373,9 @@ func skip_typing():
 		current_char_index = full_text.length()
 		text_label.text = full_text
 		dialogue_finished.emit()
+		
+		# Ativa a lógica de avanço após completar
+		_handle_dialogue_advance()
 
 
 func next_dialogue() -> bool:
