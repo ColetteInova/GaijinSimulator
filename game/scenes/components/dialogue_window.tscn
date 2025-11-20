@@ -31,6 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_aixfb")
 script = ExtResource("1")
+avatar_size = Vector2(80, 80)
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
@@ -38,16 +39,18 @@ unique_name_in_owner = true
 
 [node name="NameLabel" type="Label" parent="."]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 18.0
-offset_top = 184.0
-offset_right = 86.72253
-offset_bottom = 209.01595
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0421875
+anchor_top = 0.5416667
+anchor_right = 0.14956644
+anchor_bottom = 0.6111554
 theme = ExtResource("3_xyeu4")
 theme_type_variation = &"HeaderSmall"
 text = "dsdadas"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -80,14 +83,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AvatarContainer" type="PanelContainer" parent="Panel/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="AvatarBackground" type="TextureRect" parent="Panel/HBoxContainer/AvatarContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
@@ -95,7 +98,7 @@ stretch_mode = 5
 [node name="AvatarSprite" type="AnimatedSprite2D" parent="Panel/HBoxContainer/AvatarContainer"]
 unique_name_in_owner = true
 texture_filter = 2
-position = Vector2(64, 64)
+position = Vector2(40, 40)
 scale = Vector2(0.12500003, 0.12500003)
 
 [node name="AvatarFrame" type="PanelContainer" parent="Panel/HBoxContainer/AvatarContainer"]
@@ -111,7 +114,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 0
 mouse_filter = 2
-text = "TextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabelTextLabel"
 scroll_active = false
 scroll_following = true
 scroll_following_visible_characters = true
