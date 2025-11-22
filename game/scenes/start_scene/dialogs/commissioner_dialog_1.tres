@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DialogueLine" load_steps=5 format=3 uid="uid://cpexqfyh5gb04"]
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=6 format=3 uid="uid://cpexqfyh5gb04"]
 
 [ext_resource type="SpriteFrames" uid="uid://32chf30ypq7g" path="res://assets/sprites/characters/avatars/commissaries/mikoto_yoshida_commissary.tres" id="1_3fg1k"]
 [ext_resource type="Script" uid="uid://cklkhy8dos46y" path="res://scripts/utils/dialogue_line.gd" id="1_vq4x1"]
 [ext_resource type="Script" uid="uid://5stvai7oytny" path="res://scripts/utils/character.gd" id="2_tsmpo"]
+[ext_resource type="Script" uid="uid://c4x0dmpvdit82" path="res://scripts/utils/dialogue_choice.gd" id="3_0mh30"]
 
 [sub_resource type="Resource" id="Resource_0mh30"]
 script = ExtResource("2_tsmpo")

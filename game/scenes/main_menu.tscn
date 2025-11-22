@@ -61,7 +61,7 @@ custom_minimum_size = Vector2(260, 160)
 layout_mode = 2
 texture = ExtResource("7_8r73w")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="MenuContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 40)
@@ -87,10 +87,11 @@ text = "MENU_LOAD"
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
 auto_translate_mode = 1
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 6
 text = "MENU_OPTIONS"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MenuContainer"]
 auto_translate_mode = 1
 layout_mode = 2
+size_flags_vertical = 4
 text = "MENU_EXIT"
