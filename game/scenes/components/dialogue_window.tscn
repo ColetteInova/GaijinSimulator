@@ -1,25 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://phgauu3paffi"]
+[gd_scene load_steps=8 format=3 uid="uid://phgauu3paffi"]
 
 [ext_resource type="Script" uid="uid://bstnj38vucutt" path="res://scripts/utils/dialogue_window.gd" id="1"]
 [ext_resource type="Theme" uid="uid://ca0k68oog044u" path="res://assets/themes/dialogue_window.tres" id="2_aixfb"]
 [ext_resource type="Texture2D" uid="uid://bssbjqi5rw1le" path="res://assets/sprites/UIs/ui_windows/windows.png" id="3_ve476"]
 [ext_resource type="Theme" uid="uid://bga34dw0emcf7" path="res://assets/themes/labels/dialog_name_character_label_.tres" id="3_xyeu4"]
+[ext_resource type="Texture2D" uid="uid://dm50hrcx8lu2f" path="res://assets/sprites/UIs/ui_windows/window_dialog.png" id="4_xyeu4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xyeu4"]
-texture = ExtResource("3_ve476")
-texture_margin_left = 8.071981
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.085644
-region_rect = Rect2(78, 208, 50, 50)
+texture = ExtResource("4_xyeu4")
+texture_margin_left = 5.675485
+texture_margin_top = 4.7836437
+texture_margin_right = 5.074543
+texture_margin_bottom = 4.7223997
+region_rect = Rect2(7, 19, 106, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fent0"]
 texture = ExtResource("3_ve476")
-texture_margin_left = 4.9081707
-texture_margin_top = 5.0004153
-texture_margin_right = 4.959179
-texture_margin_bottom = 4.923497
-region_rect = Rect2(208, 208, 48, 48)
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(16, 80, 48, 48)
 draw_center = false
 
 [node name="DialogueWindow" type="Control"]
@@ -32,39 +33,19 @@ grow_vertical = 2
 theme = ExtResource("2_aixfb")
 script = ExtResource("1")
 avatar_size = Vector2(80, 80)
-enable_manual_advance = null
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0421875
-anchor_top = 0.5277778
-anchor_right = 0.959375
-anchor_bottom = 0.6388889
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="NameLabel" type="Label" parent="HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 2
-theme = ExtResource("3_xyeu4")
-theme_type_variation = &"HeaderSmall"
-text = "dsdadas"
-metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
-anchor_top = 0.62222224
+anchor_top = 0.6888889
 anchor_right = 0.975
-anchor_bottom = 0.9583333
+anchor_bottom = 0.9777778
 offset_top = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 2
@@ -73,13 +54,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.02631579
-anchor_top = -0.024951603
-anchor_right = 0.9736842
-anchor_bottom = 1.0328996
-offset_top = 20.945145
-offset_bottom = -27.054848
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -40.0
+offset_right = -8.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
@@ -96,6 +78,7 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+size_flags_horizontal = 4
 expand_mode = 1
 stretch_mode = 5
 
@@ -103,7 +86,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 texture_filter = 2
 position = Vector2(40, 40)
-scale = Vector2(0.12500003, 0.12500003)
+scale = Vector2(0.125, 0.125)
 
 [node name="AvatarFrame" type="PanelContainer" parent="Panel/HBoxContainer/AvatarContainer"]
 layout_mode = 2
@@ -118,12 +101,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 0
 mouse_filter = 2
+text = "Testes"
 scroll_active = false
 scroll_following = true
 scroll_following_visible_characters = true
 tab_size = 3
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03125
+anchor_top = 0.64444447
+anchor_right = 0.9484375
+anchor_bottom = 0.7138889
+offset_top = -1.5258789e-05
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("3_xyeu4")
+theme_type_variation = &"HeaderSmall"
+metadata/_edit_use_anchors_ = true
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true

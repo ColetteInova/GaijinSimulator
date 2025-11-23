@@ -201,9 +201,6 @@ func _update_avatar_background():
 	"""Atualiza a imagem de fundo do avatar"""
 	if avatar_background_texture_rect:
 		avatar_background_texture_rect.texture = avatar_background
-		# Garante que o fundo preencha todo o container
-		avatar_background_texture_rect.custom_minimum_size = avatar_size
-		avatar_background_texture_rect.size = avatar_size
 
 
 func _update_avatar_position():
@@ -425,7 +422,7 @@ func set_dialogue_single(line: DialogueLine):
 	current_sequence_index = 0
 
 
-func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", avatar_custom_size: Vector2 = Vector2(80, 80)):
+func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", avatar_custom_size: Vector2 = Vector2(76, 76)):
 	"""Define o avatar do personagem usando SpriteFrames"""
 	avatar_spritesheet = spriteframes
 	animation_name = anim_name
