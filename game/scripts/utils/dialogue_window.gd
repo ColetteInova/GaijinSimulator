@@ -67,6 +67,7 @@ var can_advance: bool = true ## Flag para controlar se pode avançar o diálogo
 var waiting_for_advance: bool = false ## Flag para indicar que está aguardando o usuário avançar
 var waiting_for_choice: bool = false ## Flag para indicar que está aguardando escolha
 var selected_choice: DialogueChoice = null ## Escolha selecionada pelo usuário
+var dialogue_completed: bool = false ## Flag para indicar que todos os diálogos terminaram
 
 
 func _ready():
@@ -137,7 +138,9 @@ func _input(event):
 				if has_next_dialogue():
 					next_dialogue()
 				else:
-					# Se era a última linha, emite sinal
+					# Se era a última linha, esconde a janela e emite sinal
+					dialogue_completed = true
+					visible = false
 					dialogue_advanced.emit()
 
 
@@ -567,8 +570,12 @@ func _handle_dialogue_advance():
 	# Avança para a próxima linha se houver
 	elif has_next_dialogue():
 		next_dialogue()
-	elif auto_advance:
-		dialogue_advanced.emit()
+	else:
+		# Último diálogo - esconde a janela e emite sinal
+		dialogue_completed = true
+		visible = false
+		if auto_advance:
+			dialogue_advanced.emit()
 
 
 func skip_typing():
@@ -578,6 +585,10 @@ func skip_typing():
 		audio_sync_mode = false
 		current_char_index = full_text.length()
 		text_label.text = full_text
+		
+		# Para o áudio se estiver tocando
+		if audio_player and audio_player.playing:
+			audio_player.stop()
 		
 		# Volta para a animação default quando pula o texto
 		if avatar_sprite and avatar_sprite.sprite_frames:
@@ -627,6 +638,8 @@ func set_dialogue(lines: Array[DialogueLine]):
 	dialogue_lines = lines
 	current_dialogue_index = 0
 	current_sequence_index = 0
+	dialogue_completed = false
+	visible = true
 
 
 func set_dialogue_single(line: DialogueLine):
@@ -634,6 +647,8 @@ func set_dialogue_single(line: DialogueLine):
 	dialogue_lines = [line]
 	current_dialogue_index = 0
 	current_sequence_index = 0
+	dialogue_completed = false
+	visible = true
 
 
 func set_avatar(spriteframes: SpriteFrames, anim_name: String = "default", avatar_custom_size: Vector2 = Vector2(76, 76)):
@@ -684,6 +699,11 @@ func _is_japanese_text(text: String) -> bool:
 
 func _check_scroll_visibility():
 	"""Verifica se houve scroll e esconde a janela se necessário"""
+	# Não mostra a janela se o diálogo foi completado
+	if dialogue_completed:
+		visible = false
+		return
+	
 	var current_y = global_position.y
 	var scroll_threshold = 50.0  # Threshold em pixels para considerar scroll
 	
@@ -740,4 +760,7 @@ func _process_choice(choice):
 	elif has_next_dialogue():
 		next_dialogue()
 	else:
+		# Último diálogo - esconde a janela e emite sinal
+		dialogue_completed = true
+		visible = false
 		dialogue_advanced.emit()
