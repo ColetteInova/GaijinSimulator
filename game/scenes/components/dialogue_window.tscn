@@ -51,6 +51,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"Voice"
 
 [node name="Panel" type="Panel" parent="."]
 unique_name_in_owner = true

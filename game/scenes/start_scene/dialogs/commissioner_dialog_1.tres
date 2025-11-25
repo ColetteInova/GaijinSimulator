@@ -16,8 +16,8 @@ metadata/_custom_type_script = "uid://5stvai7oytny"
 
 [resource]
 script = ExtResource("1_vq4x1")
-native_text = "皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在を。皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在を。皆さま、本日は日本へようこそ。当機はまもなく東京・羽田空港に到着いたします。シートベルトのサインが消えるまで、そのままお座りになってお待ちください。日本航空をご利用いただき、誠にありがとうございました。どうぞ良いご滞在をどうぞ良いご滞在を。"
-translated_text = "Senhoras e senhores, bem-vindos ao Japão.Estamos chegando ao Aeroporto de Haneda, em Tóquio. 
-Por favor permaneçam sentados até o sinal de cinto apagar.Obrigado por voar com a Japan Airlines.Desejamos uma boa estadia."
+use_csv_file = true
+csv_file_path = "uid://d02v605pqgf1w"
+message_key = "COMISSER_DIALOG1"
 character = SubResource("Resource_0mh30")
 metadata/_custom_type_script = "uid://cklkhy8dos46y"

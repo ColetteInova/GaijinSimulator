@@ -81,6 +81,7 @@ func _ready():
 		text_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		text_label.get_v_scroll_bar().visible = false
 		text_label.scroll_active = false
+		text_label.bbcode_enabled = true  # Habilita BBCode para quebras de linha
 	
 	_update_avatar_size()
 	_update_avatar_background()
@@ -110,10 +111,11 @@ func _input(event):
 	if advance_key_string == "":
 		advance_key_string = "X"  # Fallback para X se não estiver configurado
 	
-	# Verifica se a tecla de avançar foi pressionada
+	# Verifica se a tecla de avançar foi pressionada (configurada ou Enter)
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key_string = OS.get_keycode_string(event.keycode)
-		if key_string == advance_key_string:
+		# Aceita tanto a tecla configurada quanto Enter
+		if key_string == advance_key_string or event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 			if is_typing:
 				# Se está digitando, pula a digitação
 				skip_typing()
@@ -362,7 +364,14 @@ func _display_sequence(sequence_data: Dictionary):
 
 func _display_text(text: String):
 	"""Inicia a exibição do texto com efeito de digitação"""
-	full_text = text
+	# Habilita BBCode no RichTextLabel para suportar quebras de linha
+	if text_label:
+		text_label.bbcode_enabled = true
+		# Converte \n para [br] que é o formato de quebra de linha do RichTextLabel
+		full_text = text.replace("\n", "[br]")
+	else:
+		full_text = text
+	
 	current_char_index = 0
 	is_typing = true
 	typing_timer = 0.0
@@ -378,6 +387,17 @@ func _type_text(delta):
 		
 		if current_char_index < full_text.length():
 			current_char_index += 1
+			
+			# Pula tags BBCode para não exibi-las caractere por caractere
+			# Se encontrar [br], pula os 4 caracteres de uma vez
+			while current_char_index < full_text.length() and full_text[current_char_index - 1] == '[':
+				# Procura o final da tag
+				var tag_end = full_text.find(']', current_char_index - 1)
+				if tag_end != -1:
+					current_char_index = tag_end + 1
+				else:
+					break
+			
 			text_label.text = full_text.substr(0, current_char_index)
 			
 			# Auto-scroll quando criar uma linha nova

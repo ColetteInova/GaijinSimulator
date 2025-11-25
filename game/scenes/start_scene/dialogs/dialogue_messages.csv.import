@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d02v605pqgf1w"
+
+[deps]
+
+files=["res://scenes/start_scene/dialogs/dialogue_messages.native.translation", "res://scenes/start_scene/dialogs/dialogue_messages.en.translation", "res://scenes/start_scene/dialogs/dialogue_messages.br.translation"]
+
+source_file="res://scenes/start_scene/dialogs/dialogue_messages.csv"
+dest_files=["res://scenes/start_scene/dialogs/dialogue_messages.native.translation", "res://scenes/start_scene/dialogs/dialogue_messages.en.translation", "res://scenes/start_scene/dialogs/dialogue_messages.br.translation"]
+
+[params]
+
+compress=true
+delimiter=0

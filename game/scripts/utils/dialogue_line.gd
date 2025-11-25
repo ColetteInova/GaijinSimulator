@@ -10,10 +10,12 @@ enum DisplayMode {
 }
 
 @export_group("Text Content")
-@export var use_translation_key: bool = false  ## Se true, usa chave de tradução; se false, usa texto literal
+@export var use_csv_file: bool = false  ## Se true, busca mensagens de um arquivo CSV externo
+@export_file("*.csv") var csv_file_path: String = ""  ## Caminho para o arquivo CSV com mensagens
+@export var message_key: String = ""  ## Chave da mensagem no arquivo CSV (ex: COMISSER_DIALOG1)
 
-@export var native_text: String = ""  ## Texto nativo do personagem (literal ou chave de tradução)
-@export var translated_text: String = ""  ## Texto traduzido (literal ou chave de tradução)
+@export var native_text: String = ""  ## Texto nativo do personagem
+@export var translated_text: String = ""  ## Texto traduzido
 
 @export_group("Audio")
 @export var native_audio: AudioStream  ## Áudio da fala nativa
@@ -35,26 +37,77 @@ enum DisplayMode {
 
 
 func get_native_text() -> String:
-	"""Retorna o texto nativo (traduzido se for chave)"""
-	if use_translation_key and native_text:
-		return tr(native_text)
+	"""Retorna o texto nativo"""
+	if use_csv_file and csv_file_path and message_key:
+		return _get_text_from_csv("native")
 	return native_text
 
 
 func get_translated_text() -> String:
-	"""Retorna o texto traduzido (traduzido se for chave)"""
-	if use_translation_key and translated_text:
-		return tr(translated_text)
+	"""Retorna o texto traduzido"""
+	if use_csv_file and csv_file_path and message_key:
+		# Converte locale (ex: pt_BR) para código curto (ex: br)
+		var locale = TranslationServer.get_locale()
+		var lang_code = locale.split("_")[0]  # Pega apenas a primeira parte
+		# Mapeia pt para br
+		if lang_code == "pt":
+			lang_code = "br"
+		return _get_text_from_csv(lang_code)
 	return translated_text
+
+
+func _get_text_from_csv(column: String) -> String:
+	"""Busca o texto da coluna especificada no arquivo CSV usando a message_key"""
+	var file = FileAccess.open(csv_file_path, FileAccess.READ)
+	if not file:
+		push_error("Não foi possível abrir o arquivo CSV: " + csv_file_path)
+		return ""
+	
+	# Lê a primeira linha (cabeçalho)
+	var header_line = file.get_csv_line()
+	var column_index = -1
+	
+	# Encontra o índice da coluna desejada (remove espaços)
+	for i in range(header_line.size()):
+		var header_col = header_line[i].strip_edges().to_lower()
+		if header_col == column.to_lower():
+			column_index = i
+			break
+	
+	if column_index == -1:
+		print("Colunas disponíveis: ", header_line)
+		push_error("Coluna '" + column + "' não encontrada no CSV")
+		file.close()
+		return ""
+	
+	# Busca a linha com a chave especificada
+	while not file.eof_reached():
+		var line = file.get_csv_line()
+		if line.size() > 0:
+			var key = line[0].strip_edges()
+			if key == message_key:
+				if column_index < line.size():
+					var result = line[column_index].strip_edges()
+					file.close()
+					return result
+				break
+	
+	file.close()
+	push_error("Chave '" + message_key + "' não encontrada no CSV")
+	return ""
 
 
 func has_native() -> bool:
 	"""Verifica se tem texto nativo"""
+	if use_csv_file and csv_file_path and message_key:
+		return true
 	return native_text != ""
 
 
 func has_translation() -> bool:
 	"""Verifica se tem texto traduzido"""
+	if use_csv_file and csv_file_path and message_key:
+		return true
 	return translated_text != ""
 
 
