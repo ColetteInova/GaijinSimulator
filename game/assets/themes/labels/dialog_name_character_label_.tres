@@ -1,19 +1,19 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://bga34dw0emcf7"]
 
-[ext_resource type="FontFile" uid="uid://bim58mnativyr" path="res://assets/fonts/pixeled/Pixeled.ttf" id="1_uqh17"]
+[ext_resource type="FontFile" uid="uid://c444dg71eouhn" path="res://assets/fonts/depixel/DePixelHalbfett.ttf" id="1_uqh17"]
 [ext_resource type="Texture2D" uid="uid://bssbjqi5rw1le" path="res://assets/sprites/UIs/ui_windows/windows.png" id="2_uqh17"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uqh17"]
 texture = ExtResource("2_uqh17")
-texture_margin_left = 10.0
-texture_margin_top = 5.783157
-texture_margin_right = 10.0
-texture_margin_bottom = 5.783157
-region_rect = Rect2(464, 144, 48, 48)
+texture_margin_left = 7.550185
+texture_margin_top = 6.987563
+texture_margin_right = 7.6165667
+texture_margin_bottom = 7.0
+region_rect = Rect2(400, 480, 48, 48)
 
 [resource]
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2
-Label/font_sizes/font_size = 5
+Label/font_sizes/font_size = 6
 Label/fonts/font = ExtResource("1_uqh17")
 Label/styles/normal = SubResource("StyleBoxTexture_uqh17")

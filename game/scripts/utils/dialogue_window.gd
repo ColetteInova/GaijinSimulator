@@ -222,14 +222,39 @@ func _update_avatar_position():
 	if name_label:
 		var hbox_name = name_label.get_parent()
 		if hbox_name and hbox_name is HBoxContainer:
+			# Tenta encontrar o InfoPanel e InfoHBoxContainer
+			var info_panel = hbox_name.get_node_or_null("InfoPanel")
+			var info_hbox = null
+			if info_panel:
+				info_hbox = info_panel.get_node_or_null("InfoHBoxContainer")
+			
 			if avatar_position == 0:  # Esquerda
 				hbox_name.alignment = BoxContainer.ALIGNMENT_BEGIN
 				name_label.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 				name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-			else:  
+				
+				# Reordena para [NameLabel, InfoPanel]
+				hbox_name.move_child(name_label, 0)
+				if info_panel:
+					hbox_name.move_child(info_panel, 1)
+				
+				# Alinha InfoHBoxContainer à esquerda
+				if info_hbox:
+					info_hbox.alignment = BoxContainer.ALIGNMENT_BEGIN
+					
+			else:  # Direita
 				hbox_name.alignment = BoxContainer.ALIGNMENT_END
 				name_label.size_flags_horizontal = Control.SIZE_SHRINK_END
 				name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+				
+				# Reordena para [InfoPanel, NameLabel]
+				if info_panel:
+					hbox_name.move_child(info_panel, 0)
+				hbox_name.move_child(name_label, hbox_name.get_child_count() - 1)
+				
+				# Alinha InfoHBoxContainer à direita
+				if info_hbox:
+					info_hbox.alignment = BoxContainer.ALIGNMENT_END
 
 
 func _update_character_name():
