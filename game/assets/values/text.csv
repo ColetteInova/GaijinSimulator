@@ -28,4 +28,7 @@ CHARACTER_MALE_STUDENT,Male Student,Estudante Masculino,Estudiante Masculino,男
 CHARACTER_FEMALE_STUDENT,Female Student,Estudante Feminina,Estudiante Femenina,女子学生
 CHARACTER_MALE_OFFICE,Male Office Worker,Trabalhador de Escritório,Oficinista Masculino,男性会社員
 CHARACTER_FEMALE_OFFICE,Female Office Worker,Trabalhadora de Escritório,Oficinista Femenina,女性会社員
+CHARACTER_NATIONALITY,Nationality,Nacionalidade,Nacionalidad,国籍
+CHARACTER_BILINGUAL,Bilingual,Bilíngue,Bilingüe,バイリンガル
+CHARACTER_CONVERSATION,Conversation,Conversação,Conversación,会話
 

@@ -4,12 +4,12 @@
 
 [resource]
 texture = ExtResource("1_igqpp")
-texture_margin_left = 3.9732018
-texture_margin_top = 5.33765
-texture_margin_right = 4.4772997
-texture_margin_bottom = 4.289665
+texture_margin_left = 4.5516768
+texture_margin_top = 4.0
+texture_margin_right = 4.5516768
+texture_margin_bottom = 2.0
 expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
-region_rect = Rect2(464, 352, 48, 48)
+region_rect = Rect2(272, 480, 48, 48)

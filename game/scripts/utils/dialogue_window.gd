@@ -5,6 +5,8 @@ class_name DialogueWindow
 ## Janela de diálogo com avatar animado do personagem
 ## Aceita spritesheet como parâmetro externo e gerencia diálogos
 
+const NativeLevel = preload("res://scripts/utils/conversation_level.gd")
+
 signal dialogue_finished
 signal dialogue_advanced
 signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
@@ -37,6 +39,9 @@ signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
 @onready var avatar_background_texture_rect: TextureRect = %AvatarBackground
 @onready var audio_player: AudioStreamPlayer = %AudioPlayer
 @onready var choices_container: VBoxContainer = %ChoicesContainer
+@onready var nationality_icon: Node = %NationalityBoxContainer
+@onready var bilingual_box: Node = %BilingualBoxContainer
+@onready var conversation_box: Node = %ConversationBoxContainer
 
 # Temas para diferentes idiomas
 var japanese_theme: Theme
@@ -292,10 +297,40 @@ func _start_dialogue_line(line: DialogueLine):
 		# Atualiza posição do avatar
 		avatar_position = line.character.avatar_position
 		
+		# Atualiza a bandeira de nacionalidade
+		if nationality_icon:
+			var flag_path = Nationality.get_flag_path(line.character.nationality)
+			var flag_texture = load(flag_path)
+			if flag_texture:
+				nationality_icon.icon_texture = flag_texture
+		
+		# Atualiza o ícone do nível nativo no ConversationBoxContainer
+		if conversation_box:
+			var level_texture = NativeLevel.get_book_icon_texture(line.character.native_level)
+			if level_texture:
+				conversation_box.icon_texture = level_texture
+		
+		# Aplica o tema de texto do personagem se disponível
+		if line.character.text_theme and text_label:
+			text_label.theme = line.character.text_theme
+		elif text_label and default_theme:
+			text_label.theme = default_theme
+		
 		# Aplica as mudanças
 		_setup_avatar()
 		_update_avatar_background()
 		_update_avatar_position()
+	
+	# Esconde bilingual_box se o personagem não é bilíngue ou não há character
+	# Se bilíngue, mostra bilingual_box e esconde conversation_box
+	# Se não bilíngue, mostra conversation_box e esconde bilingual_box
+	if bilingual_box and conversation_box:
+		if line.character and line.character.is_bilingual:
+			bilingual_box.visible = true
+			conversation_box.visible = false
+		else:
+			bilingual_box.visible = false
+			conversation_box.visible = true
 	
 	# Atualiza nome do personagem
 	if name_label and line.character:

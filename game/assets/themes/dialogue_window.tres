@@ -5,11 +5,11 @@
 [resource]
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_outline_color = Color(0.3228541, 0.1568265, 0.07706501, 1)
-RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/line_separation = 3
 RichTextLabel/constants/outline_size = 4
 RichTextLabel/constants/shadow_offset_x = 1
 RichTextLabel/constants/shadow_offset_y = 4
-RichTextLabel/font_sizes/normal_font_size = 11
+RichTextLabel/font_sizes/normal_font_size = 10
 RichTextLabel/fonts/bold_font = null
 RichTextLabel/fonts/normal_font = ExtResource("1_237yd")
 RichTextLabel/icons/horizontal_rule = null

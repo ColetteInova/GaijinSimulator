@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://phgauu3paffi"]
+[gd_scene load_steps=15 format=3 uid="uid://phgauu3paffi"]
 
 [ext_resource type="Script" uid="uid://bstnj38vucutt" path="res://scripts/utils/dialogue_window.gd" id="1"]
 [ext_resource type="Theme" uid="uid://ca0k68oog044u" path="res://assets/themes/dialogue_window.tres" id="2_aixfb"]
@@ -6,9 +6,10 @@
 [ext_resource type="Theme" uid="uid://bga34dw0emcf7" path="res://assets/themes/labels/dialog_name_character_label_.tres" id="3_xyeu4"]
 [ext_resource type="Texture2D" uid="uid://dm50hrcx8lu2f" path="res://assets/sprites/UIs/ui_windows/window_dialog.png" id="4_xyeu4"]
 [ext_resource type="StyleBox" uid="uid://cwu5is38i3y61" path="res://assets/themes/panel/dialog_character_info_panel.tres" id="6_po4f0"]
-[ext_resource type="FontFile" uid="uid://cdtre7yjm15l0" path="res://assets/fonts/depixel/DePixelBreit.otf" id="6_w4q48"]
-[ext_resource type="Texture2D" uid="uid://d4cdeo75gh83x" path="res://assets/sprites/UIs/icons/flags/rectangle_12x8/Japan.png" id="7_po4f0"]
+[ext_resource type="PackedScene" uid="uid://bm17d4ywst0qa" path="res://scenes/components/icon_with_text_vertical.tscn" id="8_erfyx"]
 [ext_resource type="Texture2D" uid="uid://7njiigsbfgir" path="res://assets/sprites/UIs/icons/bilingue.png" id="9_w4q48"]
+[ext_resource type="Texture2D" uid="uid://dx0g4j2tnwb5h" path="res://assets/sprites/UIs/ui_books/book_n1.png" id="10_4psyo"]
+[ext_resource type="FontFile" uid="uid://cdtre7yjm15l0" path="res://assets/fonts/depixel/DePixelBreit.otf" id="10_erfyx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xyeu4"]
 texture = ExtResource("4_xyeu4")
@@ -30,8 +31,11 @@ draw_center = false
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fent0"]
 
 [sub_resource type="Theme" id="Theme_w4q48"]
-Label/font_sizes/font_size = 16
-Label/fonts/font = ExtResource("6_w4q48")
+Label/colors/font_color = Color(0.4392157, 0.22745098, 0.11372549, 1)
+Label/colors/font_outline_color = Color(0.4392157, 0.22745098, 0.11372549, 1)
+Label/constants/outline_size = -1
+Label/font_sizes/font_size = 4
+Label/fonts/font = ExtResource("10_erfyx")
 
 [node name="DialogueWindow" type="Control"]
 layout_mode = 3
@@ -53,7 +57,7 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
-anchor_top = 0.6888889
+anchor_top = 0.6833334
 anchor_right = 0.975
 anchor_bottom = 0.9777778
 offset_top = -1.5258789e-05
@@ -111,21 +115,23 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 0
 mouse_filter = 2
-text = "Dialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagem"
+bbcode_enabled = true
+text = "Dialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do rsonagemDialorsonagemDialorsonagemDialorsonagemDialopersonagemDialogo do personagemDialogo do personagemDialogo do personagemDialogo do personagem personagempersonagempersonagem"
 scroll_active = false
 scroll_following = true
 scroll_following_visible_characters = true
-tab_size = 3
+autowrap_trim_flags = 0
+justification_flags = 235
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0328125
-anchor_top = 0.6333334
-anchor_right = 0.9671875
-anchor_bottom = 0.7027779
+anchor_left = 0.03125
+anchor_top = 0.63055557
+anchor_right = 0.965625
+anchor_bottom = 0.6916666
 offset_top = -1.5258789e-05
 grow_horizontal = 0
 grow_vertical = 2
@@ -148,12 +154,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_fent0")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.0034602077
-anchor_top = 0.12
+anchor_top = -0.3181802
 anchor_right = 0.9965398
-anchor_bottom = 0.91999936
-grow_horizontal = 2
+anchor_bottom = 0.95454687
+grow_horizontal = 0
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="InfoItemPainel" type="PanelContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer"]
 layout_mode = 2
@@ -163,17 +168,24 @@ theme_override_styles/panel = ExtResource("6_po4f0")
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel"]
 layout_mode = 2
 
-[node name="InfoItemIconTextureRect" type="TextureRect" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer"]
+[node name="NationalityBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("7_po4f0")
-stretch_mode = 5
+translation_key = "CHARACTER_NATIONALITY"
 
-[node name="InfoItemIconTextureRect2" type="TextureRect" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer"]
-custom_minimum_size = Vector2(16, 10)
+[node name="BilingualBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("9_w4q48")
-expand_mode = 1
-stretch_mode = 5
+icon_texture = ExtResource("9_w4q48")
+label_text = "Bilingual"
+translation_key = "CHARACTER_BILINGUAL"
+
+[node name="ConversationBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
+unique_name_in_owner = true
+layout_mode = 2
+icon_texture = ExtResource("10_4psyo")
+label_text = "Bilingual"
+translation_key = "CHARACTER_CONVERSATION"
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true

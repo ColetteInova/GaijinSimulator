@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm17d4ywst0qa"]
+
+[ext_resource type="Script" uid="uid://bjt858lxjl8ax" path="res://scenes/components/icon_with_text_vertical.gd" id="1_3kp4v"]
+[ext_resource type="Texture2D" uid="uid://ciearftgkjm0d" path="res://assets/sprites/UIs/icons/flags/rectangle_24x16/Japan.png" id="1_4orlp"]
+[ext_resource type="Theme" uid="uid://b0rifogjwo8jt" path="res://assets/themes/labels/dialog_info_character_label.tres" id="2_l0yfg"]
+
+[node name="NationalityBoxContainer" type="VBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_3kp4v")
+icon_texture = ExtResource("1_4orlp")
+label_text = "Nationality"
+translation_key = null
+
+[node name="InfoItemIconTextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 10)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("2_l0yfg")
+text = "Nationality"
+vertical_alignment = 1
+autowrap_trim_flags = 0
+justification_flags = 0
