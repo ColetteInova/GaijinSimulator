@@ -3,9 +3,6 @@ class_name Character
 
 ## Representa um personagem reutilizável para diálogos
 
-const Nationality = preload("res://scripts/utils/nationality.gd")
-const NativeLevel = preload("res://scripts/utils/conversation_level.gd")
-
 @export var character_name: String = ""  ## Nome do personagem
 @export var avatar_spritesheet: SpriteFrames  ## SpriteFrames do avatar
 @export var avatar_background: Texture2D  ## Fundo do avatar (opcional - sobrescreve o padrão)

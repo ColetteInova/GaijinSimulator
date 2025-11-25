@@ -5,8 +5,6 @@ class_name DialogueWindow
 ## Janela de diálogo com avatar animado do personagem
 ## Aceita spritesheet como parâmetro externo e gerencia diálogos
 
-const NativeLevel = preload("res://scripts/utils/conversation_level.gd")
-
 signal dialogue_finished
 signal dialogue_advanced
 signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
