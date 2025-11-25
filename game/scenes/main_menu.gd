@@ -43,13 +43,7 @@ func _on_start_game_pressed():
 	UISoundManager.play_click()
 	print("Starting new game...")
 	
-	# Verifica se já existe um personagem salvo
-	if PlayerData.has_character():
-		# Já tem personagem, vai direto para o jogo
-		await SceneTransition.change_scene_to_file("res://scenes/game/game_scene.tscn", 0.5, 0.8)
-	else:
-		# Não tem personagem, vai para criação
-		await SceneTransition.change_scene_to_file("res://scenes/menus/character_creation.tscn", 0.5, 0.8)
+	await SceneTransition.change_scene_to_file("res://scenes/start_scene/start_game_scene.tscn", 0.5, 0.8)
 
 
 func _on_load_pressed():

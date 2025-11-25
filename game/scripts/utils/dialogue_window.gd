@@ -31,6 +31,7 @@ signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
 @export var window_theme: Theme
 
 @export_group("Animation Settings")
+@export var start_delay: float = 0.0 ## Delay em segundos antes de iniciar o diálogo
 @export var fade_in_duration: float = 0.6 ## Duração do fade in ao aparecer (em segundos)
 @export var fade_out_duration: float = 0.3 ## Duração do fade out ao esconder (em segundos)
 @export var enable_fade_in: bool = true ## Ativa/desativa o fade in inicial
@@ -76,6 +77,7 @@ var waiting_for_choice: bool = false ## Flag para indicar que está aguardando e
 var selected_choice: DialogueChoice = null ## Escolha selecionada pelo usuário
 var dialogue_completed: bool = false ## Flag para indicar que todos os diálogos terminaram
 var is_fading_out: bool = false ## Flag para indicar que está fazendo fade out
+var dialogue_started: bool = false ## Flag para indicar que o diálogo foi iniciado
 
 
 func _ready():
@@ -99,12 +101,24 @@ func _ready():
 	_update_avatar_background()
 	
 	if not Engine.is_editor_hint():
-		# Aplica fade in inicial se ativado
-		if enable_fade_in:
-			modulate.a = 0.0
-			_fade_in()
+		# Inicia invisível se houver delay ou diálogos configurados
+		if start_delay > 0 or dialogue_lines.size() > 0:
+			visible = false
 		
+		# Aguarda o delay configurado antes de iniciar
+		if start_delay > 0:
+			await get_tree().create_timer(start_delay).timeout
+		
+		# Torna visível e inicia os diálogos
 		if dialogue_lines.size() > 0:
+			visible = true
+			dialogue_started = true
+			
+			# Aplica fade in inicial se ativado
+			if enable_fade_in:
+				modulate.a = 0.0
+				_fade_in()
+			
 			current_dialogue_index = 0
 			_start_dialogue_line(dialogue_lines[current_dialogue_index])
 
@@ -712,8 +726,8 @@ func _is_japanese_text(text: String) -> bool:
 
 func _check_scroll_visibility():
 	"""Verifica se houve scroll e esconde a janela se necessário"""
-	# Não mostra a janela se o diálogo foi completado ou está fazendo fade out
-	if dialogue_completed or is_fading_out:
+	# Não mostra a janela se o diálogo foi completado, está fazendo fade out, ou ainda não iniciou
+	if dialogue_completed or is_fading_out or not dialogue_started:
 		return
 	
 	var current_y = global_position.y
