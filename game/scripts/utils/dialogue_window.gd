@@ -29,6 +29,12 @@ signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
 @export_group("Window Style")
 @export var window_theme: Theme
 
+@export_group("Animation Settings")
+@export var fade_in_duration: float = 0.6 ## Duração do fade in ao aparecer (em segundos)
+@export var fade_out_duration: float = 0.3 ## Duração do fade out ao esconder (em segundos)
+@export var enable_fade_in: bool = true ## Ativa/desativa o fade in inicial
+@export var enable_fade_out: bool = true ## Ativa/desativa o fade out ao esconder
+
 @onready var avatar_container: PanelContainer = %AvatarContainer
 @onready var avatar_sprite: AnimatedSprite2D = %AvatarSprite
 @onready var name_label: Label = %NameLabel
@@ -68,6 +74,7 @@ var waiting_for_advance: bool = false ## Flag para indicar que está aguardando 
 var waiting_for_choice: bool = false ## Flag para indicar que está aguardando escolha
 var selected_choice: DialogueChoice = null ## Escolha selecionada pelo usuário
 var dialogue_completed: bool = false ## Flag para indicar que todos os diálogos terminaram
+var is_fading_out: bool = false ## Flag para indicar que está fazendo fade out
 
 
 func _ready():
@@ -91,6 +98,11 @@ func _ready():
 	_update_avatar_background()
 	
 	if not Engine.is_editor_hint():
+		# Aplica fade in inicial se ativado
+		if enable_fade_in:
+			modulate.a = 0.0
+			_fade_in()
+		
 		if dialogue_lines.size() > 0:
 			current_dialogue_index = 0
 			_start_dialogue_line(dialogue_lines[current_dialogue_index])
@@ -140,7 +152,7 @@ func _input(event):
 				else:
 					# Se era a última linha, esconde a janela e emite sinal
 					dialogue_completed = true
-					visible = false
+					await _fade_out()
 					dialogue_advanced.emit()
 
 
@@ -573,7 +585,7 @@ func _handle_dialogue_advance():
 	else:
 		# Último diálogo - esconde a janela e emite sinal
 		dialogue_completed = true
-		visible = false
+		await _fade_out()
 		if auto_advance:
 			dialogue_advanced.emit()
 
@@ -699,9 +711,8 @@ func _is_japanese_text(text: String) -> bool:
 
 func _check_scroll_visibility():
 	"""Verifica se houve scroll e esconde a janela se necessário"""
-	# Não mostra a janela se o diálogo foi completado
-	if dialogue_completed:
-		visible = false
+	# Não mostra a janela se o diálogo foi completado ou está fazendo fade out
+	if dialogue_completed or is_fading_out:
 		return
 	
 	var current_y = global_position.y
@@ -762,5 +773,24 @@ func _process_choice(choice):
 	else:
 		# Último diálogo - esconde a janela e emite sinal
 		dialogue_completed = true
-		visible = false
+		await _fade_out()
 		dialogue_advanced.emit()
+
+
+func _fade_in():
+	"""Aplica o efeito de fade in na janela"""
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, fade_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+func _fade_out():
+	"""Aplica o efeito de fade out antes de esconder a janela"""
+	is_fading_out = true
+	if enable_fade_out:
+		var tween = create_tween()
+		tween.tween_property(self, "modulate:a", 0.0, fade_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		await tween.finished
+	visible = false
+	is_fading_out = false
+	# Restaura o alpha para o próximo uso
+	modulate.a = 1.0
