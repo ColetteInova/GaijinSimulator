@@ -7,6 +7,7 @@ class_name DialogueWindow
 
 signal dialogue_finished
 signal dialogue_advanced
+signal all_dialogues_completed  ## Emitido quando toda a conversa termina
 signal choice_selected(choice: DialogueChoice)  ## Quando usuário escolhe
 
 @export_group("Avatar Settings")
@@ -149,13 +150,12 @@ func _input(event):
 				# Se terminou de digitar, avança para próxima linha
 				if has_next_dialogue():
 					next_dialogue()
-				else:
-					# Se era a última linha, esconde a janela e emite sinal
-					dialogue_completed = true
-					await _fade_out()
-					dialogue_advanced.emit()
-
-
+			else:
+				# Se era a última linha, esconde a janela e emite sinal
+				dialogue_completed = true
+				await _fade_out()
+				all_dialogues_completed.emit()
+				dialogue_advanced.emit()
 func _setup_avatar():
 	"""Configura o sprite do avatar com o SpriteFrames"""
 	if not avatar_sprite or not avatar_spritesheet:
@@ -586,6 +586,7 @@ func _handle_dialogue_advance():
 		# Último diálogo - esconde a janela e emite sinal
 		dialogue_completed = true
 		await _fade_out()
+		all_dialogues_completed.emit()
 		if auto_advance:
 			dialogue_advanced.emit()
 
@@ -774,6 +775,7 @@ func _process_choice(choice):
 		# Último diálogo - esconde a janela e emite sinal
 		dialogue_completed = true
 		await _fade_out()
+		all_dialogues_completed.emit()
 		dialogue_advanced.emit()
 
 
@@ -794,3 +796,7 @@ func _fade_out():
 	is_fading_out = false
 	# Restaura o alpha para o próximo uso
 	modulate.a = 1.0
+
+
+func _on_all_dialogues_completed() -> void:
+	pass # Replace with function body.

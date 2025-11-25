@@ -47,6 +47,10 @@ grow_vertical = 2
 theme = ExtResource("2_aixfb")
 script = ExtResource("1")
 avatar_size = Vector2(80, 80)
+fade_in_duration = null
+fade_out_duration = null
+enable_fade_in = null
+enable_fade_out = null
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
@@ -57,11 +61,10 @@ bus = &"Voice"
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.025
-anchor_top = 0.6833334
-anchor_right = 0.975
-anchor_bottom = 0.9777778
-offset_top = -1.5258789e-05
+anchor_left = 0.0015625
+anchor_top = 0.62222224
+anchor_right = 1.0015625
+anchor_bottom = 0.925
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_xyeu4")
@@ -69,22 +72,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -40.0
-offset_right = -8.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_left = 0.0125
+anchor_top = 0.13302746
+anchor_right = 0.9875
+anchor_bottom = 0.8669725
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="AvatarContainer" type="PanelContainer" parent="Panel/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -129,10 +129,10 @@ drag_and_drop_selection_enabled = false
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.03125
-anchor_top = 0.63055557
-anchor_right = 0.965625
-anchor_bottom = 0.6916666
+anchor_left = 0.0109375
+anchor_top = 0.5722223
+anchor_right = 1.0015625
+anchor_bottom = 0.6333333
 offset_top = -1.5258789e-05
 grow_horizontal = 0
 grow_vertical = 2
@@ -145,48 +145,6 @@ size_flags_horizontal = 0
 theme = ExtResource("3_xyeu4")
 theme_type_variation = &"HeaderSmall"
 metadata/_edit_use_anchors_ = true
-
-[node name="InfoPanel" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_fent0")
-
-[node name="InfoHBoxContainer" type="HBoxContainer" parent="HBoxContainer/InfoPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.0034602077
-anchor_top = -0.3181802
-anchor_right = 0.9965398
-anchor_bottom = 0.95454687
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="InfoItemPainel" type="PanelContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_w4q48")
-theme_override_styles/panel = ExtResource("6_po4f0")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel"]
-layout_mode = 2
-
-[node name="NationalityBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
-unique_name_in_owner = true
-layout_mode = 2
-translation_key = "CHARACTER_NATIONALITY"
-
-[node name="BilingualBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
-unique_name_in_owner = true
-layout_mode = 2
-icon_texture = ExtResource("9_w4q48")
-label_text = "Bilingual"
-translation_key = "CHARACTER_BILINGUAL"
-
-[node name="ConversationBoxContainer" parent="HBoxContainer/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
-unique_name_in_owner = true
-layout_mode = 2
-icon_texture = ExtResource("10_4psyo")
-label_text = "Bilingual"
-translation_key = "CHARACTER_CONVERSATION"
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -202,3 +160,59 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -29.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="InfoPanel" type="Panel" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fent0")
+
+[node name="InfoHBoxContainer" type="HBoxContainer" parent="HBoxContainer2/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoItemPainel" type="PanelContainer" parent="HBoxContainer2/InfoPanel/InfoHBoxContainer"]
+custom_minimum_size = Vector2(79, 0)
+layout_mode = 2
+theme = SubResource("Theme_w4q48")
+theme_override_styles/panel = ExtResource("6_po4f0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/InfoPanel/InfoHBoxContainer/InfoItemPainel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NationalityBoxContainer" parent="HBoxContainer2/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
+unique_name_in_owner = true
+layout_mode = 2
+translation_key = "CHARACTER_NATIONALITY"
+
+[node name="BilingualBoxContainer" parent="HBoxContainer2/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
+unique_name_in_owner = true
+layout_mode = 2
+icon_texture = ExtResource("9_w4q48")
+label_text = "Bilingual"
+translation_key = "CHARACTER_BILINGUAL"
+
+[node name="ConversationBoxContainer" parent="HBoxContainer2/InfoPanel/InfoHBoxContainer/InfoItemPainel/HBoxContainer" instance=ExtResource("8_erfyx")]
+unique_name_in_owner = true
+layout_mode = 2
+icon_texture = ExtResource("10_4psyo")
+label_text = "Bilingual"
+translation_key = "CHARACTER_CONVERSATION"

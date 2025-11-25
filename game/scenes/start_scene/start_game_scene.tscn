@@ -50,7 +50,10 @@ grow_vertical = 2
 layout_mode = 2
 avatar_background = ExtResource("14_dyesy")
 dialogue_lines = Array[ExtResource("16_knp0f")]([ExtResource("17_in13e")])
-enable_fade = false
+fade_in_duration = 0.6
+fade_out_duration = 0.3
+enable_fade_in = true
+enable_fade_out = true
 
 [node name="japan_airlines_animated_sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(736.00006, 208)
@@ -63,3 +66,5 @@ float_duration = 5.0
 auto_start = false
 move_to_center_delay = 1.0
 move_to_center_duration = 5.0
+
+[connection signal="all_dialogues_completed" from="MarginContainer/DialogueWindow" to="MarginContainer/DialogueWindow" method="_on_all_dialogues_completed"]
