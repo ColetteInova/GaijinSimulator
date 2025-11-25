@@ -55,6 +55,9 @@ var is_typing: bool = false
 var current_char_index: int = 0
 var typing_timer: float = 0.0
 var full_text: String = ""
+var audio_sync_mode: bool = false  ## Se true, usa sincronização com áudio
+var audio_duration: float = 0.0  ## Duração total do áudio
+var elapsed_time: float = 0.0  ## Tempo decorrido desde o início da digitação
 var current_dialogue_index: int = 0 ## Índice da linha atual
 var current_sequence_index: int = 0 ## Índice da sequência atual (japonês/tradução)
 var current_line: DialogueLine ## Linha de diálogo atual
@@ -336,6 +339,17 @@ func _start_dialogue_line(line: DialogueLine):
 	if name_label and line.character:
 		name_label.text = line.character.character_name
 	
+	# Toca animação inicial (start) se existir, depois vai para default
+	if avatar_sprite and avatar_sprite.sprite_frames:
+		if avatar_sprite.sprite_frames.has_animation("start"):
+			avatar_sprite.play("start")
+			# Aguarda a animação "start" terminar, depois vai para default
+			await avatar_sprite.animation_finished
+			if avatar_sprite.sprite_frames.has_animation("default"):
+				avatar_sprite.play("default")
+		elif avatar_sprite.sprite_frames.has_animation("default"):
+			avatar_sprite.play("default")
+	
 	# Inicia a primeira sequência
 	if current_sequence.size() > 0:
 		_display_sequence(current_sequence[current_sequence_index])
@@ -353,14 +367,22 @@ func _display_sequence(sequence_data: Dictionary):
 		if text_label and default_theme:
 			text_label.theme = default_theme
 		
+	# Inicia a animação do avatar ao começar a exibir o texto
+	# Tenta usar a animação "talk", se não existir, usa a animação padrão
+	if avatar_sprite and play_animation:
+		if avatar_sprite.sprite_frames and avatar_sprite.sprite_frames.has_animation("talk"):
+			avatar_sprite.play("talk")
+		else:
+			avatar_sprite.play()
 	
-	_display_text(text)
-	
-	# Toca o áudio se disponível
+	# Toca o áudio se disponível e calcula a velocidade de digitação
 	var audio: AudioStream = sequence_data.get("audio", null)
-	if audio and audio_player:
-		audio_player.stream = audio
-		audio_player.play()
+	if audio:
+		# Calcula a velocidade de digitação baseada na duração do áudio
+		_display_text_with_audio(text, audio)
+	else:
+		# Usa a velocidade padrão se não houver áudio
+		_display_text(text)
 
 func _display_text(text: String):
 	"""Inicia a exibição do texto com efeito de digitação"""
@@ -372,41 +394,146 @@ func _display_text(text: String):
 	else:
 		full_text = text
 	
+	# Desativa modo de sincronização com áudio
+	audio_sync_mode = false
+	
 	current_char_index = 0
 	is_typing = true
 	typing_timer = 0.0
 	text_label.text = ""
 
 
+func _display_text_with_audio(text: String, audio: AudioStream):
+	"""Inicia a exibição do texto sincronizado com o áudio"""
+	# Habilita BBCode no RichTextLabel para suportar quebras de linha
+	if text_label:
+		text_label.bbcode_enabled = true
+		# Converte \n para [br] que é o formato de quebra de linha do RichTextLabel
+		full_text = text.replace("\n", "[br]")
+	else:
+		full_text = text
+	
+	# Ativa modo de sincronização com áudio
+	audio_sync_mode = true
+	audio_duration = audio.get_length()
+	elapsed_time = 0.0
+	
+	# Inicia a digitação
+	current_char_index = 0
+	is_typing = true
+	typing_timer = 0.0
+	text_label.text = ""
+	
+	# Toca o áudio
+	if audio_player:
+		audio_player.stream = audio
+		audio_player.play()
+
+
+func _count_visible_characters(text: String) -> int:
+	"""Conta o número de caracteres visíveis (excluindo tags BBCode)"""
+	var count = 0
+	var i = 0
+	var in_tag = false
+	
+	while i < text.length():
+		var current_char = text[i]
+		
+		if current_char == '[':
+			in_tag = true
+		elif current_char == ']':
+			in_tag = false
+		elif not in_tag:
+			count += 1
+		
+		i += 1
+	
+	return count
+
+
 func _type_text(delta):
 	"""Processa o efeito de digitação"""
-	typing_timer += delta
-	
-	if typing_timer >= text_speed:
-		typing_timer = 0.0
+	if audio_sync_mode and audio_duration > 0:
+		# Modo de sincronização com áudio: calcula posição baseado no tempo
+		elapsed_time += delta
 		
-		if current_char_index < full_text.length():
-			current_char_index += 1
+		# Calcula qual caractere deveria estar visível baseado no tempo decorrido
+		var progress = clamp(elapsed_time / audio_duration, 0.0, 1.0)
+		var target_char_index = int(progress * full_text.length())
+		
+		# Atualiza o texto se mudou o índice
+		if target_char_index != current_char_index:
+			current_char_index = target_char_index
 			
-			# Pula tags BBCode para não exibi-las caractere por caractere
-			# Se encontrar [br], pula os 4 caracteres de uma vez
-			while current_char_index < full_text.length() and full_text[current_char_index - 1] == '[':
-				# Procura o final da tag
-				var tag_end = full_text.find(']', current_char_index - 1)
-				if tag_end != -1:
-					current_char_index = tag_end + 1
-				else:
+			# Garante que não corta no meio de uma tag BBCode
+			# Se estamos no meio de uma tag, avança até o final dela
+			var check_pos = current_char_index - 1
+			while check_pos >= 0:
+				if full_text[check_pos] == '[':
+					# Encontrou início de tag, precisa incluir até o final
+					var tag_end = full_text.find(']', check_pos)
+					if tag_end != -1 and tag_end >= current_char_index:
+						# Estamos no meio da tag, avança até o final
+						current_char_index = tag_end + 1
 					break
+				elif full_text[check_pos] == ']':
+					# Já passou de uma tag completa, está ok
+					break
+				check_pos -= 1
 			
 			text_label.text = full_text.substr(0, current_char_index)
 			
 			# Auto-scroll quando criar uma linha nova
 			if text_label.get_v_scroll_bar():
 				text_label.get_v_scroll_bar().value = text_label.get_v_scroll_bar().max_value
-		else:
+		
+		# Verifica se terminou
+		if current_char_index >= full_text.length():
 			is_typing = false
+			audio_sync_mode = false
+			# Volta para a animação default quando o texto termina
+			if avatar_sprite and avatar_sprite.sprite_frames:
+				if avatar_sprite.sprite_frames.has_animation("default"):
+					avatar_sprite.play("default")
+				else:
+					avatar_sprite.play()
 			dialogue_finished.emit()
 			_handle_dialogue_advance()
+	else:
+		# Modo normal: usa velocidade de digitação por caractere
+		typing_timer += delta
+		
+		if typing_timer >= text_speed:
+			typing_timer = 0.0
+			
+			if current_char_index < full_text.length():
+				current_char_index += 1
+				
+				# Pula tags BBCode para não exibi-las caractere por caractere
+				# Se encontrar [br], pula os 4 caracteres de uma vez
+				while current_char_index < full_text.length() and full_text[current_char_index - 1] == '[':
+					# Procura o final da tag
+					var tag_end = full_text.find(']', current_char_index - 1)
+					if tag_end != -1:
+						current_char_index = tag_end + 1
+					else:
+						break
+				
+				text_label.text = full_text.substr(0, current_char_index)
+				
+				# Auto-scroll quando criar uma linha nova
+				if text_label.get_v_scroll_bar():
+					text_label.get_v_scroll_bar().value = text_label.get_v_scroll_bar().max_value
+			else:
+				is_typing = false
+				# Volta para a animação default quando o texto termina
+				if avatar_sprite and avatar_sprite.sprite_frames:
+					if avatar_sprite.sprite_frames.has_animation("default"):
+						avatar_sprite.play("default")
+					else:
+						avatar_sprite.play()
+				dialogue_finished.emit()
+				_handle_dialogue_advance()
 
 
 func _handle_dialogue_advance():
@@ -448,8 +575,17 @@ func skip_typing():
 	"""Pula o efeito de digitação e mostra o texto completo"""
 	if is_typing:
 		is_typing = false
+		audio_sync_mode = false
 		current_char_index = full_text.length()
 		text_label.text = full_text
+		
+		# Volta para a animação default quando pula o texto
+		if avatar_sprite and avatar_sprite.sprite_frames:
+			if avatar_sprite.sprite_frames.has_animation("default"):
+				avatar_sprite.play("default")
+			else:
+				avatar_sprite.play()
+		
 		dialogue_finished.emit()
 		
 		# Ativa a lógica de avanço após completar
