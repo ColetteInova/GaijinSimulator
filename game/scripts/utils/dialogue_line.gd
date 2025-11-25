@@ -18,8 +18,7 @@ enum DisplayMode {
 @export var translated_text: String = ""  ## Texto traduzido
 
 @export_group("Audio")
-@export var native_audio: AudioStream  ## Áudio da fala nativa
-@export var translated_audio: AudioStream  ## Áudio da fala traduzida
+@export_dir var audio_folder_path: String = ""  ## Pasta base com áudios (ex: res://assets/audios/dialogues/character1/)
 
 @export_group("Display Settings")
 @export var display_mode: DisplayMode = DisplayMode.NATIVE_THEN_TRANSLATED  ## Modo de exibição
@@ -131,15 +130,19 @@ func get_display_sequence() -> Array[Dictionary]:
 			if has_native():
 				sequence.append({
 					"text": get_native_text(),
-					"audio": native_audio,
+					"audio": _get_audio_for_language("native"),
 					"is_native": true
 				})
 		
 		DisplayMode.TRANSLATED_ONLY:
 			if has_translation():
+				var locale = TranslationServer.get_locale()
+				var lang_code = locale.split("_")[0]
+				if lang_code == "pt":
+					lang_code = "br"
 				sequence.append({
 					"text": get_translated_text(),
-					"audio": translated_audio,
+					"audio": _get_audio_for_language(lang_code),
 					"is_native": false
 				})
 		
@@ -147,14 +150,54 @@ func get_display_sequence() -> Array[Dictionary]:
 			if has_native():
 				sequence.append({
 					"text": get_native_text(),
-					"audio": native_audio,
+					"audio": _get_audio_for_language("native"),
 					"is_native": true
 				})
 			if has_translation():
+				var locale = TranslationServer.get_locale()
+				var lang_code = locale.split("_")[0]
+				if lang_code == "pt":
+					lang_code = "br"
 				sequence.append({
 					"text": get_translated_text(),
-					"audio": translated_audio,
+					"audio": _get_audio_for_language(lang_code),
 					"is_native": false
 				})
 	
 	return sequence
+
+
+func _get_audio_for_language(language: String) -> AudioStream:
+	"""Carrega o áudio para o idioma especificado baseado na pasta e message_key
+	Estrutura esperada: audio_folder_path/native|br|en/message_key.mp3|.ogg|.wav
+	"""
+	# Se audio_folder_path não estiver definido, retorna null
+	if audio_folder_path == "":
+		push_warning("audio_folder_path não definido para carregar áudio automaticamente")
+		return null
+	
+	# Se message_key não estiver definida, não há como carregar o áudio
+	if message_key == "":
+		push_warning("message_key não definida para carregar áudio automaticamente")
+		return null
+	
+	# Garante que o caminho termina com /
+	var base_path = audio_folder_path
+	if not base_path.ends_with("/"):
+		base_path += "/"
+	
+	# Constrói o caminho: base_path/language/message_key.extensão
+	var audio_path_base = base_path + language + "/" + message_key
+	
+	# Tenta diferentes extensões de áudio
+	var extensions = [".mp3", ".ogg", ".wav"]
+	for ext in extensions:
+		var audio_path = audio_path_base + ext
+		if ResourceLoader.exists(audio_path):
+			var audio = load(audio_path)
+			if audio is AudioStream:
+				return audio
+	
+	# Se não encontrou, retorna null e exibe um aviso
+	push_warning("Áudio não encontrado para idioma '" + language + "' com key '" + message_key + "' em: " + audio_path_base)
+	return null

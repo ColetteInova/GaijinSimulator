@@ -19,5 +19,6 @@ script = ExtResource("1_vq4x1")
 use_csv_file = true
 csv_file_path = "uid://d02v605pqgf1w"
 message_key = "COMISSER_DIALOG1"
+audio_folder_path = "res://scenes/start_scene/dialogs/audios"
 character = SubResource("Resource_0mh30")
 metadata/_custom_type_script = "uid://cklkhy8dos46y"

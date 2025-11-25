@@ -50,9 +50,6 @@ grow_vertical = 2
 layout_mode = 2
 avatar_background = ExtResource("14_dyesy")
 dialogue_lines = Array[ExtResource("16_knp0f")]([ExtResource("17_in13e")])
-text_speed = 0.06
-line_advance_delay = 1.0
-auto_advance = true
 
 [node name="japan_airlines_animated_sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(736.00006, 208)
