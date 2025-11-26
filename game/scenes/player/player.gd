@@ -1,16 +1,32 @@
 extends CharacterBody2D
 
-## Player com movimentação em 8 direções e animações correspondentes
+## Player com movimentação em 8 direções e sistema modular de camadas
 
 @export_group("Movement")
 @export var speed: float = 200.0  ## Velocidade de movimento em pixels/segundo
 @export var enable_diagonal: bool = true  ## Permite movimento diagonal
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@export_group("Appearance")
+@export var appearance: PlayerAppearance  ## Configuração de aparência do player
+
+# Referências para as camadas de sprite
+var sprite_layers: Dictionary = {}
+var layer_order = [
+	"back_hair",    # Layer 0
+	"skin",         # Layer 1
+	"eyes",         # Layer 2
+	"shirt",        # Layer 3
+	"pants",        # Layer 6
+	"shoes",        # Layer 5
+	"front_hair",   # Layer 4
+	"glasses",      # Acessório
+	"hat"           # Acessório
+]
 
 # Controle de animação
 var current_direction: Vector2 = Vector2.DOWN
 var is_moving: bool = false
+var last_animation: String = ""
 
 # Teclas configuráveis (carregadas do GameSettings)
 var key_up: int = KEY_W
@@ -20,10 +36,98 @@ var key_right: int = KEY_D
 
 
 func _ready():
+	# Cria as camadas de sprite
+	setup_sprite_layers()
+	
+	# Carrega a aparência (usa default se não configurada)
+	if not appearance:
+		appearance = PlayerAppearance.create_default()
+	
+	apply_appearance()
+	
 	# Carrega as configurações de teclas
 	load_key_bindings()
+	
 	# Inicia com animação idle para baixo
 	play_animation("idle_down")
+
+
+func setup_sprite_layers():
+	"""Cria os nós AnimatedSprite2D para cada camada"""
+	for layer_name in layer_order:
+		var sprite = AnimatedSprite2D.new()
+		sprite.name = layer_name.capitalize()
+		add_child(sprite)
+		sprite_layers[layer_name] = sprite
+
+
+func apply_appearance():
+	"""Aplica a configuração de aparência carregando as texturas"""
+	if not appearance:
+		push_warning("No appearance configured")
+		return
+	
+	# Aplica skin (obrigatória)
+	load_layer("skin", "layer1_skin", appearance.skin_texture)
+	
+	# Aplica eyes
+	if appearance.eyes_enabled:
+		load_layer("eyes", "layer2_eyes", appearance.eyes_texture)
+	
+	# Aplica shirt
+	if appearance.shirt_enabled:
+		load_layer("shirt", "layer3_shirt", appearance.shirt_texture)
+	
+	# Aplica front hair
+	if appearance.front_hair_enabled:
+		load_layer("front_hair", "layer4_front_hair", appearance.front_hair_texture)
+	
+	# Aplica shoes
+	if appearance.shoes_enabled:
+		load_layer("shoes", "layer5_shoes", appearance.shoes_texture)
+	
+	# Aplica pants
+	if appearance.pants_enabled:
+		load_layer("pants", "layer6_pants", appearance.pants_texture)
+	
+	# Aplica back hair
+	if appearance.back_hair_enabled:
+		load_layer("back_hair", "layer0_back_hair", appearance.back_hair_texture)
+	
+	# Aplica acessórios
+	if not appearance.glasses_texture.is_empty():
+		load_accessory("glasses", appearance.glasses_texture)
+	
+	if not appearance.hat_texture.is_empty():
+		load_accessory("hat", appearance.hat_texture)
+
+
+func load_layer(layer_name: String, folder: String, texture_name: String):
+	"""Carrega uma camada específica do player"""
+	if not sprite_layers.has(layer_name):
+		return
+	
+	var sprite: AnimatedSprite2D = sprite_layers[layer_name]
+	var texture_path = appearance.get_layer_path(folder, texture_name)
+	
+	var sprite_frames = PlayerSpriteBuilder.create_spriteframes_from_texture(texture_path)
+	if sprite_frames:
+		sprite.sprite_frames = sprite_frames
+		sprite.visible = true
+
+
+func load_accessory(layer_name: String, texture_name: String):
+	"""Carrega um acessório unisex"""
+	if not sprite_layers.has(layer_name):
+		return
+	
+	var sprite: AnimatedSprite2D = sprite_layers[layer_name]
+	var texture_path = appearance.get_accessory_path(texture_name)
+	
+	var sprite_frames = PlayerSpriteBuilder.create_spriteframes_from_texture(texture_path)
+	if sprite_frames:
+		sprite.sprite_frames = sprite_frames
+		sprite.visible = true
 
 
 func _physics_process(_delta: float):
@@ -145,12 +249,18 @@ func get_animation_for_direction(direction: Vector2, moving: bool) -> String:
 
 
 func play_animation(animation_name: String):
-	"""Toca a animação se ela existir e não estiver já tocando"""
-	if animated_sprite.sprite_frames.has_animation(animation_name):
-		if animated_sprite.animation != animation_name:
-			animated_sprite.play(animation_name)
-	else:
-		push_warning("Animation not found: " + animation_name)
+	"""Toca a animação em todas as camadas ativas"""
+	# Só muda a animação se for diferente da atual
+	if animation_name == last_animation:
+		return
+	
+	# Toca a animação em todas as camadas que têm essa animação
+	for layer_name in sprite_layers:
+		var sprite: AnimatedSprite2D = sprite_layers[layer_name]
+		if sprite.visible and sprite.sprite_frames and sprite.sprite_frames.has_animation(animation_name):
+			sprite.play(animation_name)
+	
+	last_animation = animation_name
 
 
 func set_direction(direction: Vector2):
