@@ -1,3 +1,67 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://c7w0agwjdl0sd"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://c7w0agwjdl0sd"]
+
+[ext_resource type="Texture2D" uid="uid://0rl6tsqy6vup" path="res://assets/sprites/characters/player/female/layer4_front_hair/female_hair_01.png" id="1_jwnqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jebx4"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(64, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qluqh"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(128, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlh0e"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(192, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja4du"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(256, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r0cj"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(320, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oox10"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(384, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy4fm"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(448, 0, 64, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ons8r"]
+atlas = ExtResource("1_jwnqk")
+region = Rect2(512, 0, 64, 98)
 
 [resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jebx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qluqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlh0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja4du")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r0cj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oox10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oy4fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ons8r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
