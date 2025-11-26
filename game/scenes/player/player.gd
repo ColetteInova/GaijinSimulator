@@ -68,47 +68,47 @@ func apply_appearance():
 		return
 	
 	# Aplica skin (obrigatória)
-	load_layer("skin", "layer1_skin", appearance.skin_texture)
+	load_layer("skin", "layer1_skin")
 	
 	# Aplica eyes
 	if appearance.eyes_enabled:
-		load_layer("eyes", "layer2_eyes", appearance.eyes_texture)
+		load_layer("eyes", "layer2_eyes")
 	
 	# Aplica shirt
 	if appearance.shirt_enabled:
-		load_layer("shirt", "layer3_shirt", appearance.shirt_texture)
+		load_layer("shirt", "layer3_shirt")
 	
 	# Aplica front hair
 	if appearance.front_hair_enabled:
-		load_layer("front_hair", "layer4_front_hair", appearance.front_hair_texture)
+		load_layer("front_hair", "layer4_front_hair")
 	
 	# Aplica shoes
 	if appearance.shoes_enabled:
-		load_layer("shoes", "layer5_shoes", appearance.shoes_texture)
+		load_layer("shoes", "layer5_shoes")
 	
 	# Aplica pants
 	if appearance.pants_enabled:
-		load_layer("pants", "layer6_pants", appearance.pants_texture)
+		load_layer("pants", "layer6_pants")
 	
 	# Aplica back hair
 	if appearance.back_hair_enabled:
-		load_layer("back_hair", "layer0_back_hair", appearance.back_hair_texture)
+		load_layer("back_hair", "layer0_back_hair")
 	
 	# Aplica acessórios
-	if not appearance.glasses_texture.is_empty():
-		load_accessory("glasses", appearance.glasses_texture)
+	if appearance.glasses != PlayerAppearance.GlassesType.NONE:
+		load_accessory("glasses", "glasses")
 	
-	if not appearance.hat_texture.is_empty():
-		load_accessory("hat", appearance.hat_texture)
+	if appearance.hat != PlayerAppearance.HatType.NONE:
+		load_accessory("hat", "hat")
 
 
-func load_layer(layer_name: String, folder: String, texture_name: String):
+func load_layer(layer_name: String, folder: String):
 	"""Carrega uma camada específica do player"""
 	if not sprite_layers.has(layer_name):
 		return
 	
 	var sprite: AnimatedSprite2D = sprite_layers[layer_name]
-	var texture_path = appearance.get_layer_path(folder, texture_name)
+	var texture_path = appearance.get_layer_path(folder)
 	
 	var sprite_frames = PlayerSpriteBuilder.create_spriteframes_from_texture(texture_path)
 	if sprite_frames:
@@ -116,13 +116,13 @@ func load_layer(layer_name: String, folder: String, texture_name: String):
 		sprite.visible = true
 
 
-func load_accessory(layer_name: String, texture_name: String):
+func load_accessory(layer_name: String, accessory_type: String):
 	"""Carrega um acessório unisex"""
 	if not sprite_layers.has(layer_name):
 		return
 	
 	var sprite: AnimatedSprite2D = sprite_layers[layer_name]
-	var texture_path = appearance.get_accessory_path(texture_name)
+	var texture_path = appearance.get_accessory_path(accessory_type)
 	
 	var sprite_frames = PlayerSpriteBuilder.create_spriteframes_from_texture(texture_path)
 	if sprite_frames:

@@ -4,3 +4,5 @@
 
 [resource]
 script = ExtResource("1")
+skin = 2
+eyes = 2
