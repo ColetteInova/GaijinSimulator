@@ -41,7 +41,11 @@ func _ready():
 	
 	# Carrega a aparência (usa default se não configurada)
 	if not appearance:
-		appearance = PlayerAppearance.create_default()
+		# Tenta carregar do PlayerData primeiro
+		if PlayerData and PlayerData.player_appearance:
+			appearance = PlayerData.player_appearance
+		else:
+			appearance = PlayerAppearance.create_default()
 	
 	apply_appearance()
 	

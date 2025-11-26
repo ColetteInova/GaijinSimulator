@@ -1,5 +1,8 @@
 extends Node
 
+# Aparência customizada do player
+var player_appearance: PlayerAppearance = null
+
 # Dados do personagem atual
 var character_data = {
 	"name": "",
@@ -21,6 +24,7 @@ func _ready():
 	SimpleSettings.config_files.set("player", {"path": "user://player.ini"})
 	SimpleSettings.load()
 	load_data()
+	load_appearance()
 
 
 func set_character_info(character_name: String, character_id: String, sprite_path: String):
@@ -161,5 +165,49 @@ func advance_time():
 		"night":
 			set_time_of_day("morning")
 			# Avança o dia quando volta para manhã
-			character_data["day"] += 1
-			save_data()
+
+
+## Gerenciamento de Aparência do Player
+func set_player_appearance(appearance: PlayerAppearance):
+	"""Define a aparência customizada do player"""
+	player_appearance = appearance.duplicate(true)
+	save_appearance()
+
+
+func get_player_appearance() -> PlayerAppearance:
+	"""Retorna a aparência atual do player"""
+	if not player_appearance:
+		# Se não houver aparência configurada, cria uma padrão
+		player_appearance = PlayerAppearance.create_default()
+		save_appearance()
+	return player_appearance
+
+
+func save_appearance():
+	"""Salva a aparência do player"""
+	if player_appearance:
+		var save_path = "user://player_appearance.tres"
+		var result = ResourceSaver.save(player_appearance, save_path)
+		if result != OK:
+			push_error("Failed to save player appearance")
+
+
+func load_appearance():
+	"""Carrega a aparência salva do player"""
+	var load_path = "user://player_appearance.tres"
+	
+	if FileAccess.file_exists(load_path):
+		var loaded = ResourceLoader.load(load_path) as PlayerAppearance
+		if loaded:
+			player_appearance = loaded
+		else:
+			push_warning("Failed to load player appearance, using default")
+			player_appearance = PlayerAppearance.create_default()
+	else:
+		player_appearance = PlayerAppearance.create_default()
+
+
+func reset_appearance():
+	"""Reseta a aparência para o padrão"""
+	player_appearance = PlayerAppearance.create_default()
+	save_appearance()
