@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuqub6xmv36a2"
-path="res://.godot/imported/Female_Skin_01.png-febc01af6e2365040e4fe4663d0d2e1b.ctex"
+path="res://.godot/imported/Female_Skin_01.png-58e7dfa07b2270f3b614af8c58a6c5e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/Layer1_Skin/Female_Skin_01.png"
-dest_files=["res://.godot/imported/Female_Skin_01.png-febc01af6e2365040e4fe4663d0d2e1b.ctex"]
+source_file="res://assets/sprites/characters/player/female/layer1_Skin/Female_Skin_01.png"
+dest_files=["res://.godot/imported/Female_Skin_01.png-58e7dfa07b2270f3b614af8c58a6c5e6.ctex"]
 
 [params]
 

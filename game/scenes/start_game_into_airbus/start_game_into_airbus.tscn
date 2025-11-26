@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuhxg5q1ky7s"]
+
+[ext_resource type="Texture2D" uid="uid://bawaoxt40pwd7" path="res://assets/sprites/transports/planes/japan_airlines_plane/inner/Gemini_Generated_Image_4mybma4mybma4myb.png" id="1_rrh33"]
+
+[node name="StartGameIntoAirbus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(324.7969, 186.16962)
+scale = Vector2(1.795573, 1.8795089)
+texture = ExtResource("1_rrh33")
