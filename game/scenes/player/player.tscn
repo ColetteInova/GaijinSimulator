@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5xq8r3m4n7yp"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player_script"]
+[ext_resource type="Script" uid="uid://m2mssiemcb7u" path="res://scenes/player/player.gd" id="1_player_script"]
 [ext_resource type="SpriteFrames" uid="uid://dmk5y8x3qn8px" path="res://assets/sprites/characters/player/player_animations.tres" id="2_animations"]
 
 [node name="Player" type="CharacterBody2D"]
@@ -15,5 +15,3 @@ autoplay = "idle_down"
 position = Vector2(0, 10)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-enabled = true
-zoom = Vector2(2, 2)
