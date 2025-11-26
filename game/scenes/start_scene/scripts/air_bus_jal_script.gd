@@ -6,13 +6,6 @@ extends AnimatedSprite2D
 @export var horizontal_float_amplitude: float = 8.0  # Amplitude do movimento horizontal em pixels
 @export var auto_start: bool = true        # Inicia automaticamente
 
-# Configurações de som
-@export_group("Sound Effects")
-@export var enable_sounds: bool = true     # Habilita/desabilita sons
-@export var play_sound_on_spawn: bool = true
-@export var play_sound_on_float: bool = true
-@export var play_sound_on_move_center: bool = true
-
 # Configurações de movimento para o centro
 @export var move_to_center_delay: float = 2.0      # Delay antes de mover para o centro (segundos)
 @export var move_to_center_duration: float = 3.0   # Duração do movimento até o centro (segundos)
@@ -31,10 +24,6 @@ func _ready():
 	
 	# Busca o sistema de som se existir
 	sound_effects = get_node_or_null("SpriteSoundEffects")
-	
-	# Toca som de spawn se habilitado
-	if enable_sounds and play_sound_on_spawn and sound_effects:
-		sound_effects.play_spawn_sound()
 	
 	if auto_start:
 		start_floating_animation()
@@ -55,11 +44,9 @@ func move_to_screen_center():
 		float_tween.kill()
 	
 	# Para o som idle e toca som de movimento
-	if enable_sounds and sound_effects:
-		if play_sound_on_float:
-			sound_effects.stop_idle_sound()
-		if play_sound_on_move_center:
-			sound_effects.play_movement_sound()
+	if sound_effects:
+		sound_effects.stop_idle_sound()
+		sound_effects.play_movement_sound()
 	
 	# Obtém o centro da tela
 	var viewport_size = get_viewport_rect().size
@@ -81,10 +68,9 @@ func move_to_screen_center():
 	# Quando terminar o movimento, atualiza a posição inicial e reinicia a flutuação
 	tween.finished.connect(func():
 		# Para o som de movimento e volta para idle
-		if enable_sounds and sound_effects:
+		if sound_effects:
 			sound_effects.stop_movement_sound()
-			if play_sound_on_float:
-				sound_effects.play_idle_sound()
+			sound_effects.play_idle_sound()
 		
 		initial_position = position
 		start_floating_animation()
@@ -95,10 +81,9 @@ func start_floating_animation():
 	if float_tween:
 		float_tween.kill()
 	
-	# Toca som idle se habilitado e não estiver tocando
-	if enable_sounds and play_sound_on_float and sound_effects:
-		if not sound_effects.is_playing_idle:
-			sound_effects.play_idle_sound()
+	# Toca som idle se não estiver tocando
+	if sound_effects and not sound_effects.is_playing_idle:
+		sound_effects.play_idle_sound()
 	
 	# Cria um novo tween para a animação de flutuação
 	float_tween = create_tween()
@@ -154,7 +139,7 @@ func stop_floating_animation():
 		position.x = initial_position.x
 	
 	# Para os sons quando parar a animação
-	if enable_sounds and sound_effects:
+	if sound_effects:
 		sound_effects.stop_idle_sound()
 		sound_effects.stop_movement_sound()
 

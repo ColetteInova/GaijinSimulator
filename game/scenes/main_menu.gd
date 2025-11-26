@@ -15,6 +15,9 @@ func _ready():
 		var lang = GameSettings.get_language()
 		TranslationServer.set_locale(lang)
 	
+	# Inicia a música do menu principal
+	MusicManager.play_music("res://assets/audios/main_menu_music.mp3", 1.5, 0.0)
+	
 	# Conecta os sinais dos botões
 	start_game_btn.pressed.connect(_on_start_game_pressed)
 	load_btn.pressed.connect(_on_load_pressed)
@@ -42,6 +45,9 @@ func _update_load_button_state():
 func _on_start_game_pressed():
 	UISoundManager.play_click()
 	print("Starting new game...")
+	
+	# Inicia a transição de música antes da cena
+	MusicManager.play_music("res://assets/audios/main_menu_music.mp3", 1.5, -10.0)  # Música diferente quando implementada
 	
 	await SceneTransition.change_scene_to_file("res://scenes/start_scene/start_game_scene.tscn", 0.5, 0.8)
 

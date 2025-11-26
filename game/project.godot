@@ -28,6 +28,7 @@ SaveManager="*res://scripts/save_manager.gd"
 UISoundManager="*res://scripts/ui_sound_manager.gd"
 PlayerData="*res://scripts/player_data.gd"
 DayTimeManager="*res://scripts/day_time_manager.gd"
+MusicManager="*res://scripts/music_manager.gd"
 
 [display]
 

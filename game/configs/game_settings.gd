@@ -40,6 +40,8 @@ func _ready():
 	SimpleSettings.load()
 	load_settings()
 	print_settings()
+	# Aplica os volumes salvos aos buses de áudio
+	apply_audio_settings()
 
 func load_settings():
 	difficulty_level = get_difficulty_level()
@@ -263,6 +265,7 @@ func get_master_volume() -> float:
 func set_master_volume(value: float):
 	master_volume = value
 	SimpleSettings.set_value("game", "audio/master_volume", value)
+	AudioServer.set_bus_volume_db(0, linear_to_db(value / 100.0))
 
 func get_music_volume() -> float:
 	return SimpleSettings.get_value("game", "audio/music_volume", music_volume)
@@ -270,6 +273,9 @@ func get_music_volume() -> float:
 func set_music_volume(value: float):
 	music_volume = value
 	SimpleSettings.set_value("game", "audio/music_volume", value)
+	var music_bus_idx = AudioServer.get_bus_index("Music")
+	if music_bus_idx != -1:
+		AudioServer.set_bus_volume_db(music_bus_idx, linear_to_db(value / 100.0))
 
 func get_sfx_volume() -> float:
 	return SimpleSettings.get_value("game", "audio/sfx_volume", sfx_volume)
@@ -277,6 +283,9 @@ func get_sfx_volume() -> float:
 func set_sfx_volume(value: float):
 	sfx_volume = value
 	SimpleSettings.set_value("game", "audio/sfx_volume", value)
+	var sfx_bus_idx = AudioServer.get_bus_index("SFX")
+	if sfx_bus_idx != -1:
+		AudioServer.set_bus_volume_db(sfx_bus_idx, linear_to_db(value / 100.0))
 
 
 # Video methods
@@ -314,3 +323,25 @@ func apply_theme_to_node(node: Control):
 		node.theme = japanese_theme
 	elif node and default_theme:
 		node.theme = default_theme
+
+
+func apply_audio_settings():
+	"""Aplica as configurações de volume salvas aos buses de áudio"""
+	# Master bus (índice 0)
+	AudioServer.set_bus_volume_db(0, linear_to_db(master_volume / 100.0))
+	
+	# Music bus
+	var music_bus_idx = AudioServer.get_bus_index("Music")
+	if music_bus_idx != -1:
+		AudioServer.set_bus_volume_db(music_bus_idx, linear_to_db(music_volume / 100.0))
+	
+	# SFX bus
+	var sfx_bus_idx = AudioServer.get_bus_index("SFX")
+	if sfx_bus_idx != -1:
+		AudioServer.set_bus_volume_db(sfx_bus_idx, linear_to_db(sfx_volume / 100.0))
+	
+	# Voice bus (se existir)
+	var voice_bus_idx = AudioServer.get_bus_index("Voice")
+	if voice_bus_idx != -1:
+		# Voice usa o mesmo volume que Master por padrão
+		AudioServer.set_bus_volume_db(voice_bus_idx, linear_to_db(master_volume / 100.0))

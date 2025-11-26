@@ -59,21 +59,14 @@ func _setup_language_options():
 
 func _on_master_volume_changed(value: float):
 	GameSettings.set_master_volume(value)
-	AudioServer.set_bus_volume_db(0, linear_to_db(value / 100.0))
 
 
 func _on_music_volume_changed(value: float):
 	GameSettings.set_music_volume(value)
-	var bus_idx = AudioServer.get_bus_index("Music")
-	if bus_idx != -1:
-		AudioServer.set_bus_volume_db(bus_idx, linear_to_db(value / 100.0))
 
 
 func _on_sfx_volume_changed(value: float):
 	GameSettings.set_sfx_volume(value)
-	var bus_idx = AudioServer.get_bus_index("SFX")
-	if bus_idx != -1:
-		AudioServer.set_bus_volume_db(bus_idx, linear_to_db(value / 100.0))
 
 
 func _on_fullscreen_toggled(toggled_on: bool):
