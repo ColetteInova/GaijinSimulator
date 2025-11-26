@@ -21,11 +21,23 @@ signal sound_finished(sound_name: String)
 @export var idle_sound_volume: float = -10.0  ## Volume do som idle (dB)
 @export var disappear_sound_volume: float = 0.0  ## Volume do som de desaparecer (dB)
 
+@export_group("Delay Settings")
+@export var spawn_delay: float = 0.0  ## Delay antes de tocar spawn (segundos)
+@export var movement_delay: float = 0.0  ## Delay antes de tocar movimento (segundos)
+@export var idle_delay: float = 0.0  ## Delay antes de tocar idle (segundos)
+@export var disappear_delay: float = 0.0  ## Delay antes de tocar disappear (segundos)
+
+@export_group("Speed Settings")
+@export_range(0.1, 4.0, 0.01) var spawn_pitch: float = 1.0  ## Velocidade do som de spawn (1.0 = normal)
+@export_range(0.1, 4.0, 0.01) var movement_pitch: float = 1.0  ## Velocidade do som de movimento (1.0 = normal)
+@export_range(0.1, 4.0, 0.01) var idle_pitch: float = 1.0  ## Velocidade do som idle (1.0 = normal)
+@export_range(0.1, 4.0, 0.01) var disappear_pitch: float = 1.0  ## Velocidade do som de disappear (1.0 = normal)
+
 @export_group("Playback Options")
 @export var auto_play_spawn: bool = true  ## Toca automaticamente ao aparecer
 @export var loop_idle_sound: bool = true  ## Loop no som idle
 @export var loop_movement_sound: bool = false  ## Loop no som de movimento
-@export_enum("Master", "SFX", "Music", "UI", "Ambient") var sound_bus: String = "Master"  ## Bus de áudio a usar
+@export_enum("Master", "SFX", "Music", "UI", "Ambient") var sound_bus: String = "SFX"  ## Bus de áudio a usar
 
 # Audio players internos
 var spawn_player: AudioStreamPlayer
@@ -42,7 +54,7 @@ func _ready():
 	_setup_audio_players()
 	
 	if auto_play_spawn:
-		play_spawn_sound()
+		play_spawn_sound(spawn_delay)
 
 
 func _setup_audio_players():
@@ -52,6 +64,7 @@ func _setup_audio_players():
 	spawn_player.name = "SpawnSoundPlayer"
 	spawn_player.bus = sound_bus
 	spawn_player.volume_db = spawn_sound_volume
+	spawn_player.pitch_scale = spawn_pitch
 	add_child(spawn_player)
 	spawn_player.finished.connect(_on_spawn_sound_finished)
 	
@@ -60,6 +73,7 @@ func _setup_audio_players():
 	movement_player.name = "MovementSoundPlayer"
 	movement_player.bus = sound_bus
 	movement_player.volume_db = movement_sound_volume
+	movement_player.pitch_scale = movement_pitch
 	add_child(movement_player)
 	movement_player.finished.connect(_on_movement_sound_finished)
 	
@@ -68,6 +82,7 @@ func _setup_audio_players():
 	idle_player.name = "IdleSoundPlayer"
 	idle_player.bus = sound_bus
 	idle_player.volume_db = idle_sound_volume
+	idle_player.pitch_scale = idle_pitch
 	add_child(idle_player)
 	idle_player.finished.connect(_on_idle_sound_finished)
 	
@@ -76,6 +91,7 @@ func _setup_audio_players():
 	disappear_player.name = "DisappearSoundPlayer"
 	disappear_player.bus = sound_bus
 	disappear_player.volume_db = disappear_sound_volume
+	disappear_player.pitch_scale = disappear_pitch
 	add_child(disappear_player)
 	disappear_player.finished.connect(_on_disappear_sound_finished)
 
@@ -84,17 +100,29 @@ func _setup_audio_players():
 # Métodos públicos para tocar sons
 # ============================================================================
 
-func play_spawn_sound():
-	"""Toca o som de spawn/aparecimento"""
+func play_spawn_sound(delay: float = 0.0):
+	"""Toca o som de spawn/aparecimento
+	
+	Args:
+		delay: Tempo em segundos antes de tocar o som (padrão: 0.0)
+	"""
 	if spawn_sound and spawn_player:
+		if delay > 0.0:
+			await get_tree().create_timer(delay).timeout
 		spawn_player.stream = spawn_sound
 		spawn_player.play()
 		sound_started.emit("spawn")
 
 
-func play_movement_sound():
-	"""Toca o som de movimento"""
+func play_movement_sound(delay: float = 0.0):
+	"""Toca o som de movimento
+	
+	Args:
+		delay: Tempo em segundos antes de tocar o som (padrão: 0.0)
+	"""
 	if movement_sound and movement_player and not is_playing_movement:
+		if delay > 0.0:
+			await get_tree().create_timer(delay).timeout
 		movement_player.stream = movement_sound
 		if loop_movement_sound:
 			# Cria um AudioStreamRandomPitch ou similar se quiser variação
@@ -111,9 +139,15 @@ func stop_movement_sound():
 		is_playing_movement = false
 
 
-func play_idle_sound():
-	"""Toca o som idle/flutuação"""
+func play_idle_sound(delay: float = 0.0):
+	"""Toca o som idle/flutuação
+	
+	Args:
+		delay: Tempo em segundos antes de tocar o som (padrão: 0.0)
+	"""
 	if idle_sound and idle_player and not is_playing_idle:
+		if delay > 0.0:
+			await get_tree().create_timer(delay).timeout
 		idle_player.stream = idle_sound
 		idle_player.play()
 		is_playing_idle = true
@@ -127,9 +161,15 @@ func stop_idle_sound():
 		is_playing_idle = false
 
 
-func play_disappear_sound():
-	"""Toca o som de desaparecimento"""
+func play_disappear_sound(delay: float = 0.0):
+	"""Toca o som de desaparecimento
+	
+	Args:
+		delay: Tempo em segundos antes de tocar o som (padrão: 0.0)
+	"""
 	if disappear_sound and disappear_player:
+		if delay > 0.0:
+			await get_tree().create_timer(delay).timeout
 		disappear_player.stream = disappear_sound
 		disappear_player.play()
 		sound_started.emit("disappear")
@@ -188,6 +228,46 @@ func set_master_volume(volume_db: float):
 	set_movement_volume(volume_db)
 	set_idle_volume(volume_db)
 	set_disappear_volume(volume_db)
+
+
+# ============================================================================
+# Métodos auxiliares para controle de velocidade (pitch)
+# ============================================================================
+
+func set_spawn_pitch(pitch: float):
+	"""Define a velocidade do som de spawn"""
+	spawn_pitch = pitch
+	if spawn_player:
+		spawn_player.pitch_scale = pitch
+
+
+func set_movement_pitch(pitch: float):
+	"""Define a velocidade do som de movimento"""
+	movement_pitch = pitch
+	if movement_player:
+		movement_player.pitch_scale = pitch
+
+
+func set_idle_pitch(pitch: float):
+	"""Define a velocidade do som idle"""
+	idle_pitch = pitch
+	if idle_player:
+		idle_player.pitch_scale = pitch
+
+
+func set_disappear_pitch(pitch: float):
+	"""Define a velocidade do som de desaparecimento"""
+	disappear_pitch = pitch
+	if disappear_player:
+		disappear_player.pitch_scale = pitch
+
+
+func set_master_pitch(pitch: float):
+	"""Define a velocidade de todos os sons"""
+	set_spawn_pitch(pitch)
+	set_movement_pitch(pitch)
+	set_idle_pitch(pitch)
+	set_disappear_pitch(pitch)
 
 
 # ============================================================================

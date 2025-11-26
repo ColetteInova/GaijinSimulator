@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://j5ql28qy78mu"]
+[gd_scene load_steps=21 format=3 uid="uid://j5ql28qy78mu"]
 
 [ext_resource type="Theme" uid="uid://c7iqi7vhijrmm" path="res://assets/themes/default.tres" id="1_gtona"]
 [ext_resource type="PackedScene" uid="uid://dhql0w47jfkgb" path="res://scenes/components/parallax_background.tscn" id="2_g13i7"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://cpexqfyh5gb04" path="res://scenes/start_scene/dialogs/commissioner_dialog_1.tres" id="17_in13e"]
 [ext_resource type="Script" uid="uid://ch6wwik7c1tbv" path="res://scenes/start_scene/scripts/air_bus_jal_script.gd" id="17_irmer"]
 [ext_resource type="Script" uid="uid://baan722rbnca3" path="res://scripts/utils/sprite_sound_effects.gd" id="19_knp0f"]
+[ext_resource type="AudioStream" uid="uid://dnspwu4l0a71e" path="res://assets/audios/sxfs/vehicles/planes/airbus/air_bus_accelerate_sfx.ogg" id="20_in13e"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -76,6 +77,8 @@ move_to_center_duration = 5.0
 
 [node name="SpriteSoundEffects" type="Node" parent="AirBusJALSprite"]
 script = ExtResource("19_knp0f")
-sound_bus = "SFX"
+spawn_sound = ExtResource("20_in13e")
+spawn_delay = 2.0
+spawn_pitch = 1.25
 
 [connection signal="all_dialogues_completed" from="MarginContainer/DialogueWindow" to="MarginContainer/DialogueWindow" method="_on_all_dialogues_completed"]

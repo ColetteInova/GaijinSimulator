@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cldjjr2c6gnw2" path="res://scenes/main_menu.gd" id="3_menu_script"]
 [ext_resource type="VideoStream" uid="uid://cmrn3w6qqjpk" path="res://assets/videos/backgrounds/house_brigde_uban_clean.ogv" id="4_ng0o5"]
 [ext_resource type="VideoStream" uid="uid://4qndyd36ukn2" path="res://assets/videos/backgrounds/house_city_kanagawa_clean.ogv" id="6_1hnlc"]
-[ext_resource type="AudioStream" uid="uid://o8p3l8tmuchx" path="res://assets/audios/main_menu_music.mp3" id="6_8r73w"]
+[ext_resource type="AudioStream" uid="uid://o8p3l8tmuchx" path="res://assets/audios/menus/main_menu_music.mp3" id="6_8r73w"]
 [ext_resource type="Texture2D" uid="uid://bumtcn743bshj" path="res://assets/sprites/UIs/logo.png" id="7_8r73w"]
 
 [node name="TitleScreen" type="Control"]
@@ -38,7 +38,7 @@ random_order = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_8r73w")
-autoplay = true
+autoplay = false
 parameters/looping = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
