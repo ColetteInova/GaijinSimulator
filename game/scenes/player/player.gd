@@ -8,6 +8,7 @@ const BREATHING_SPEED: float = 2.0
 @export_group("Movement")
 @export var speed: float = 200.0  ## Velocidade de movimento em pixels/segundo
 @export var enable_diagonal: bool = true  ## Permite movimento diagonal
+@export var can_move: bool = true  ## Permite habilitar/desabilitar movimento
 
 @export_group("Appearance")
 @export var appearance: PlayerAppearance  ## Configuração de aparência do player
@@ -164,6 +165,13 @@ func load_accessory(layer_name: String, accessory_type: String):
 
 
 func _physics_process(_delta: float):
+	if not can_move:
+		velocity = Vector2.ZERO
+		is_moving = false
+		move_and_slide()
+		update_animation()
+		return
+
 	# Captura o input de movimento
 	var input_direction = get_input_direction()
 	
@@ -313,6 +321,16 @@ func set_direction(direction: Vector2):
 func set_speed(new_speed: float):
 	"""Altera a velocidade do player"""
 	speed = new_speed
+
+
+func set_can_move(value: bool):
+	"""Ativa ou desativa o movimento do player (útil em cutscenes)"""
+	if can_move == value:
+		return
+	
+	can_move = value
+	if not can_move:
+		stop_movement()
 
 
 func stop_movement():
