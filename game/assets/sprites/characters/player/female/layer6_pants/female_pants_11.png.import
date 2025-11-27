@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkt0c52hc5qpy"
-path="res://.godot/imported/female_pants_11.png-9781aac8c5f3b530d0939aaa68afec6c.ctex"
+path="res://.godot/imported/Female_Pants_11.png-1d03c2bc887962462e7e2e6bbbaec1b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/layer6_pants/female_pants_11.png"
-dest_files=["res://.godot/imported/female_pants_11.png-9781aac8c5f3b530d0939aaa68afec6c.ctex"]
+source_file="res://assets/sprites/characters/player/female/Layer6_Pants/Female_Pants_11.png"
+dest_files=["res://.godot/imported/Female_Pants_11.png-1d03c2bc887962462e7e2e6bbbaec1b3.ctex"]
 
 [params]
 

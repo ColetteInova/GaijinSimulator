@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cghg6gesmox7a"
-path="res://.godot/imported/unisex_glasses2.png-c32c2cdf032af15e2daeae3cc03759a5.ctex"
+path="res://.godot/imported/Unisex_Glasses2.png-126a6ac7fa5a60d02918277de9dae7b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/unisex_accessories/unisex_glasses2.png"
-dest_files=["res://.godot/imported/unisex_glasses2.png-c32c2cdf032af15e2daeae3cc03759a5.ctex"]
+source_file="res://assets/sprites/characters/player/unisex_accessories/Unisex_Glasses2.png"
+dest_files=["res://.godot/imported/Unisex_Glasses2.png-126a6ac7fa5a60d02918277de9dae7b8.ctex"]
 
 [params]
 

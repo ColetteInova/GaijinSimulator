@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d113h7rq61atx"
-path="res://.godot/imported/male_shoes_08.png-b0e9108781e3441768185e6b52869b59.ctex"
+path="res://.godot/imported/Male_Shoes_08.png-57d22fb80003b09437774f13ade5b1e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/layer5_shoes/male_shoes_08.png"
-dest_files=["res://.godot/imported/male_shoes_08.png-b0e9108781e3441768185e6b52869b59.ctex"]
+source_file="res://assets/sprites/characters/player/male/Layer5_Shoes/Male_Shoes_08.png"
+dest_files=["res://.godot/imported/Male_Shoes_08.png-57d22fb80003b09437774f13ade5b1e7.ctex"]
 
 [params]
 

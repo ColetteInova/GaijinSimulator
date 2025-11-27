@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu76inhxnhhxl"
-path="res://.godot/imported/female_shoes_01.png-7ac0b60e7409e234c1b4ea928aa5eea4.ctex"
+path="res://.godot/imported/Female_Shoes_01.png-694cbe18338d9410b09ec21865eacdc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/layer5_shoes/female_shoes_01.png"
-dest_files=["res://.godot/imported/female_shoes_01.png-7ac0b60e7409e234c1b4ea928aa5eea4.ctex"]
+source_file="res://assets/sprites/characters/player/female/Layer5_Shoes/Female_Shoes_01.png"
+dest_files=["res://.godot/imported/Female_Shoes_01.png-694cbe18338d9410b09ec21865eacdc0.ctex"]
 
 [params]
 

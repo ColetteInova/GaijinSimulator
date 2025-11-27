@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqpiunepo1re"
-path="res://.godot/imported/male_eyes_04.png-7bf6ad02c30c628c338a223011d3bc24.ctex"
+path="res://.godot/imported/Male_Eyes_04.png-834ca77147c57bf518910821305d2a5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/layer2_eyes/male_eyes_04.png"
-dest_files=["res://.godot/imported/male_eyes_04.png-7bf6ad02c30c628c338a223011d3bc24.ctex"]
+source_file="res://assets/sprites/characters/player/male/Layer2_Eyes/Male_Eyes_04.png"
+dest_files=["res://.godot/imported/Male_Eyes_04.png-834ca77147c57bf518910821305d2a5a.ctex"]
 
 [params]
 

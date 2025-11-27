@@ -12,3 +12,5 @@ grow_vertical = 2
 
 [node name="Player" parent="." instance=ExtResource("1_rrh33")]
 position = Vector2(296, 208)
+breathing_scale = 0.01
+breathing_speed = 5.0

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cj0h1my24sef7"
-path="res://.godot/imported/unisex_hat4.png-dff0a82849625fccd2606d7020b3d27f.ctex"
+path="res://.godot/imported/Unisex_Hat4.png-660fc9c70c9cf14293863a8c289d10b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/unisex_accessories/unisex_hat4.png"
-dest_files=["res://.godot/imported/unisex_hat4.png-dff0a82849625fccd2606d7020b3d27f.ctex"]
+source_file="res://assets/sprites/characters/player/unisex_accessories/Unisex_Hat4.png"
+dest_files=["res://.godot/imported/Unisex_Hat4.png-660fc9c70c9cf14293863a8c289d10b3.ctex"]
 
 [params]
 
