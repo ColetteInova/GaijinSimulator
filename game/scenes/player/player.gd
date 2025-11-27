@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 ## Player com movimentação em 8 direções e sistema modular de camadas
 
+const BREATHING_AMPLITUDE: float = 0.01
+const BREATHING_SPEED: float = 2.0
+
 @export_group("Movement")
 @export var speed: float = 200.0  ## Velocidade de movimento em pixels/segundo
 @export var enable_diagonal: bool = true  ## Permite movimento diagonal
@@ -9,7 +12,11 @@ extends CharacterBody2D
 @export_group("Appearance")
 @export var appearance: PlayerAppearance  ## Configuração de aparência do player
 
+@export_group("Camera")
+@export var camera_zoom: Vector2 = Vector2.ONE
+
 # Referências para as camadas de sprite
+var sprite_container: Node2D
 var sprite_layers: Dictionary = {}
 var layer_order = [
 	"back_hair",    # Layer 0
@@ -27,6 +34,9 @@ var layer_order = [
 var current_direction: Vector2 = Vector2.DOWN
 var is_moving: bool = false
 var last_animation: String = ""
+var breathing_time: float = 0.0
+var breathing_enabled: bool = false
+var player_camera: Camera2D
 
 # Teclas configuráveis (carregadas do GameSettings)
 var key_up: int = KEY_W
@@ -35,7 +45,10 @@ var key_left: int = KEY_A
 var key_right: int = KEY_D
 
 
+
 func _ready():
+	create_sprite_container()
+	player_camera = get_node_or_null("Camera2D")
 	# Cria as camadas de sprite
 	setup_sprite_layers()
 	
@@ -54,14 +67,30 @@ func _ready():
 	
 	# Inicia com animação idle para baixo
 	play_animation("idle_down")
+	update_breathing_state()
+	apply_camera_zoom()
+
+
+func create_sprite_container():
+	"""Garante um nó separado para manipular as camadas de sprite"""
+	if sprite_container:
+		return
+	
+	sprite_container = Node2D.new()
+	sprite_container.name = "SpriteContainer"
+	add_child(sprite_container)
 
 
 func setup_sprite_layers():
 	"""Cria os nós AnimatedSprite2D para cada camada"""
+	if not sprite_container:
+		create_sprite_container()
+
+	sprite_layers.clear()
 	for layer_name in layer_order:
 		var sprite = AnimatedSprite2D.new()
 		sprite.name = layer_name.capitalize()
-		add_child(sprite)
+		sprite_container.add_child(sprite)
 		sprite_layers[layer_name] = sprite
 
 
@@ -154,6 +183,13 @@ func _physics_process(_delta: float):
 	update_animation()
 
 
+func _process(delta: float) -> void:
+	if breathing_enabled and sprite_container:
+		breathing_time = wrapf(breathing_time + delta * BREATHING_SPEED, 0.0, TAU)
+		var scale_factor = 1.0 + sin(breathing_time) * BREATHING_AMPLITUDE
+		sprite_container.scale = Vector2(scale_factor, scale_factor)
+
+
 func load_key_bindings():
 	"""Carrega as configurações de teclas do GameSettings"""
 	if not GameSettings:
@@ -215,6 +251,7 @@ func update_animation():
 	"""Atualiza a animação baseada na direção atual e se está se movendo"""
 	var animation_name = get_animation_for_direction(current_direction, is_moving)
 	play_animation(animation_name)
+	update_breathing_state()
 
 
 func get_animation_for_direction(direction: Vector2, moving: bool) -> String:
@@ -283,3 +320,36 @@ func stop_movement():
 	velocity = Vector2.ZERO
 	is_moving = false
 	update_animation()
+
+
+func apply_camera_zoom():
+	"""Aplica o zoom exportado à Camera2D anexada"""
+	if player_camera:
+		player_camera.zoom = camera_zoom
+
+
+func update_breathing_state():
+	"""Alterna a animação de respiração conforme o movimento"""
+	if is_moving:
+		stop_breathing_animation()
+	else:
+		start_breathing_animation()
+
+
+func start_breathing_animation():
+	"""Inicia a animação suave de respiração durante o idle"""
+	if breathing_enabled or not sprite_container:
+		return
+	
+	breathing_enabled = true
+	breathing_time = 0.0
+
+
+func stop_breathing_animation():
+	"""Interrompe a animação de respiração quando o player anda"""
+	if not breathing_enabled or not sprite_container:
+		return
+	
+	breathing_enabled = false
+	breathing_time = 0.0
+	sprite_container.scale = Vector2.ONE

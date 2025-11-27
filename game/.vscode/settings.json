@@ -23,5 +23,8 @@
     "[gdscript]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": false
-    }
+    },
+    
+    // Desativa a mensagem de blame nativa na linha atual
+    "git.showInlineBlame": false
 }
