@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q1cym0uor7ek"
-path="res://.godot/imported/Female_Hair_11.png-88ee55fc9ad09df8bfc3f2b94594684f.ctex"
+uid="uid://bb16j0114hli0"
+path="res://.godot/imported/female_hair_11.png-950341ad1e8adf2c23c252efdee397df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/layer4_front_hair/Female_Hair_11.png"
-dest_files=["res://.godot/imported/Female_Hair_11.png-88ee55fc9ad09df8bfc3f2b94594684f.ctex"]
+source_file="res://assets/sprites/characters/player/female/layer4_front_hair/female_hair_11.png"
+dest_files=["res://.godot/imported/female_hair_11.png-950341ad1e8adf2c23c252efdee397df.ctex"]
 
 [params]
 

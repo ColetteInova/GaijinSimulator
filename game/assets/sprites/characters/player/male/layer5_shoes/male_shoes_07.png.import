@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5lnd62g3woqw"
-path="res://.godot/imported/Male_Shoes_07.png-0f858381587d1d92f6b1ea956ef61369.ctex"
+uid="uid://coel2mojx8a6c"
+path="res://.godot/imported/male_shoes_07.png-4844fc7cba56376bec58c8c3359c5aee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/Layer5_Shoes/Male_Shoes_07.png"
-dest_files=["res://.godot/imported/Male_Shoes_07.png-0f858381587d1d92f6b1ea956ef61369.ctex"]
+source_file="res://assets/sprites/characters/player/male/layer5_shoes/male_shoes_07.png"
+dest_files=["res://.godot/imported/male_shoes_07.png-4844fc7cba56376bec58c8c3359c5aee.ctex"]
 
 [params]
 

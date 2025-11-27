@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e2xhe1mwld7t"
-path="res://.godot/imported/Male_Shirt_08.png-8f76dd34b25c66b71c04e4d338ae8692.ctex"
+uid="uid://de8niotl8y1q"
+path="res://.godot/imported/male_shirt_08.png-b9d61c05e557bf91776e14536585f662.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/Layer3_Shirt/Male_Shirt_08.png"
-dest_files=["res://.godot/imported/Male_Shirt_08.png-8f76dd34b25c66b71c04e4d338ae8692.ctex"]
+source_file="res://assets/sprites/characters/player/male/layer3_shirt/male_shirt_08.png"
+dest_files=["res://.godot/imported/male_shirt_08.png-b9d61c05e557bf91776e14536585f662.ctex"]
 
 [params]
 

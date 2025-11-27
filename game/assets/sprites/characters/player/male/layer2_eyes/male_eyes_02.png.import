@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vktpj0fwtq3u"
-path="res://.godot/imported/Male_Eyes_02.png-c17c80ea4af128d1808820f70d1c9c33.ctex"
+uid="uid://c00inwk4e6gh8"
+path="res://.godot/imported/male_eyes_02.png-ed932e8d24de64369f9b5640257f3edc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/Layer2_Eyes/Male_Eyes_02.png"
-dest_files=["res://.godot/imported/Male_Eyes_02.png-c17c80ea4af128d1808820f70d1c9c33.ctex"]
+source_file="res://assets/sprites/characters/player/male/layer2_eyes/male_eyes_02.png"
+dest_files=["res://.godot/imported/male_eyes_02.png-ed932e8d24de64369f9b5640257f3edc.ctex"]
 
 [params]
 

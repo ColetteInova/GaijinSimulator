@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n52od5ereioa"
-path="res://.godot/imported/Female_Shoes_12.png-c7aa7d86dceda46a4eb0072580a5f8e9.ctex"
+uid="uid://cquaed3ag6sx6"
+path="res://.godot/imported/female_shoes_12.png-5f1c2e83a95856767c98719625de5ab1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/Layer5_Shoes/Female_Shoes_12.png"
-dest_files=["res://.godot/imported/Female_Shoes_12.png-c7aa7d86dceda46a4eb0072580a5f8e9.ctex"]
+source_file="res://assets/sprites/characters/player/female/layer5_shoes/female_shoes_12.png"
+dest_files=["res://.godot/imported/female_shoes_12.png-5f1c2e83a95856767c98719625de5ab1.ctex"]
 
 [params]
 

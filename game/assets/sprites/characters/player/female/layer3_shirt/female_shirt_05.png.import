@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0of0wua8whws"
-path="res://.godot/imported/Female_Shirt_05.png-72b067e19369cd9cd93481ce4f2973ab.ctex"
+uid="uid://dookxx7ok1uox"
+path="res://.godot/imported/female_shirt_05.png-96aed0ce12cc6c0aef4a6ed1f5702e3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/Layer3_Shirt/Female_Shirt_05.png"
-dest_files=["res://.godot/imported/Female_Shirt_05.png-72b067e19369cd9cd93481ce4f2973ab.ctex"]
+source_file="res://assets/sprites/characters/player/female/layer3_shirt/female_shirt_05.png"
+dest_files=["res://.godot/imported/female_shirt_05.png-96aed0ce12cc6c0aef4a6ed1f5702e3a.ctex"]
 
 [params]
 

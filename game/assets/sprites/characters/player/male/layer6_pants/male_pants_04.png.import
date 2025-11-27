@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctxpxqhdb56c6"
-path="res://.godot/imported/Male_Pants_04.png-0454469c0fb39fc7c62da90a4332b1c3.ctex"
+uid="uid://6u5jex1sc88t"
+path="res://.godot/imported/male_pants_04.png-d39ecdaee07043e3d3a4eb972263f709.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/Layer6_Pants/Male_Pants_04.png"
-dest_files=["res://.godot/imported/Male_Pants_04.png-0454469c0fb39fc7c62da90a4332b1c3.ctex"]
+source_file="res://assets/sprites/characters/player/male/layer6_pants/male_pants_04.png"
+dest_files=["res://.godot/imported/male_pants_04.png-d39ecdaee07043e3d3a4eb972263f709.ctex"]
 
 [params]
 

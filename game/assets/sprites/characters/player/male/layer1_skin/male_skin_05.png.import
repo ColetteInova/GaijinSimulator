@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcn7ms56611id"
-path="res://.godot/imported/Male_Skin_05.png-b25f0dfdc36179480061773be8fd17ab.ctex"
+uid="uid://wnidc1y87d3p"
+path="res://.godot/imported/male_skin_05.png-2335e2c6d4298abed8319784d9b5077a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/male/Layer1_Skin/Male_Skin_05.png"
-dest_files=["res://.godot/imported/Male_Skin_05.png-b25f0dfdc36179480061773be8fd17ab.ctex"]
+source_file="res://assets/sprites/characters/player/male/layer1_skin/male_skin_05.png"
+dest_files=["res://.godot/imported/male_skin_05.png-2335e2c6d4298abed8319784d9b5077a.ctex"]
 
 [params]
 

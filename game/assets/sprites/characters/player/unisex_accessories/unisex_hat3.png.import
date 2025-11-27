@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5ri67uleqy38"
-path="res://.godot/imported/Unisex_Hat3.png-f2e114664ecc96bb75cbbe9d8ae22595.ctex"
+uid="uid://o2aopia3cfqq"
+path="res://.godot/imported/unisex_hat3.png-968f3a29a1f1b23b382882cdd21ccf06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/unisex_accessories/Unisex_Hat3.png"
-dest_files=["res://.godot/imported/Unisex_Hat3.png-f2e114664ecc96bb75cbbe9d8ae22595.ctex"]
+source_file="res://assets/sprites/characters/player/unisex_accessories/unisex_hat3.png"
+dest_files=["res://.godot/imported/unisex_hat3.png-968f3a29a1f1b23b382882cdd21ccf06.ctex"]
 
 [params]
 

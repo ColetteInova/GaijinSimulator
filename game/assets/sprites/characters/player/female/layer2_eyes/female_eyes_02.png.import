@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c12sq0y34vtn7"
-path="res://.godot/imported/Female_Eyes_02.png-358d5daeb658c15b9cef46208a177502.ctex"
+uid="uid://cq1ue31bd6qem"
+path="res://.godot/imported/female_eyes_02.png-b47130456d3dfa3fa2f37d2ef939de4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/player/female/Layer2_Eyes/Female_Eyes_02.png"
-dest_files=["res://.godot/imported/Female_Eyes_02.png-358d5daeb658c15b9cef46208a177502.ctex"]
+source_file="res://assets/sprites/characters/player/female/layer2_eyes/female_eyes_02.png"
+dest_files=["res://.godot/imported/female_eyes_02.png-b47130456d3dfa3fa2f37d2ef939de4b.ctex"]
 
 [params]
 
