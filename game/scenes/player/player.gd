@@ -14,6 +14,10 @@ extends CharacterBody2D
 @export_range(0.005, 0.05) var breathing_amplitude: float = 0.015  ## Intensidade da respiração (escala)
 @export_range(0.5, 5.0) var breathing_speed: float = 1.5  ## Velocidade da respiração
 @export_range(0.0, 3.0) var breathing_pause: float = 0.5  ## Pausa entre respirações (segundos)
+@export var enable_blinking: bool = true  ## Habilita piscar de olhos
+@export_range(1.0, 8.0) var blink_interval_min: float = 2.0  ## Intervalo mínimo entre piscadas (segundos)
+@export_range(2.0, 10.0) var blink_interval_max: float = 5.0  ## Intervalo máximo entre piscadas (segundos)
+@export_range(0.001, 0.3) var blink_duration: float = 0.001  ## Duração do piscar (segundos)
 
 @export_group("Camera")
 @export var camera_zoom: Vector2 = Vector2.ONE
@@ -44,6 +48,12 @@ var breathing_paused: bool = false
 var breathing_pause_timer: float = 0.0
 var player_camera: Camera2D
 var is_initialized: bool = false
+
+# Controle de piscar
+var blink_timer: float = 0.0
+var next_blink_time: float = 0.0
+var is_blinking: bool = false
+var blink_close_timer: float = 0.0
 
 # Teclas configuráveis (carregadas do GameSettings)
 var key_up: int = KEY_W
@@ -77,6 +87,11 @@ func _ready():
 	play_animation("idle_down")
 	update_breathing_state()
 	apply_camera_zoom()
+	
+	# Inicializa piscar de olhos
+	if enable_blinking:
+		next_blink_time = randf_range(blink_interval_min, blink_interval_max)
+	
 	is_initialized = true
 
 
@@ -209,31 +224,62 @@ func _physics_process(_delta: float):
 
 
 func _process(delta: float) -> void:
+	# Animação de respiração
 	if enable_breathing and breathing_enabled and sprite_container:
 		# Se estiver em pausa, espera o timer
 		if breathing_paused:
 			breathing_pause_timer -= delta
 			if breathing_pause_timer <= 0.0:
 				breathing_paused = false
-			return
-		
-		breathing_time += delta * breathing_speed
-		
-		# Quando completa um ciclo (TAU), inicia pausa
-		if breathing_time >= TAU:
-			breathing_time = 0.0
-			if breathing_pause > 0.0:
-				breathing_paused = true
-				breathing_pause_timer = breathing_pause
-				sprite_container.scale = player_scale
-				return
-		
-		# Escala sutil no Y (peito expandindo/contraindo)
-		# Range de 1.0 a 1.0 + amplitude
-		var breath_factor = 1.0 + ((sin(breathing_time) + 1.0) * 0.5) * breathing_amplitude
-		sprite_container.scale = Vector2(player_scale.x, player_scale.y * breath_factor)
+		else:
+			breathing_time += delta * breathing_speed
+			
+			# Quando completa um ciclo (TAU), inicia pausa
+			if breathing_time >= TAU:
+				breathing_time = 0.0
+				if breathing_pause > 0.0:
+					breathing_paused = true
+					breathing_pause_timer = breathing_pause
+					sprite_container.scale = player_scale
+			else:
+				# Escala sutil no Y (peito expandindo/contraindo)
+				var breath_factor = 1.0 + ((sin(breathing_time) + 1.0) * 0.5) * breathing_amplitude
+				sprite_container.scale = Vector2(player_scale.x, player_scale.y * breath_factor)
 	elif not enable_breathing and sprite_container:
 		sprite_container.scale = player_scale
+	
+	# Animação de piscar
+	if enable_blinking:
+		update_blinking(delta)
+
+
+func update_blinking(delta: float) -> void:
+	"""Atualiza a animação de piscar de olhos"""
+	if not sprite_layers.has("eyes"):
+		return
+	
+	var eyes_sprite: AnimatedSprite2D = sprite_layers["eyes"]
+	if not eyes_sprite or not eyes_sprite.visible:
+		return
+	
+	if is_blinking:
+		# Olhos fechados, espera a duração do piscar
+		blink_close_timer -= delta
+		if blink_close_timer <= 0.0:
+			# Abre os olhos
+			is_blinking = false
+			eyes_sprite.modulate.a = 1.0
+			# Agenda próximo piscar
+			next_blink_time = randf_range(blink_interval_min, blink_interval_max)
+			blink_timer = 0.0
+	else:
+		# Olhos abertos, conta tempo para próximo piscar
+		blink_timer += delta
+		if blink_timer >= next_blink_time:
+			# Fecha os olhos
+			is_blinking = true
+			eyes_sprite.modulate.a = 0.0
+			blink_close_timer = blink_duration
 
 
 func load_key_bindings():

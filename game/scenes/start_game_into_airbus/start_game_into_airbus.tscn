@@ -46,3 +46,7 @@ size_flags_horizontal = 3
 [node name="Player" parent="." instance=ExtResource("1_rrh33")]
 position = Vector2(320, 180)
 player_scale = Vector2(0.7, 0.7)
+breathing_pause = 2.624
+blink_interval_min = 5.052
+blink_interval_max = 8.79
+blink_duration = 0.041
