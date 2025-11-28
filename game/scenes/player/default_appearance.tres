@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1")
-gender = 1
 eyes = 2

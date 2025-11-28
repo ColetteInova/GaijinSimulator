@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 ## Player com movimentação em 8 direções e sistema modular de camadas
 
-const BREATHING_AMPLITUDE: float = 0.01
-const BREATHING_SPEED: float = 2.0
-
 @export_group("Movement")
 @export var speed: float = 200.0  ## Velocidade de movimento em pixels/segundo
 @export var enable_diagonal: bool = true  ## Permite movimento diagonal
@@ -12,9 +9,15 @@ const BREATHING_SPEED: float = 2.0
 
 @export_group("Appearance")
 @export var appearance: PlayerAppearance  ## Configuração de aparência do player
+@export var player_scale: Vector2 = Vector2.ONE  ## Escala/tamanho do player
+@export var enable_breathing: bool = true  ## Habilita animação de respiração no idle
+@export_range(0.005, 0.05) var breathing_amplitude: float = 0.015  ## Intensidade da respiração (escala)
+@export_range(0.5, 5.0) var breathing_speed: float = 1.5  ## Velocidade da respiração
+@export_range(0.0, 3.0) var breathing_pause: float = 0.5  ## Pausa entre respirações (segundos)
 
 @export_group("Camera")
 @export var camera_zoom: Vector2 = Vector2.ONE
+@export var camera_enabled: bool = true  ## Desabilite quando o player for usado em UI
 
 # Referências para as camadas de sprite
 var sprite_container: Node2D
@@ -37,7 +40,10 @@ var is_moving: bool = false
 var last_animation: String = ""
 var breathing_time: float = 0.0
 var breathing_enabled: bool = false
+var breathing_paused: bool = false
+var breathing_pause_timer: float = 0.0
 var player_camera: Camera2D
+var is_initialized: bool = false
 
 # Teclas configuráveis (carregadas do GameSettings)
 var key_up: int = KEY_W
@@ -62,6 +68,7 @@ func _ready():
 			appearance = PlayerAppearance.create_default()
 	
 	apply_appearance()
+	apply_player_scale()
 	
 	# Carrega as configurações de teclas
 	load_key_bindings()
@@ -70,6 +77,13 @@ func _ready():
 	play_animation("idle_down")
 	update_breathing_state()
 	apply_camera_zoom()
+	is_initialized = true
+
+
+func apply_player_scale():
+	"""Aplica a escala ao sprite container"""
+	if sprite_container:
+		sprite_container.scale = player_scale
 
 
 func create_sprite_container():
@@ -165,6 +179,9 @@ func load_accessory(layer_name: String, accessory_type: String):
 
 
 func _physics_process(_delta: float):
+	if not is_initialized:
+		return
+	
 	if not can_move:
 		velocity = Vector2.ZERO
 		is_moving = false
@@ -192,10 +209,31 @@ func _physics_process(_delta: float):
 
 
 func _process(delta: float) -> void:
-	if breathing_enabled and sprite_container:
-		breathing_time = wrapf(breathing_time + delta * BREATHING_SPEED, 0.0, TAU)
-		var scale_factor = 1.0 + sin(breathing_time) * BREATHING_AMPLITUDE
-		sprite_container.scale = Vector2(scale_factor, scale_factor)
+	if enable_breathing and breathing_enabled and sprite_container:
+		# Se estiver em pausa, espera o timer
+		if breathing_paused:
+			breathing_pause_timer -= delta
+			if breathing_pause_timer <= 0.0:
+				breathing_paused = false
+			return
+		
+		breathing_time += delta * breathing_speed
+		
+		# Quando completa um ciclo (TAU), inicia pausa
+		if breathing_time >= TAU:
+			breathing_time = 0.0
+			if breathing_pause > 0.0:
+				breathing_paused = true
+				breathing_pause_timer = breathing_pause
+				sprite_container.scale = player_scale
+				return
+		
+		# Escala sutil no Y (peito expandindo/contraindo)
+		# Range de 1.0 a 1.0 + amplitude
+		var breath_factor = 1.0 + ((sin(breathing_time) + 1.0) * 0.5) * breathing_amplitude
+		sprite_container.scale = Vector2(player_scale.x, player_scale.y * breath_factor)
+	elif not enable_breathing and sprite_container:
+		sprite_container.scale = player_scale
 
 
 func load_key_bindings():
@@ -267,30 +305,28 @@ func get_animation_for_direction(direction: Vector2, moving: bool) -> String:
 	if direction == Vector2.ZERO:
 		direction = Vector2.DOWN  # Padrão para baixo se não houver direção
 	
-	# Normaliza e determina a direção predominante
-	var angle = direction.angle()
-	
-	# Converte o ângulo para uma das 8 direções
-	# 0° = direita, 90° = baixo, 180° = esquerda, -90° = cima
+	# Usa componentes X e Y para determinar direção (mais estável que ângulos)
 	var dir_name = ""
+	var abs_x = abs(direction.x)
+	var abs_y = abs(direction.y)
 	
-	# Determina a direção baseada no ângulo (com tolerância de 22.5° para cada direção)
-	if angle >= -PI/8 and angle < PI/8:
-		dir_name = "left"
-	elif angle >= PI/8 and angle < 3*PI/8:
-		dir_name = "down_left"
-	elif angle >= 3*PI/8 and angle < 5*PI/8:
-		dir_name = "down"
-	elif angle >= 5*PI/8 and angle < 7*PI/8:
-		dir_name = "down_right"
-	elif angle >= 7*PI/8 or angle < -7*PI/8:
-		dir_name = "right"
-	elif angle >= -7*PI/8 and angle < -5*PI/8:
-		dir_name = "up_right"
-	elif angle >= -5*PI/8 and angle < -3*PI/8:
-		dir_name = "up"
-	else:  # -3*PI/8 a -PI/8
-		dir_name = "up_left"
+	# Threshold para considerar diagonal (quando ambos eixos têm valor significativo)
+	var diagonal_threshold = 0.4
+	
+	var is_diagonal = abs_x > diagonal_threshold and abs_y > diagonal_threshold
+	
+	if is_diagonal:
+		# Movimento diagonal
+		if direction.y > 0:
+			dir_name = "down_right" if direction.x < 0 else "down_left"
+		else:
+			dir_name = "up_right" if direction.x < 0 else "up_left"
+	else:
+		# Movimento cardinal (prioriza o eixo com maior magnitude)
+		if abs_x > abs_y:
+			dir_name = "right" if direction.x < 0 else "left"
+		else:
+			dir_name = "down" if direction.y > 0 else "up"
 	
 	# Adiciona prefixo walk_ ou idle_
 	var prefix = "walk_" if moving else "idle_"
@@ -343,7 +379,9 @@ func stop_movement():
 func apply_camera_zoom():
 	"""Aplica o zoom exportado à Camera2D anexada"""
 	if player_camera:
-		player_camera.zoom = camera_zoom
+		player_camera.enabled = camera_enabled
+		if camera_enabled:
+			player_camera.zoom = camera_zoom
 
 
 func update_breathing_state():
@@ -356,11 +394,10 @@ func update_breathing_state():
 
 func start_breathing_animation():
 	"""Inicia a animação suave de respiração durante o idle"""
-	if breathing_enabled or not sprite_container:
+	if not sprite_container:
 		return
 	
 	breathing_enabled = true
-	breathing_time = 0.0
 
 
 func stop_breathing_animation():
@@ -370,4 +407,4 @@ func stop_breathing_animation():
 	
 	breathing_enabled = false
 	breathing_time = 0.0
-	sprite_container.scale = Vector2.ONE
+	sprite_container.scale = player_scale
