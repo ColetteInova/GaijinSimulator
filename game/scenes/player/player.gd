@@ -22,6 +22,9 @@ extends CharacterBody2D
 @export_group("Camera")
 @export var camera_zoom: Vector2 = Vector2.ONE
 @export var camera_enabled: bool = true  ## Desabilite quando o player for usado em UI
+@export var portrait_mode: bool = false  ## Modo foto 3x4 - foca no rosto
+@export var portrait_offset: Vector2 = Vector2(0, -35)  ## Offset para centralizar o rosto
+@export var portrait_zoom: Vector2 = Vector2(4, 4)  ## Zoom para foto 3x4
 
 # Referências para as camadas de sprite
 var sprite_container: Node2D
@@ -427,7 +430,18 @@ func apply_camera_zoom():
 	if player_camera:
 		player_camera.enabled = camera_enabled
 		if camera_enabled:
-			player_camera.zoom = camera_zoom
+			if portrait_mode:
+				player_camera.zoom = portrait_zoom
+				player_camera.offset = portrait_offset
+			else:
+				player_camera.zoom = camera_zoom
+				player_camera.offset = Vector2.ZERO
+
+
+func set_portrait_mode(enabled: bool):
+	"""Ativa/desativa o modo foto 3x4"""
+	portrait_mode = enabled
+	apply_camera_zoom()
 
 
 func update_breathing_state():
