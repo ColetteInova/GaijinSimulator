@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuhxg5q1ky7s"]
+[gd_scene load_steps=6 format=3 uid="uid://cuhxg5q1ky7s"]
 
 [ext_resource type="PackedScene" uid="uid://b5xq8r3m4n7yp" path="res://scenes/player/player.tscn" id="1_rrh33"]
+[ext_resource type="PackedScene" uid="uid://dv3p7xk2m8qn1" path="res://scenes/components/video_playlist_player.tscn" id="1_video_playlist"]
+[ext_resource type="VideoStream" uid="uid://6gnhbtlq8bix" path="res://assets/videos/transports/planes/japan_airlines/japan_airlines_inner_open_passaport.ogv" id="2_icm0y"]
+[ext_resource type="VideoStream" uid="uid://duxe27ut6oxsu" path="res://assets/videos/transports/planes/japan_airlines/japan_airlines_inner_fixed_passaport.ogv" id="3_b147o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_guy7j"]
 
 [node name="StartGameIntoAirbus" type="Control"]
 layout_mode = 3
@@ -10,6 +15,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="VideoPlaylistPlayer" parent="." instance=ExtResource("1_video_playlist")]
+layout_mode = 1
+playlist = Array[VideoStream]([ExtResource("2_icm0y"), ExtResource("3_b147o")])
+metadata/_edit_use_anchors_ = true
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -17,14 +27,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
+theme_override_constants/margin_left = 90
 theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_right = 90
 theme_override_constants/margin_bottom = 30
 metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_guy7j")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel"]
 layout_mode = 1
@@ -39,14 +50,16 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Player" parent="." instance=ExtResource("1_rrh33")]
-position = Vector2(320, 180)
+[node name="Player" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer" instance=ExtResource("1_rrh33")]
+position = Vector2(175, 147)
+can_move = false
 player_scale = Vector2(0.7, 0.7)
 breathing_pause = 2.624
 blink_interval_min = 5.052
 blink_interval_max = 8.79
 blink_duration = 0.041
+camera_enabled = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
