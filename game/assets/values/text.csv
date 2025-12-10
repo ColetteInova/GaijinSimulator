@@ -31,4 +31,41 @@ CHARACTER_FEMALE_OFFICE,Female Office Worker,Trabalhadora de Escritório,Oficini
 CHARACTER_NATIONALITY,Nationality,Nacionalidade,Nacionalidad,国籍
 CHARACTER_BILINGUAL,Bilingual,Bilíngue,Bilingüe,バイリンガル
 CHARACTER_CONVERSATION,Conversation,Conversação,Conversación,会話
+PASSPORT_TITLE,Travel Document,Documento de Viagem,Documento de Viaje,渡航書類
+PASSPORT_FIRST_NAME,First Name,Nome,Nombre,名
+PASSPORT_LAST_NAME,Last Name,Sobrenome,Apellido,姓
+PASSPORT_GENDER,Gender,Gênero,Género,性別
+PASSPORT_ORIENTATION,Sexual Orientation,Orientação Sexual,Orientación Sexual,性的指向
+PASSPORT_COUNTRY,Country of Origin,País de Origem,País de Origen,出身国
+PASSPORT_APPEARANCE,Appearance,Aparência,Apariencia,外見
+PASSPORT_SKIN,Skin,Pele,Piel,肌
+PASSPORT_EYES,Eyes,Olhos,Ojos,目
+PASSPORT_HAIR,Hair,Cabelo,Cabello,髪
+PASSPORT_CONFIRM,Confirm Registration,Confirmar Cadastro,Confirmar Registro,登録確認
+GENDER_MALE,Male,Masculino,Masculino,男性
+GENDER_FEMALE,Female,Feminino,Femenino,女性
+ORIENTATION_HETEROSEXUAL,Heterosexual,Heterossexual,Heterosexual,異性愛者
+ORIENTATION_HOMOSEXUAL,Homosexual,Homossexual,Homosexual,同性愛者
+ORIENTATION_BISEXUAL,Bisexual,Bissexual,Bisexual,両性愛者
+ORIENTATION_PANSEXUAL,Pansexual,Pansexual,Pansexual,全性愛者
+ORIENTATION_ASEXUAL,Asexual,Assexual,Asexual,無性愛者
+ORIENTATION_OTHER,Other,Outro,Otro,その他
+ORIENTATION_PREFER_NOT_SAY,Prefer not to say,Prefiro não dizer,Prefiero no decir,答えたくない
+COUNTRY_BRAZIL,Brazil,Brasil,Brasil,ブラジル
+COUNTRY_USA,United States,Estados Unidos,Estados Unidos,アメリカ
+COUNTRY_JAPAN,Japan,Japão,Japón,日本
+COUNTRY_UK,United Kingdom,Reino Unido,Reino Unido,イギリス
+COUNTRY_GERMANY,Germany,Alemanha,Alemania,ドイツ
+COUNTRY_FRANCE,France,França,Francia,フランス
+COUNTRY_ITALY,Italy,Itália,Italia,イタリア
+COUNTRY_SPAIN,Spain,Espanha,España,スペイン
+COUNTRY_PORTUGAL,Portugal,Portugal,Portugal,ポルトガル
+COUNTRY_CANADA,Canada,Canadá,Canadá,カナダ
+COUNTRY_MEXICO,Mexico,México,México,メキシコ
+COUNTRY_ARGENTINA,Argentina,Argentina,Argentina,アルゼンチン
+COUNTRY_CHINA,China,China,China,中国
+COUNTRY_KOREA,South Korea,Coreia do Sul,Corea del Sur,韓国
+COUNTRY_INDIA,India,Índia,India,インド
+COUNTRY_AUSTRALIA,Australia,Austrália,Australia,オーストラリア
+COUNTRY_OTHER,Other,Outro,Otro,その他
 
